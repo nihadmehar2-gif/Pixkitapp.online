@@ -63,3 +63,7 @@ examples/
 Caddyfile
 scripts/floatgen/
 /scripts/*.ts
+
+# Android build toolchain (local only)
+/android-sdk/
+/tools/

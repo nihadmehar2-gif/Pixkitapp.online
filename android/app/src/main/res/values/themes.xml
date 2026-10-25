@@ -1,0 +1,10 @@
+<resources>
+    <style name="Theme.PixKitApp" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@color/brand_bg</item>
+        <item name="android:statusBarColor">@color/brand_bg</item>
+        <item name="android:navigationBarColor">@color/brand_bg</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="colorPrimary">@color/brand_primary</item>
+        <item name="colorAccent">@color/brand_primary</item>
+    </style>
+</resources>
