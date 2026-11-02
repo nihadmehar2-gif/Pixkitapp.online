@@ -21,7 +21,7 @@ export const RESIZE_TOOLS: ToolDef[] = [
       optNumber("height", "Height", 600, 1, 12000, "px"),
       optToggle("keepAspect", "Lock aspect ratio", true, "Fits inside the box without distortion."),
       FORMAT_OPTS("auto"),
-      optSlider("quality", "Quality", 88, 30, 100, 1, "%"),
+      optSlider("quality", "Quality", 90, 30, 100, 1, "%"),
     ],
     processor: "resize",
     params: { mode: "both" },
@@ -44,7 +44,7 @@ export const RESIZE_TOOLS: ToolDef[] = [
     options: [
       optSlider("percent", "Scale to", 50, 1, 400, 1, "%", "50% = half size, 200% = double."),
       FORMAT_OPTS("auto"),
-      optSlider("quality", "Quality", 88, 30, 100, 1, "%"),
+      optSlider("quality", "Quality", 90, 30, 100, 1, "%"),
     ],
     processor: "resize",
     params: { mode: "percent" },
@@ -70,7 +70,7 @@ export const RESIZE_TOOLS: ToolDef[] = [
         { value: "1920", label: "1920px — full HD hero" },
       ]),
       FORMAT_OPTS("auto"),
-      optSlider("quality", "Quality", 88, 30, 100, 1, "%"),
+      optSlider("quality", "Quality", 90, 30, 100, 1, "%"),
     ],
     processor: "resize",
     params: { mode: "width" },
@@ -89,7 +89,7 @@ export const RESIZE_TOOLS: ToolDef[] = [
     options: [
       optNumber("height", "Target height", 1080, 1, 12000, "px"),
       FORMAT_OPTS("auto"),
-      optSlider("quality", "Quality", 88, 30, 100, 1, "%"),
+      optSlider("quality", "Quality", 90, 30, 100, 1, "%"),
     ],
     processor: "resize",
     params: { mode: "height" },
@@ -173,11 +173,11 @@ export const RESIZE_TOOLS: ToolDef[] = [
     multiple: true,
     options: [
       optNumber("width", "Width", 1600, 1, 12000, "px"),
-      optSlider("quality", "JPEG quality", 85, 30, 100, 1, "%"),
+      optSlider("quality", "JPEG quality", 90, 30, 100, 1, "%"),
     ],
     processor: "resize",
     params: { mode: "width", format: "image/jpeg" },
-    about: "A JPG-focused resizer that pairs dimension changes with quality control — resize a 6000px camera photo to 1600px at quality 85 and it lands around 400KB, ready for the web or email.",
+    about: "A JPG-focused resizer that pairs dimension changes with quality control — resize a 6000px camera photo to 1600px at quality 90 and it lands email- and web-ready.",
   },
   {
     slug: "resize-webp-image",
@@ -191,7 +191,7 @@ export const RESIZE_TOOLS: ToolDef[] = [
     multiple: true,
     options: [
       optNumber("width", "Width", 1200, 1, 12000, "px"),
-      optSlider("quality", "WebP quality", 85, 30, 100, 1, "%"),
+      optSlider("quality", "WebP quality", 90, 30, 100, 1, "%"),
     ],
     processor: "resize",
     params: { mode: "width", format: "image/webp" },
