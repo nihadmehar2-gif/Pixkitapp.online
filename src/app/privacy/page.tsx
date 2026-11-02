@@ -16,7 +16,10 @@ export const metadata: Metadata = {
   }),
 };
 
-const SECTIONS = [
+type PolicyLink = { href: string; label: string };
+type PolicySection = { title: string; body: string[]; links?: PolicyLink[] };
+
+const SECTIONS: PolicySection[] = [
   {
     title: "1. Overview",
     body: [
@@ -41,10 +44,14 @@ const SECTIONS = [
   },
   {
     title: "4. Automatic technical data",
+    links: [
+      { href: "https://policies.google.com/technologies/partner-sites", label: "How Google uses information from sites or apps that use our services" },
+      { href: "https://tools.google.com/dlpage/gaoptout", label: "Google Analytics opt-out browser add-on (tools.google.com/dlpage/gaoptout)" },
+    ],
     body: [
       "Like most websites, our hosting provider may record standard server logs — IP address, user-agent, requested URL, timestamp and referrer — for security, abuse prevention and aggregate analytics. These logs relate to page requests only; they never contain your image data because image data is never requested or sent.",
-      "We use Google Analytics 4 (Google Ireland Limited / Google LLC; measurement ID G-VXJMF2PERB) to understand aggregate usage of the site — pages and tools viewed, session counts, device and browser type, general geographic region and referrer — so we can improve the website. GA4 does not log or store your IP address, and it never receives your images, because images are processed only inside your browser.",
-      "Google Analytics sets first-party cookies (such as _ga) to distinguish visits, and loads its script from Google's googletagmanager.com domain. You can prevent Google Analytics from collecting your data without affecting any tool — for example with Google's official opt-out browser add-on (tools.google.com/dlpage/gaoptout) or a content blocker that filters googletagmanager.com. We do not currently operate a cookie-consent banner; where local law requires a consent choice for measurement cookies, we will surface one.",
+      "We use Google Analytics 4 (Google Ireland Limited / Google LLC; measurement ID G-VXJMF2PERB) to understand aggregate usage of the site — pages and tools viewed, session counts, device and browser type, general geographic region and referrer — so we can improve the website. Google Analytics 4 does not store IP addresses in its standard reporting data. IP information may be processed by Google to derive approximate location and other technical information before being discarded according to Google's processing practices. Google Analytics never receives your images, because images are processed only inside your browser.",
+      "Google Analytics sets first-party cookies (such as _ga) to distinguish visits, and loads its script from Google's googletagmanager.com domain. Google may use cookie or device identifiers and related technical information to measure website usage and improve the service; this information is handled by Google according to Google's policies, described in Google's official explainer linked below. You can prevent Google Analytics from collecting your data without affecting any tool — for example with Google's official opt-out browser add-on (also linked below) or a content blocker that filters googletagmanager.com. We do not currently operate a cookie-consent banner; where local law requires a consent choice for measurement cookies, we will surface one. Appropriate cookie/consent controls will be implemented where required before any advertising or personalized advertising is enabled.",
     ],
   },
   {
@@ -72,7 +79,7 @@ const SECTIONS = [
   {
     title: "8. Children's privacy",
     body: [
-      "PixKitApp is suitable for all ages precisely because normal tool usage collects no personal data. The site is not directed at children under 13 and we do not knowingly collect personal information from children — there is simply no mechanism to do so through normal tool usage.",
+      "PixKitApp is suitable for all ages: the image tools do not ask users to provide personal information such as names, email addresses or account details. Google Analytics may use cookie or device identifiers and related technical information to measure website usage and improve the service; this information is handled by Google according to Google's policies. The site is not directed at children under 13 and we do not knowingly collect personal information from children — the tools have no account system and no upload step.",
     ],
   },
   {
@@ -85,7 +92,7 @@ const SECTIONS = [
   {
     title: "10. Your rights",
     body: [
-      "Under regulations such as the GDPR and CCPA, you have rights to access, correct, delete and port your personal data. Because we do not maintain user databases, there is generally no personal data held by us to act upon. For any question or request — including deleting correspondence you emailed us — contact pixkitapp1@gmail.com and we will respond within 30 days.",
+      "Under regulations such as the GDPR and CCPA, you have rights to access, correct, delete and port your personal data. We do not maintain user accounts, so we hold no user-provided personal data. The website-usage information measured by Google Analytics 4 (section 4) — including cookie or device identifiers — is collected and handled by Google according to Google's policies; you can opt out of Google Analytics with the official browser add-on linked in section 4. For any question or request — including deleting correspondence you emailed us — contact pixkitapp1@gmail.com and we will respond within 30 days.",
       "If and when advertising cookies become active, the ad provider's own opt-out tools (such as Google Ads Settings and www.aboutads.info) will also be available to you, in addition to any consent interface we are required to offer in your region.",
     ],
   },
@@ -123,6 +130,15 @@ export default function PrivacyPage() {
                 <p key={i} className="leading-relaxed text-muted-foreground">{p}</p>
               ))}
             </div>
+            {s.links && (
+              <ul className="mt-3 space-y-1.5 text-sm">
+                {s.links.map((l) => (
+                  <li key={l.href}>
+                    <a href={l.href} rel="noopener noreferrer" className="text-primary hover:underline">{l.label}</a>
+                  </li>
+                ))}
+              </ul>
+            )}
           </section>
         ))}
       </div>

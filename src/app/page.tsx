@@ -223,7 +223,7 @@ export default function HomePage() {
                   body: "Unlike most online tools, PixKitApp has no upload step. All processing runs locally with the Canvas API and modern browser capabilities — your files stay on your machine from start to finish.",
                 },
                 {
-                  title: "Genuinely different tools, not clones",
+                  title: "A growing collection of practical image tools",
                   body: "Each of the 127 tools has its own purpose-built interface, options and output — from iterative target-size compression to EXIF inspection to passport photo guides.",
                 },
                 {

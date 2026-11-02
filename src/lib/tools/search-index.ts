@@ -419,7 +419,7 @@ export const SEARCH_ITEMS: SearchItem[] = [
   {
     "slug": "jpg-to-png",
     "name": "JPG to PNG",
-    "description": "Convert JPG photos to PNG format online free. Lossless output with no quality loss — private in-browser conversion.",
+    "description": "Convert JPG photos to PNG format online free. No extra quality loss during conversion — private in-browser conversion.",
     "category": "conversion",
     "icon": "Repeat",
     "keywords": [

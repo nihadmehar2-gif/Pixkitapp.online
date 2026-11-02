@@ -42,7 +42,7 @@ export const CONVERSION_TOOLS: ToolDef[] = [
     slug: "jpg-to-png",
     name: "JPG to PNG",
     h1: "Convert JPG to PNG",
-    description: "Convert JPG photos to PNG format online free. Lossless output with no quality loss — private in-browser conversion.",
+    description: "Convert JPG photos to PNG format online free. No extra quality loss during conversion — private in-browser conversion.",
     keywords: ["jpg to png", "jpeg to png", "convert jpg to png online"],
     category: "conversion",
     icon: "Repeat",

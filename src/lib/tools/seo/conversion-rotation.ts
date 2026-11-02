@@ -22,8 +22,8 @@ export const CONVERSION_SEO: Record<string, ToolSeo> = {
     "The route to take when an app accepts PNG but not WebP: design tools with PNG-only import, documentation systems, older Android webviews, and any asset pipeline that needs alpha plus lossless. Screenshots and UI graphics come through pixel-perfect."
   ),
   "jpg-to-png": seo(
-    "JPG to PNG Converter – Lossless Output",
-    "Convert JPG to PNG online free. Lossless output with no further quality loss, ideal for editing masters and text-heavy images — private, instant, no watermark.",
+    "JPG to PNG Converter – No Extra Quality Loss",
+    "Convert JPG to PNG online free. No extra quality loss during conversion, ideal for editing masters and text-heavy images — private, instant, no watermark.",
     "jpg to png converter",
     "The tool unwraps your JPEG's decoded pixels into a lossless PNG container. No new compression artifacts are added — though artifacts already baked into the JPG by its camera or previous save remain, since no converter can undo past JPEG loss.",
     "Drop up to 10 .jpg files and press Convert — there are no settings because none are needed. Preview each result, then download files individually or the batch as a ZIP.",

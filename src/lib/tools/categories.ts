@@ -131,10 +131,10 @@ export const CATEGORIES: ToolCategory[] = [
     id: "transparency",
     name: "Transparency",
     slug: "transparency",
-    description: "Remove backgrounds, add transparency, round corners and drop shadows.",
+    description: "Remove white backgrounds, key out colours, add transparency, round corners and drop shadows.",
     metaTitle: "Transparency Tools — 7 Free Online Alpha Tools",
     metaDescription:
-      "Remove backgrounds, add transparency, round corners and drop shadows. Seven free tools produce clean alpha channels for logos, stickers and UI assets.",
+      "Remove white backgrounds, key out colours, add transparency, round corners and drop shadows. Seven free tools produce clean alpha channels for logos, stickers and UI assets.",
     icon: "Layers",
     color: "from-cyan-500 to-sky-600",
   },
