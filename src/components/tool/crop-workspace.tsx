@@ -385,8 +385,13 @@ export function CropWorkspace({ tool, mode }: Props) {
       let blob: Blob;
       const mime = format as "image/jpeg" | "image/png" | "image/webp";
       if (mime === "image/jpeg") {
+        // Fill white BEFORE drawing so transparent source pixels composite
+        // onto white instead of turning black during JPEG encoding.
         const flat = createCanvas(outW, outH);
-        ctx2d(flat, false).drawImage(out, 0, 0);
+        const fctx = ctx2d(flat, false);
+        fctx.fillStyle = "#ffffff";
+        fctx.fillRect(0, 0, outW, outH);
+        fctx.drawImage(out, 0, 0);
         blob = await new Promise<Blob>((res, rej) => flat.toBlob((b) => (b ? res(b) : rej(new Error("encode failed"))), mime, quality / 100));
       } else {
         blob = await new Promise<Blob>((res, rej) => out.toBlob((b) => (b ? res(b) : rej(new Error("encode failed"))), mime, quality / 100));

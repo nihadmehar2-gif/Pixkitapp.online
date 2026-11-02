@@ -7,6 +7,9 @@ import {
   ctx2d,
   drawScaled,
   canvasToBlob,
+  encodeWithAlphaHandling,
+  flattenForJpeg,
+  quickPsnr,
 } from "@/lib/image/canvas";
 import { canvasToBmpBlob, quantizeCanvas, applyPalette, getPixels, putPixels } from "@/lib/image/encoders";
 import {
@@ -29,7 +32,18 @@ async function compress(images: LoadedImage[], o: ToolOptionValues, ctx: Process
   return out;
 }
 
-/* ---------- Target size compressor (binary search on quality, then downscale) ---------- */
+/* ---------- Target size compressor (fidelity-first search, then downscale) ----------
+ *  Strategy: keep the ORIGINAL dimensions and search for the candidate with
+ *  the HIGHEST MEASURED fidelity (sampled PSNR) that fits the target — we do
+ *  not assume a higher quality label is always better, because browser
+ *  encoders are not monotonic near q=1.0 (measured: quality 97 can be a
+ *  larger yet LESS faithful encode than quality 95). Besides the binary
+ *  search we therefore also probe the known encoder switch points
+ *  (0.95/0.9/0.85/0.8). Transparency is flattened onto white for JPEG
+ *  (never black) and scoring uses the same flattened reference so alpha
+ *  never skews the comparison. */
+const PSNR_PROBES = [0.95, 0.9, 0.85, 0.8];
+
 async function compressToSize(images: LoadedImage[], o: ToolOptionValues, ctx: ProcessContext): Promise<ProcessedResult[]> {
   const targetBytes = num(o, "__targetKB", 100) * 1024;
   const format = str(o, "format", "image/jpeg") as "image/jpeg" | "image/webp" | "image/png";
@@ -39,38 +53,77 @@ async function compressToSize(images: LoadedImage[], o: ToolOptionValues, ctx: P
     const canvas = canvasFromImage(img);
     let bestBlob: Blob | null = null;
     let bestQuality = 0;
-    let work = canvas;
-
-    // Binary search quality 0.95 -> 0.05
-    let lo = 0.05, hi = 0.95;
-    for (let attempt = 0; attempt < 8; attempt++) {
-      const q = (lo + hi) / 2;
-      const blob = await canvasToBlob(work, format, q);
-      if (blob.size <= targetBytes) {
+    let bestScore = -1;
+    // Keep the highest-fidelity fitting candidate (ties → smaller file).
+    const consider = async (blob: Blob, q: number, ref: HTMLCanvasElement) => {
+      const score = await quickPsnr(ref, blob);
+      if (score < 0) return;
+      if (
+        score > bestScore + 0.05 ||
+        (Math.abs(score - bestScore) <= 0.05 && bestBlob !== null && blob.size < bestBlob.size)
+      ) {
         bestBlob = blob;
         bestQuality = q;
-        lo = q;
-      } else {
-        hi = q;
+        bestScore = score;
+      }
+    };
+    let work = canvas;
+
+    // JPEG output: composite transparency onto white ONCE and search on that
+    // reference (also the scoring reference — keeps RGB comparisons valid).
+    const fullRef = await flattenForJpeg(canvas, format, "#ffffff");
+    // Fast floor check: if even the lowest quality busts the target at full
+    // size, skip straight to downscaling instead of wasting encodes.
+    const floorBlob = await canvasToBlob(fullRef, format, 0.05);
+    if (floorBlob.size <= targetBytes) {
+      await consider(floorBlob, 0.05, fullRef);
+      // Binary search quality 0.05 -> 1.0, scoring every fitting candidate.
+      let lo = 0.05, hi = 1.0;
+      for (let attempt = 0; attempt < 9; attempt++) {
+        const q = (lo + hi) / 2;
+        const blob = await canvasToBlob(fullRef, format, q);
+        if (blob.size <= targetBytes) {
+          await consider(blob, q, fullRef);
+          lo = q;
+        } else {
+          hi = q;
+        }
+      }
+      // Probe fixed qualities around browser-encoder switch points — the
+      // bisection grid alone can miss the best-fidelity pocket (e.g. q≈0.95).
+      for (const pq of PSNR_PROBES) {
+        const blob = await canvasToBlob(fullRef, format, pq);
+        if (blob.size <= targetBytes) await consider(blob, pq, fullRef);
       }
     }
-    // Still too big at full size? Downscale and retry a quality ladder at
-    // each size so even tiny targets stay reachable.
+    // Still no candidate at full size? Downscale (re-deriving from the
+    // ORIGINAL canvas each time — no cumulative generational loss) and run
+    // the same scored search at each scale; the first fitting scale wins.
     let scale = 1;
     while (!bestBlob && work.width > 24) {
       scale *= 0.8;
       const w = Math.max(24, Math.round(canvas.width * scale));
       const h = Math.max(24, Math.round(canvas.height * scale));
       work = drawScaled(canvas, canvas.width, canvas.height, w, h);
-      for (const q of [0.85, 0.5, 0.25, 0.05]) {
-        const blob = await canvasToBlob(work, format, q);
-        if (blob.size <= targetBytes) { bestBlob = blob; bestQuality = q; break; }
+      const refS = await flattenForJpeg(work, format, "#ffffff");
+      const scaleFloor = await canvasToBlob(refS, format, 0.05);
+      if (scaleFloor.size > targetBytes) continue;
+      await consider(scaleFloor, 0.05, refS);
+      let slo = 0.05, shi = 1.0;
+      for (let attempt = 0; attempt < 7; attempt++) {
+        const q = (slo + shi) / 2;
+        const blob = await canvasToBlob(refS, format, q);
+        if (blob.size <= targetBytes) { await consider(blob, q, refS); slo = q; } else shi = q;
+      }
+      for (const pq of PSNR_PROBES) {
+        const blob = await canvasToBlob(refS, format, pq);
+        if (blob.size <= targetBytes) await consider(blob, pq, refS);
       }
     }
     if (!bestBlob) {
       // Last resort at the smallest size. If even that exceeds the target,
       // fail honestly instead of silently delivering an oversized file.
-      const blob = await canvasToBlob(work, format, 0.05);
+      const blob = await encodeWithAlphaHandling(work, format, 0.05);
       if (blob.size > targetBytes) {
         throw new Error(
           `Could not get "${img.name}" under ${Math.round(targetBytes / 1024)}KB even at the smallest size — try a smaller or simpler image, or a higher target.`
@@ -146,15 +199,16 @@ async function compressNearLossless(images: LoadedImage[], o: ToolOptionValues, 
     const img = images[i];
     const canvas = canvasFromImage(img);
     const format = str(o, "format", "image/jpeg") as "image/jpeg" | "image/webp" | "image/png";
-    // Try highest qualities first, accept first that is smaller than original
+    // Try highest qualities first, accept first that is smaller than original.
+    // Alpha-safe encoding: transparent PNGs flattened to white for JPEG.
     let bestBlob: Blob | null = null;
     let usedQ = 100;
     for (const q of [0.95, 0.9, 0.85, 0.8]) {
-      const blob = await canvasToBlob(canvas, format, q);
+      const blob = await encodeWithAlphaHandling(canvas, format, q);
       if (blob.size < img.size) { bestBlob = blob; usedQ = Math.round(q * 100); break; }
     }
     if (!bestBlob) {
-      bestBlob = await canvasToBlob(canvas, format, 0.92);
+      bestBlob = await encodeWithAlphaHandling(canvas, format, 0.92);
       usedQ = 92;
     }
     const ext = MIME_EXT[format] ?? "jpg";
@@ -229,14 +283,44 @@ async function resizeToKB(images: LoadedImage[], o: ToolOptionValues, ctx: Proce
       const w = Math.round(canvas.width * s);
       const h = Math.round(canvas.height * s);
       const work = s === 1 ? canvas : drawScaled(canvas, canvas.width, canvas.height, w, h);
-      let lo = 0.05, hi = 0.95;
-      bestBlob = null;
-      for (let a = 0; a < 7; a++) {
+      // JPEG: composite transparency onto white once per scale; scoring and
+      // encoding both use this reference (valid RGB comparison).
+      const refS = await flattenForJpeg(work, format, "#ffffff");
+      // Floor check per scale: skip the search when this scale cannot fit
+      // the target even at the lowest quality.
+      const floorBlob = await canvasToBlob(refS, format, 0.05);
+      if (floorBlob.size > targetBytes) continue;
+      // Scored search at this scale: highest measured fidelity that fits.
+      let bestScore = -1;
+      let scaleBlob: Blob = floorBlob;
+      let scaleQ = 0.05;
+      const consider = async (blob: Blob, qq: number) => {
+        const score = await quickPsnr(refS, blob);
+        if (score < 0) return;
+        if (
+          score > bestScore + 0.05 ||
+          (Math.abs(score - bestScore) <= 0.05 && blob.size < scaleBlob.size)
+        ) {
+          scaleBlob = blob;
+          scaleQ = qq;
+          bestScore = score;
+        }
+      };
+      await consider(floorBlob, 0.05);
+      let lo = 0.05, hi = 1.0;
+      for (let a = 0; a < 8; a++) {
         const qq = (lo + hi) / 2;
-        const blob = await canvasToBlob(work, format, qq);
-        if (blob.size <= targetBytes) { bestBlob = blob; q = qq; lo = qq; } else hi = qq;
+        const blob = await canvasToBlob(refS, format, qq);
+        if (blob.size <= targetBytes) { await consider(blob, qq); lo = qq; } else hi = qq;
       }
-      if (bestBlob) { bestScale = s; break; }
+      for (const pq of PSNR_PROBES) {
+        const blob = await canvasToBlob(refS, format, pq);
+        if (blob.size <= targetBytes) await consider(blob, pq);
+      }
+      bestBlob = scaleBlob;
+      q = scaleQ;
+      bestScale = s;
+      break;
     }
     if (!bestBlob) {
       // Last resort at the smallest scale. If even that exceeds the target,
@@ -245,7 +329,7 @@ async function resizeToKB(images: LoadedImage[], o: ToolOptionValues, ctx: Proce
       const w = Math.max(24, Math.round(canvas.width * s));
       const h = Math.max(24, Math.round(canvas.height * s));
       const work = drawScaled(canvas, canvas.width, canvas.height, w, h);
-      const blob = await canvasToBlob(work, format, 0.05);
+      const blob = await encodeWithAlphaHandling(work, format, 0.05);
       if (blob.size > targetBytes) {
         throw new Error(
           `Could not get "${img.name}" under ${Math.round(targetBytes / 1024)}KB even at the smallest size — try a smaller or simpler image, or a higher target.`
@@ -343,19 +427,21 @@ async function thumbnail(images: LoadedImage[], o: ToolOptionValues, ctx: Proces
     const canvas = canvasFromImage(img);
     let thumb: HTMLCanvasElement;
     if (fit === "cover") {
+      // Two-step: high-quality resample to the cover size first, then
+      // center-crop. A single full-size→square draw aliases on big inputs.
+      const r = Math.max(size / canvas.width, size / canvas.height);
+      const w = Math.max(1, Math.round(canvas.width * r));
+      const h = Math.max(1, Math.round(canvas.height * r));
+      const scaled = drawScaled(canvas, canvas.width, canvas.height, w, h);
       thumb = createCanvas(size, size);
       const tctx = ctx2d(thumb);
-      const r = Math.max(size / canvas.width, size / canvas.height);
-      const w = canvas.width * r, h = canvas.height * r;
+      tctx.imageSmoothingEnabled = true;
       tctx.imageSmoothingQuality = "high";
-      tctx.drawImage(canvas, (size - w) / 2, (size - h) / 2, w, h);
+      tctx.drawImage(scaled, Math.floor((size - w) / 2), Math.floor((size - h) / 2), w, h);
     } else {
       const r = Math.min(size / canvas.width, size / canvas.height);
-      const w = Math.round(canvas.width * r), h = Math.round(canvas.height * r);
-      thumb = createCanvas(w, h);
-      const tctx = ctx2d(thumb);
-      tctx.imageSmoothingQuality = "high";
-      tctx.drawImage(canvas, 0, 0, w, h);
+      const w = Math.max(1, Math.round(canvas.width * r)), h = Math.max(1, Math.round(canvas.height * r));
+      thumb = drawScaled(canvas, canvas.width, canvas.height, w, h);
     }
     const result = await encodeImageResult(img, thumb, enc, `${size}px-thumb`);
     result.note = `${size}×${size} ${fit === "cover" ? "square" : "fit"} thumbnail`;

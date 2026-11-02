@@ -8,6 +8,10 @@ export interface EncodeOptions {
   format: OutputFormat;
   quality?: number; // 0..1 for jpeg/webp
   background?: string; // flatten background for formats without alpha
+  /** MIME type of the ORIGINAL source file. When format is 'auto' the source
+   *  format is preserved (JPEG stays JPEG, PNG stays PNG, WebP stays WebP)
+   *  instead of lossy-converting opaque images to JPEG. */
+  sourceType?: string | null;
 }
 
 export function createCanvas(width: number, height: number): HTMLCanvasElement {
@@ -44,10 +48,21 @@ export function drawFlattened(
   return canvas;
 }
 
-/** Pick the actual encode mime for 'auto' based on source alpha presence. */
-export async function resolveAutoFormat(canvas: HTMLCanvasElement, preferred: OutputFormat): Promise<Exclude<OutputFormat, "auto">> {
+/** Pick the actual encode mime for 'auto'.
+ *  Preserves the original file's format when it is a common web format
+ *  (JPEG/PNG/WebP) so auto never performs a hidden lossy conversion.
+ *  Only falls back to alpha detection for exotic/unknown sources. */
+export async function resolveAutoFormat(
+  canvas: HTMLCanvasElement,
+  preferred: OutputFormat,
+  sourceType?: string | null
+): Promise<Exclude<OutputFormat, "auto">> {
   if (preferred !== "auto") return preferred;
-  // Keep alpha if any pixel is transparent, else encode JPEG (smaller).
+  if (sourceType === "image/jpeg" || sourceType === "image/png" || sourceType === "image/webp") {
+    return sourceType;
+  }
+  // Unknown source (e.g. some SVG/bitmap rasters): keep alpha safe in PNG,
+  // otherwise encode JPEG (smaller).
   if (await canvasHasAlpha(canvas)) return "image/png";
   return "image/jpeg";
 }
@@ -86,19 +101,81 @@ export interface EncodedResult {
 
 /** Encode canvas with auto format resolution + alpha flattening. */
 export async function encodeCanvas(canvas: HTMLCanvasElement, opts: EncodeOptions): Promise<EncodedResult> {
-  const format = await resolveAutoFormat(canvas, opts.format);
-  let target: HTMLCanvasElement = canvas;
-  if (format === "image/jpeg") {
-    // Check for alpha and flatten if needed
-    if (await canvasHasAlpha(canvas)) {
-      target = drawFlattened(canvas, canvas.width, canvas.height, opts.background ?? "#ffffff");
-    }
-  }
+  const format = await resolveAutoFormat(canvas, opts.format, opts.sourceType);
+  const target = await flattenForJpeg(canvas, format, opts.background ?? "#ffffff");
   const blob = await canvasToBlob(target, format, opts.quality);
   return { blob, mime: format, width: target.width, height: target.height };
 }
 
-/** High-quality multi-step downscale (avoids aliasing on large reductions). */
+/** For JPEG output, composite transparency over the background color once.
+ *  Encoding a transparent canvas straight to JPEG turns transparent pixels
+ *  BLACK in most browsers — this prevents that. Other formats pass through. */
+export async function flattenForJpeg(
+  canvas: HTMLCanvasElement,
+  format: "image/jpeg" | "image/png" | "image/webp",
+  background: string = "#ffffff"
+): Promise<HTMLCanvasElement> {
+  if (format !== "image/jpeg") return canvas;
+  if (await canvasHasAlpha(canvas)) {
+    return drawFlattened(canvas, canvas.width, canvas.height, background);
+  }
+  return canvas;
+}
+
+/** Convenience: alpha-safe encode to a fixed format/quality (target-KB tools). */
+export async function encodeWithAlphaHandling(
+  canvas: HTMLCanvasElement,
+  format: Exclude<OutputFormat, "auto">,
+  quality: number,
+  background: string = "#ffffff"
+): Promise<Blob> {
+  const target = await flattenForJpeg(canvas, format, background);
+  return canvasToBlob(target, format, quality);
+}
+
+/** Cheap sampled PSNR between a canvas and an encoded candidate of the same
+ *  dimensions (returns -1 when dimensions differ).
+ *  Used by target-size searches to pick the highest-fidelity candidate:
+ *  browser encoders are NOT strictly monotonic in the 0.95-1.0 quality range
+ *  (measured: q=0.97 can produce a larger yet LESS faithful file than q=0.95),
+ *  so fidelity must be measured, not assumed from the quality label. */
+/** Cache of reference pixel data per canvas — avoids re-reading a possibly
+ *  huge ImageData on every scored candidate during target-size searches. */
+const psnrRefCache = new WeakMap<HTMLCanvasElement, Uint8ClampedArray>();
+
+export async function quickPsnr(source: HTMLCanvasElement, candidate: Blob): Promise<number> {
+  try {
+    const bmp = await createImageBitmap(candidate);
+    if (bmp.width !== source.width || bmp.height !== source.height) return -1;
+    const c = createCanvas(bmp.width, bmp.height);
+    const cctx = ctxForRead(c);
+    cctx.drawImage(bmp, 0, 0);
+    bmp.close();
+    const a = cctx.getImageData(0, 0, c.width, c.height).data;
+    let b = psnrRefCache.get(source);
+    if (!b) {
+      b = ctxForRead(source).getImageData(0, 0, source.width, source.height).data;
+      psnrRefCache.set(source, b);
+    }
+    let se = 0;
+    let n = 0;
+    const stride = 4 * Math.max(1, Math.floor((c.width * c.height) / 200000));
+    for (let i = 0; i < a.length; i += stride) {
+      for (let k = 0; k < 3; k++) {
+        const d = a[i + k] - b[i + k];
+        se += d * d;
+        n++;
+      }
+    }
+    const mse = se / n;
+    return mse === 0 ? 99 : 10 * Math.log10(255 * 255 / mse);
+  } catch {
+    return -1;
+  }
+}
+
+/** High-quality multi-step rescale for BOTH directions (avoids aliasing on
+ *  large reductions and harsh single-pass enlargements). */
 export function drawScaled(
   source: CanvasImageSource,
   srcW: number,
@@ -106,6 +183,16 @@ export function drawScaled(
   dstW: number,
   dstH: number
 ): HTMLCanvasElement {
+  // Upscaling: a single high-quality draw is correct (stepping up in halves
+  // adds no information and can soften edges further).
+  if (dstW >= srcW && dstH >= srcH) {
+    const up = createCanvas(dstW, dstH);
+    const uctx = ctx2d(up);
+    uctx.imageSmoothingEnabled = true;
+    uctx.imageSmoothingQuality = "high";
+    uctx.drawImage(source, 0, 0, dstW, dstH);
+    return up;
+  }
   let current = source;
   let cw = srcW;
   let ch = srcH;

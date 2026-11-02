@@ -49,7 +49,8 @@ export async function buildResult(
   filename: string,
   note?: string
 ): Promise<ProcessedResult> {
-  const encoded = await encodeCanvas(canvas, enc);
+  // 'auto' must preserve the original file's format (no hidden PNG→JPEG etc.)
+  const encoded = await encodeCanvas(canvas, { ...enc, sourceType: img.type });
   return {
     id: `${img.id}-${Math.random().toString(36).slice(2, 7)}`,
     sourceId: img.id,
@@ -72,10 +73,10 @@ export async function encodeImageResult(
   note?: string
 ): Promise<ProcessedResult> {
   const format = enc.format === "auto" ? "auto" : (enc.format as OutputFormat);
-  // determine extension
+  // determine extension (auto resolves to the SOURCE format first)
   let ext: string;
   if (format === "auto") {
-    const resolved = await import("@/lib/image/canvas").then((m) => m.resolveAutoFormat(canvas, "auto"));
+    const resolved = await import("@/lib/image/canvas").then((m) => m.resolveAutoFormat(canvas, "auto", img.type));
     ext = MIME_EXT[resolved] ?? "png";
   } else {
     ext = MIME_EXT[format] ?? "png";

@@ -2,7 +2,7 @@
 
 import type { LoadedImage } from "@/lib/image/loader";
 import type { ProcessedResult, ProcessContext, ToolOptionValues, Processor } from "../types";
-import { createCanvas, ctx2d, encodeCanvas, outputName } from "@/lib/image/canvas";
+import { createCanvas, ctx2d, encodeCanvas, outputName, drawScaled } from "@/lib/image/canvas";
 import { canvasFromImage, encodeOpts, num, str } from "./helpers";
 import { basicProcessors } from "./basic";
 import { geometryProcessors } from "./geometry";
@@ -25,21 +25,29 @@ async function socialResize(images: LoadedImage[], o: ToolOptionValues, ctx: Pro
     const src = canvasFromImage(img);
     const canvas = createCanvas(targetW, targetH);
     const c = ctx2d(canvas);
+    // Multi-step resampling (drawScaled) keeps big downscales free of aliasing
+    // — a single full-size→target draw produces soft/ragged output.
     if (fit === "cover") {
       const r = Math.max(targetW / src.width, targetH / src.height);
-      const w = src.width * r, h = src.height * r;
+      const w = Math.max(targetW, Math.round(src.width * r));
+      const h = Math.max(targetH, Math.round(src.height * r));
+      const scaled = drawScaled(src, src.width, src.height, w, h);
+      c.imageSmoothingEnabled = true;
       c.imageSmoothingQuality = "high";
-      c.drawImage(src, (targetW - w) / 2, (targetH - h) / 2, w, h);
+      c.drawImage(scaled, Math.floor((targetW - w) / 2), Math.floor((targetH - h) / 2), w, h);
     } else if (fit === "contain") {
       c.fillStyle = bg;
       c.fillRect(0, 0, targetW, targetH);
       const r = Math.min(targetW / src.width, targetH / src.height);
-      const w = src.width * r, h = src.height * r;
+      const w = Math.max(1, Math.round(src.width * r));
+      const h = Math.max(1, Math.round(src.height * r));
+      const scaled = drawScaled(src, src.width, src.height, w, h);
+      c.imageSmoothingEnabled = true;
       c.imageSmoothingQuality = "high";
-      c.drawImage(src, (targetW - w) / 2, (targetH - h) / 2, w, h);
+      c.drawImage(scaled, Math.floor((targetW - w) / 2), Math.floor((targetH - h) / 2), w, h);
     } else {
-      c.imageSmoothingQuality = "high";
-      c.drawImage(src, 0, 0, targetW, targetH);
+      const scaled = drawScaled(src, src.width, src.height, targetW, targetH);
+      c.drawImage(scaled, 0, 0);
     }
     const label = `${targetW}x${targetH}`;
     const result = await (async () => {

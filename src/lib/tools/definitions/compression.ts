@@ -18,10 +18,10 @@ export const COMPRESSION_TOOLS: ToolDef[] = [
     multiple: true,
     options: [...[optSlider("quality", "Compression quality", 75, 5, 100, 1, "%", "Lower = smaller file. 75% is ideal for most photos.")], FORMAT_OPTS("auto")],
     processor: "compress",
-    about: "PixKitApp's free image compressor reduces JPG, PNG and WebP file sizes directly in your browser using Canvas re-encoding. Your photos never leave your device, so compression is instant and completely private. Adjust the quality slider to balance file size against visual fidelity — JPEG and WebP photos typically shrink substantially at 75% quality, and opaque PNGs converted to JPEG can drop far more. Preview the result before downloading to confirm you're happy with it.",
+    about: "PixKitApp's free image compressor reduces JPG, PNG and WebP file sizes directly in your browser using Canvas re-encoding. Your photos never leave your device, so compression is instant and completely private. Your image's original format is preserved — PNG stays PNG, WebP stays WebP, JPEG stays JPEG — so screenshots, logos and transparent graphics never turn blurry. Photos in JPEG or WebP typically shrink substantially at 75% quality; for bigger savings on a PNG photo, pick JPEG in the output format menu. Preview the result before downloading to confirm you're happy with it.",
     faq: [
       { q: "Is my image uploaded to a server?", a: "No. Compression runs 100% in your browser using the Canvas API. Images never leave your device." },
-      { q: "How much smaller will my image get?", a: "It depends on the image. JPEG and WebP photos re-encoded at 75% quality typically shrink substantially; converting an opaque PNG to JPEG often saves even more. Already-compressed or flat graphics may shrink less. The result card shows your exact saving before you download." },
+      { q: "How much smaller will my image get?", a: "It depends on the image. JPEG and WebP photos re-encoded at 75% quality typically shrink substantially. PNG files stay PNG with a lossless re-encode, so screenshots and logos never get blurry — to get photo-style savings from a large PNG, choose JPEG or WebP in the output format menu. The result card shows your exact saving before you download." },
       { q: "Can I compress multiple images at once?", a: "Yes — drop up to 10 images and compress them in one batch, then download all as a ZIP." },
     ],
   },
