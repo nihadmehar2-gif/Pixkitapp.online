@@ -51,7 +51,7 @@ export function SiteFooter() {
           </div>
         </div>
         <div className="mt-10 flex flex-col items-center justify-between gap-3 border-t pt-6 text-sm text-muted-foreground sm:flex-row">
-          <p>© {year} PixKitApp · pixkitapp.com — All rights reserved.</p>
+          <p>© {year} PixKitApp · www.pixkitapp.online — All rights reserved.</p>
           <p className="flex items-center gap-1.5">
             <span className="inline-block h-2 w-2 rounded-full bg-emerald-500 shadow-[0_0_8px_2px_oklch(0.72_0.19_160/0.7)] motion-reduce:shadow-none" aria-hidden="true" />
             Images are processed in your browser — never uploaded

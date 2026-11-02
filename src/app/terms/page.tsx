@@ -20,7 +20,7 @@ const SECTIONS = [
   {
     title: "1. Acceptance of terms",
     body: [
-      "These Terms of Service (\"Terms\") govern your use of pixkitapp.com and all tools offered by PixKitApp (the \"Service\"). By accessing or using the Service you agree to be bound by these Terms. If you do not agree, do not use the Service.",
+      "These Terms of Service (\"Terms\") govern your use of www.pixkitapp.online and all tools offered by PixKitApp (the \"Service\"). By accessing or using the Service you agree to be bound by these Terms. If you do not agree, do not use the Service.",
       "We may revise these Terms from time to time. Continued use after changes are posted constitutes acceptance of the revised Terms. The effective date below indicates the current version.",
     ],
   },
@@ -102,7 +102,7 @@ export default function TermsPage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
       <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">Terms of Service</h1>
-      <p className="mt-2 text-sm text-muted-foreground">Effective date: October 14, 2026 · Applies to pixkitapp.com and all PixKitApp tools.</p>
+      <p className="mt-2 text-sm text-muted-foreground">Effective date: October 14, 2026 · Applies to www.pixkitapp.online and all PixKitApp tools.</p>
 
       <div className="mt-8 space-y-8">
         {SECTIONS.map((s) => (

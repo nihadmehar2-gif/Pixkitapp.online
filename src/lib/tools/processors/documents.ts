@@ -117,7 +117,7 @@ function buildCenteredPdf(
     objects[imageIds[i]] =
       `<< /Type /XObject /Subtype /Image /Width ${jw} /Height ${jh} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${jpeg.length} >>`;
   }
-  objects[infoId] = `<< /Title (PixKitApp PDF) /Producer (PixKitApp - pixkitapp.com) >>`;
+  objects[infoId] = `<< /Title (PixKitApp PDF) /Producer (PixKitApp - www.pixkitapp.online) >>`;
 
   let pdfLen = 0;
   const encoder = new TextEncoder();

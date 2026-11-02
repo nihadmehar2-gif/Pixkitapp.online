@@ -29,7 +29,8 @@ export const TOOLS: ToolDef[] = [
   ...PASSPORT_TOOLS,
 ];
 
-export const SITE_URL = "https://pixkitapp.com";
+/** The one canonical production origin — every sitemap/robots/canonical/OG/schema URL derives from it. */
+export const SITE_URL = "https://www.pixkitapp.online";
 export const SITE_NAME = "PixKitApp";
 
 /** Lightweight tool shape for client components — excludes SEO guides, FAQs and options. */

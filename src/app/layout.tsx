@@ -133,7 +133,7 @@ export default function RootLayout({
           <script
             dangerouslySetInnerHTML={{
               __html:
-                'try{if(!/^(www\\.)?pixkitapp\\.com$/.test(location.hostname)){var m=document.querySelector(\'meta[name="robots"]\');if(!m){m=document.createElement("meta");m.setAttribute("name","robots");document.head.appendChild(m)}m.setAttribute("content","noindex, nofollow")}}catch(e){}',
+                'try{if(!/^(www\\.)?pixkitapp\\.online$/.test(location.hostname)){var m=document.querySelector(\'meta[name="robots"]\');if(!m){m=document.createElement("meta");m.setAttribute("name","robots");document.head.appendChild(m)}m.setAttribute("content","noindex, nofollow")}}catch(e){}',
             }}
           />
         </ThemeProvider>

@@ -6,7 +6,7 @@ import { IS_PREVIEW } from "@/lib/seo";
 /**
  * Production sitemap: exactly the 147 intended indexable URLs —
  * 1 homepage + 5 static pages (/tools /about /contact /privacy /terms)
- * + 14 category pages + 127 tool pages — all absolute https://pixkitapp.com
+ * + 14 category pages + 127 tool pages — all absolute https://www.pixkitapp.online
  * URLs, no query variants, no fragments, no duplicates.
  *
  * Preview/staging must not publish the production sitemap (robots.txt

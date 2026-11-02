@@ -40,7 +40,7 @@ export const ROBOTS_DIRECTIVES: Metadata["robots"] = IS_PREVIEW
 /**
  * Stable, publicly served social sharing image — 1200×630 PNG in /public
  * (professional branded card, <300 KB). Resolves to the absolute production
- * URL https://pixkitapp.com/og-default.png via metadataBase, so scrapers
+ * URL https://www.pixkitapp.online/og-default.png via metadataBase, so scrapers
  * always see a production asset that will exist once the site is deployed
  * (it ships in /public).
  */

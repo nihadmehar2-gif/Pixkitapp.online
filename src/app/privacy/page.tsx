@@ -20,8 +20,8 @@ const SECTIONS = [
   {
     title: "1. Overview",
     body: [
-      "PixKitApp (\"we\", \"us\", \"our\") operates pixkitapp.com, a suite of free browser-based image tools. This policy explains what data we collect, what we deliberately do not collect, and how the site works technically. The short version: your images are processed entirely on your own device and are never transmitted to our servers.",
-      "By using PixKitApp you agree to this policy. If you disagree with any part of it, please discontinue use of the site. This policy describes only pixkitapp.com; it does not cover third-party services that load only after we enable them, which we describe in sections 4, 6 and 7 and will update before doing so.",
+      "PixKitApp (\"we\", \"us\", \"our\") operates www.pixkitapp.online, a suite of free browser-based image tools. This policy explains what data we collect, what we deliberately do not collect, and how the site works technically. The short version: your images are processed entirely on your own device and are never transmitted to our servers.",
+      "By using PixKitApp you agree to this policy. If you disagree with any part of it, please discontinue use of the site. This policy describes only www.pixkitapp.online; it does not cover third-party services that load only after we enable them, which we describe in sections 4, 6 and 7 and will update before doing so.",
     ],
   },
   {
@@ -106,7 +106,7 @@ export default function PrivacyPage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
       <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">Privacy Policy</h1>
-      <p className="mt-2 text-sm text-muted-foreground">Effective date: October 14, 2026 · Applies to pixkitapp.com and all PixKitApp tools.</p>
+      <p className="mt-2 text-sm text-muted-foreground">Effective date: October 14, 2026 · Applies to www.pixkitapp.online and all PixKitApp tools.</p>
 
       <div className="mt-4 rounded-xl border border-primary/30 bg-primary/5 p-4 text-sm leading-relaxed">
         <strong>TL;DR:</strong> All {TOOLS_COUNT} tools process images locally in your browser — we never receive, store or see your images. No accounts, and no

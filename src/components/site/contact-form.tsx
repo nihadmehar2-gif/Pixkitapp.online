@@ -30,7 +30,7 @@ export function ContactForm() {
 
     // Compose a mailto — nothing is transmitted over the web; your email client sends it.
     const subject = `[PixKitApp ${type}] ${message.slice(0, 60).replace(/\s+/g, " ")}`;
-    const body = `${message}\n\n—\nName: ${name}\nEmail: ${email}\nSent from pixkitapp.com contact page`;
+    const body = `${message}\n\n—\nName: ${name}\nEmail: ${email}\nSent from www.pixkitapp.online contact page`;
     window.location.href = `mailto:nihadmehar2@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     setSent(true);
   };
