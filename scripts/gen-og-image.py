@@ -5,7 +5,7 @@ Brand-consistent with the site: dark background (#1a1625), violet->orange
 gradient accent (matches public/logo.svg), Inter-like heavy sans (DejaVu Sans
 Bold is the closest installed), same wordmark treatment.
 
-Output: public/og-default.png — served at https://pixkitapp.com/og-default.png
+Output: public/og-default.png — served at https://www.pixkitapp.online/og-default.png
 """
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 import math
@@ -168,7 +168,7 @@ draw.text((pill_x + 24, pill_y + 10), "1.3 MB → 57 KB", font=f_stat, fill=WHIT
 draw.text((pill_x + 24, pill_y + 52), "100% private · no upload", font=f_stat_small, fill=FAINT)
 
 # ---- footer url ----------------------------------------------------------------
-draw.text((MARGIN_X, 552), "pixkitapp.com", font=f_url, fill=FAINT)
+draw.text((MARGIN_X, 552), "www.pixkitapp.online", font=f_url, fill=FAINT)
 
 # subtle top hairline gradient strip (brand)
 strip = vertical_gradient((W, 6), VIOLET, ORANGE).convert("RGBA")

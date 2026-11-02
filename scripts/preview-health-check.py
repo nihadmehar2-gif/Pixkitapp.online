@@ -40,7 +40,7 @@ def main():
 
     # --- 2. Check every URL locally (concurrent) ---
     def check(u):
-        s, _, _ = fetch(u.replace("https://pixkitapp.com", LOCAL))
+        s, _, _ = fetch(u.replace("https://www.pixkitapp.online", LOCAL))
         return u, s
 
     bad = []

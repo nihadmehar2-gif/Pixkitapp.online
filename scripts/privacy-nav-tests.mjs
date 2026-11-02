@@ -65,8 +65,8 @@ console.log(`404 handling: ${status === 404 && hasHelp ? "PASS" : "FAIL"} (statu
 /* 4. Sitemap & robots on prod */
 const sm = await (await fetch(`${BASE}/sitemap.xml`)).text();
 const rb = await (await fetch(`${BASE}/robots.txt`)).text();
-console.log(`sitemap.xml: ${sm.includes("<urlset") && sm.includes("https://pixkitapp.com/image-compressor") ? "PASS" : "FAIL"} (${(sm.match(/<loc>/g) || []).length} URLs)`);
-console.log(`robots.txt: ${rb.includes("Allow: /") && rb.includes("Sitemap: https://pixkitapp.com/sitemap.xml") && !rb.includes("Disallow") ? "PASS" : "FAIL"}`);
+console.log(`sitemap.xml: ${sm.includes("<urlset") && sm.includes("https://www.pixkitapp.online/image-compressor") ? "PASS" : "FAIL"} (${(sm.match(/<loc>/g) || []).length} URLs)`);
+console.log(`robots.txt: ${rb.includes("Allow: /") && rb.includes("Sitemap: https://www.pixkitapp.online/sitemap.xml") && !rb.includes("Disallow") ? "PASS" : "FAIL"}`);
 
 console.log(`page errors overall: ${log.length}`);
 await browser.close();

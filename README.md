@@ -5,7 +5,9 @@ user's browser** (Canvas API + built-in codecs). No uploads. No accounts. 147
 SEO-indexed static pages. Built with Next.js 16 (App Router, SSG), TypeScript,
 Tailwind CSS 4 and shadcn/ui.
 
-- Production URL: **https://pixkitapp.com**
+- Production URL: **https://www.pixkitapp.online** (canonical host — apex
+  `pixkitapp.online` and the legacy `pixkitapp.com` domain 308-redirect here,
+  see `src/proxy.ts`)
 - Every tool has a unique clean URL (e.g. `/image-compressor`, `/webp-to-jpg`,
   `/passport-photo-maker`), a working interface, live preview and download.
 
@@ -100,26 +102,32 @@ compatible with Vercel's build.
    (or skip until AdSense is approved).
 5. **Deploy.** First build ≈ 1–2 min; all 152 pages prerender.
 
-### Connect pixkitapp.com + HTTPS
+### Connect www.pixkitapp.online + HTTPS
 
-1. Vercel project → **Settings → Domains → Add** → `pixkitapp.com`, and add
-   `www.pixkitapp.com` as well (redirect www → apex, or vice-versa).
+The production domain is **`www.pixkitapp.online`** — this is the canonical
+host every sitemap/robots/canonical/OG URL is derived from (`SITE_URL` in
+`src/lib/tools/index.ts`). The apex and the legacy `.com` domain redirect to
+it with 308s (proxy-level, `src/proxy.ts`).
+
+1. Vercel project → **Settings → Domains → Add** → `pixkitapp.online`, then
+   add `www.pixkitapp.online` and set **www as primary** (apex → www redirect).
 2. At your registrar, point DNS per Vercel's instructions:
    - Apex `A` record → `76.76.21.21`
    - `www` `CNAME` → `cname.vercel-dns.com`
-3. HTTPS is automatic: Vercel provisions and renews Let's Encrypt certificates
-   for every connected domain — no manual step. Verify the padlock on
-   `https://pixkitapp.com` after DNS propagates (5 min – 48 h).
-4. Keep the canonical host consistent — the site's canonical tags point at
-   `https://pixkitapp.com` (no www), so leave www → apex redirect enabled.
+3. HTTPS is automatic: Vercel provisions and renews certificates for every
+   connected domain — no manual step. Verify the padlock on
+   `https://www.pixkitapp.online` after DNS propagates (5 min – 48 h).
+4. If the legacy `pixkitapp.com` domain is still owned, add it to the same
+   Vercel project and redirect it to `www.pixkitapp.online` (the app already
+   308s any legacy host it receives).
 
 ### Submit the sitemap to Google Search Console
 
-1. Create/verify the property for `https://pixkitapp.com` in
+1. Create/verify the property for `https://www.pixkitapp.online` in
    [search.google.com/search-console](https://search.google.com/search-console)
    (DNS TXT record verification is easiest while adding the domain).
 2. **Sitemaps → Add a new sitemap** → enter `sitemap.xml` → Submit.
-   (The live file is at `https://pixkitapp.com/sitemap.xml` — 147 URLs.)
+   (The live file is at `https://www.pixkitapp.online/sitemap.xml` — 147 URLs.)
 3. Use **URL Inspection** on key pages (`/`, `/image-compressor`,
    `/webp-to-jpg`, …) → "Request indexing" for the first batch.
 4. Revisit Coverage reports over the following weeks. Note: indexing and
@@ -129,11 +137,13 @@ compatible with Vercel's build.
 ### Test individual URLs
 
 ```bash
-curl -I https://pixkitapp.com/webp-to-jpg          # expect HTTP/2 200
-curl -s https://pixkitapp.com/sitemap.xml | grep -c "<loc>"   # expect 147
-curl -s https://pixkitapp.com/robots.txt
+curl -I https://www.pixkitapp.online/webp-to-jpg     # expect HTTP/2 200
+curl -s https://www.pixkitapp.online/sitemap.xml | grep -c "<loc>"   # expect 147
+curl -s https://www.pixkitapp.online/robots.txt
 # 404 behaviour
-curl -o /dev/null -w "%{http_code}\n" https://pixkitapp.com/does-not-exist   # 404
+curl -o /dev/null -w "%{http_code}\n" https://www.pixkitapp.online/does-not-exist   # 404
+# apex + legacy domain must 308-redirect to www
+curl -s -o /dev/null -w "%{http_code} %{redirect_url}\n" https://pixkitapp.online/
 ```
 
 ## 5. Verification tooling (scripts/)
@@ -156,8 +166,8 @@ All runnable locally against a build:
 - Three reserved slots: **below header**, **in-content** (between tool and
   guide / on homepage between sections), **pre-footer**. Each reserves its
   height (100–280px) to avoid layout shift, sits in normal document flow and
-  never overlaps controls. With no env vars set, they render labelled
-  placeholders and load **zero** third-party code.
+  never overlaps controls. With no env vars set, they render **nothing at
+  all** (no empty "Advertisement" boxes) and load **zero** third-party code.
 - Privacy claims are deliberately precise: images are processed in-browser and
   are never uploaded; the Privacy Policy accurately describes hosting logs,
   theme localStorage, and — in its own section — what activates if/when
@@ -169,8 +179,9 @@ All runnable locally against a build:
 Code-complete and verified (see worklog for test evidence). Items that require
 the site owner, by nature outside the codebase:
 
-1. **Domain + hosting** — connect pixkitapp.com on Vercel (§4). Until then the
-   site runs wherever this repo is deployed.
+1. **Domain + hosting** — `www.pixkitapp.online` is live and canonical; the
+   apex 308-redirects to it (§4). If the legacy `pixkitapp.com` domain is
+   still owned, point it at the same Vercel project (the app 308s it).
 2. **Contact inbox** — all contact references site-wide (Contact/Privacy/
    Terms and the form's mailto action) route to the owner's personal inbox
    **nihadmehar2@gmail.com**; no mailbox provisioning is needed.
