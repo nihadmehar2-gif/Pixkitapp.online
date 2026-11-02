@@ -15,11 +15,13 @@ const HOME_DESCRIPTION =
   "Use 127 free online image tools to compress, resize, crop and convert photos right in your browser. Nothing is uploaded — files never leave your device.";
 
 export const metadata: Metadata = {
-  title: "Free Online Image Tools – Compress, Resize & Convert | PixKitApp",
+  // 56 chars — primary keyword "free online image tools" verbatim plus brand;
+  // resize/crop intent stays covered by the meta description and H1 below.
+  title: "Free Online Image Tools – Compress & Convert | PixKitApp",
   description: HOME_DESCRIPTION,
   alternates: { canonical: SITE_URL },
   ...socialMeta({
-    title: "Free Online Image Tools – Compress, Resize & Convert | PixKitApp",
+    title: "Free Online Image Tools – Compress & Convert | PixKitApp",
     description: HOME_DESCRIPTION,
     path: "/",
   }),

@@ -110,7 +110,7 @@ export default function PrivacyPage() {
       <p className="mt-2 text-sm text-muted-foreground">Effective date: November 2, 2026 · Applies to www.pixkitapp.online and all PixKitApp tools.</p>
 
       <div className="mt-4 rounded-xl border border-primary/30 bg-primary/5 p-4 text-sm leading-relaxed">
-        <strong>TL;DR:</strong> All {TOOLS_COUNT} tools process images locally in your browser — we never receive, store or see your images. No accounts. Aggregate usage measurement via Google Analytics 4 is active (section 4) — it measures page views and device type, never your images. Ad containers on the page are reserved placeholders; section 6 explains exactly what will change
+        <strong>TL;DR:</strong> All {TOOLS_COUNT} tools process images locally in your browser — we never receive, store or see your images. No accounts. Aggregate usage measurement via Google Analytics 4 is active (section 4) — it measures page views and device type, never your images. No ads are shown today; section 6 explains exactly what will change
         if we enable advertising.
       </div>
 

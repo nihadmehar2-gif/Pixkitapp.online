@@ -182,11 +182,11 @@ export const COMPRESSION_TOOLS: ToolDef[] = [
     about: "Some platforms demand unusual limits — 30KB forum avatars, 150KB marketplace photos, 800KB print forms. Enter any target in kilobytes and this tool searches quality and dimensions until it lands under your number, all inside your browser.",
   },
   {
-    slug: "lossless-image-compressor",
+    slug: "near-lossless-image-compressor",
     name: "Near-Lossless Compressor",
     h1: "Near-Lossless Image Compressor",
     description: "Shrink photos at very high quality (90–95). Most people can't tell the difference — but it's not mathematically lossless, so keep your original too.",
-    keywords: ["lossless image compressor", "visually lossless", "compress without quality loss"],
+    keywords: ["lossless image compressor", "near lossless compressor", "visually lossless", "compress without quality loss"],
     category: "compression",
     icon: "Award",
     accept: IMG_ACCEPT,

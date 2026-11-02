@@ -132,13 +132,14 @@ export const SEARCH_ITEMS: SearchItem[] = [
     ]
   },
   {
-    "slug": "lossless-image-compressor",
+    "slug": "near-lossless-image-compressor",
     "name": "Near-Lossless Compressor",
     "description": "Shrink photos at very high quality (90–95). Most people can't tell the difference — but it's not mathematically lossless, so keep your original too.",
     "category": "compression",
     "icon": "Award",
     "keywords": [
       "lossless image compressor",
+      "near lossless compressor",
       "visually lossless",
       "compress without quality loss"
     ]
@@ -1011,7 +1012,7 @@ export const SEARCH_ITEMS: SearchItem[] = [
   {
     "slug": "image-metadata-viewer",
     "name": "Metadata Viewer",
-    "description": "Inspect EXIF, GPS and PNG metadata of any image — camera model, date, settings, location. private, in-browser — the file never leaves your device.",
+    "description": "Inspect EXIF, GPS and PNG metadata of any image — camera model, date, settings, location. Private, in-browser — the file never leaves your device.",
     "category": "metadata",
     "icon": "FileSearch",
     "keywords": [

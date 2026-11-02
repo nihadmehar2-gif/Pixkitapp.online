@@ -112,7 +112,7 @@ export const GENERATED_FAQS: Record<string, NonNullable<ToolDef["faq"]>> = {
       "a": "Yes — settings include Target file size (KB), Output format. Each run regenerates the preview, so you can compare options before downloading."
     }
   ],
-  "lossless-image-compressor": [
+  "near-lossless-image-compressor": [
     {
       "q": "Is my image uploaded to a server when I use Near-Lossless Compressor?",
       "a": "Everything runs locally in your browser via the Canvas API. Your picture never leaves your machine — there is no upload step at all, so processing is as private as working in an offline editor."

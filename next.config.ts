@@ -34,6 +34,20 @@ const nextConfig: NextConfig = {
     ignoreBuildErrors: true,
   },
   reactStrictMode: false,
+  async redirects() {
+    return [
+      // The near-lossless compressor was previously published at
+      // /lossless-image-compressor. The slug implied mathematically lossless
+      // output, which the page itself explicitly disclaims, so it was renamed
+      // to match the tool name. Permanent 308 (method + query preserved) so
+      // existing external links keep working and equity transfers.
+      {
+        source: "/lossless-image-compressor",
+        destination: "/near-lossless-image-compressor",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {

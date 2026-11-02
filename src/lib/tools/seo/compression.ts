@@ -84,7 +84,7 @@ export const COMPRESSION_SEO: Record<string, ToolSeo> = {
     "Accepts .jpg, .png, .webp up to 30MB each, 10 files per run. Targets below ~20KB force visible quality loss on big photos; resizing dimensions alongside compression gives much better results for extreme targets.",
     "Whenever an upload field names an arbitrary number — 75KB for a signature image, 300KB for a product shot, 1MB for a portfolio piece — this is the tool that hits it exactly, on-device, without trial-and-error exports from a heavyweight editor."
   ),
-  "lossless-image-compressor": seo(
+  "near-lossless-image-compressor": seo(
     "Near-Lossless Image Compressor – High Quality",
     "A near-lossless image compressor for photos: high-quality re-encoding most people can't tell from the original — honest, not mathematically lossless.",
     "lossless image compressor",
