@@ -1,0 +1,325 @@
+{
+ "generatedOn": "2026-11-02T09:44:55.387Z",
+ "base": "https://www.pixkitapp.online",
+ "sourcesSynthetic": true,
+ "ssimMethod": "grayscale (0.299/0.587/0.114), downscaled to <=512px long side with high-quality resample, 8x8 uniform windows, global mean SSIM; reference = original resampled to the OUTPUT dimensions",
+ "tests": [
+  {
+   "test": "SOURCES (synthetic)",
+   "sources": [
+    {
+     "name": "photo-landscape.jpg",
+     "size": 351257,
+     "type": "image/jpeg"
+    },
+    {
+     "name": "portrait.jpg",
+     "size": 76404,
+     "type": "image/jpeg"
+    },
+    {
+     "name": "logo-transparent.png",
+     "size": 21588,
+     "type": "image/png"
+    },
+    {
+     "name": "source-webp.webp",
+     "size": 17440,
+     "type": "image/webp"
+    },
+    {
+     "name": "screenshot-text.png",
+     "size": 278584,
+     "type": "image/png"
+    },
+    {
+     "name": "tiny-alpha.png",
+     "size": 2689,
+     "type": "image/png"
+    }
+   ]
+  },
+  {
+   "test": "T1 image-compressor auto",
+   "source": "photo-landscape.jpg",
+   "expectMime": "image/jpeg",
+   "outputMime": "image/jpeg",
+   "sizeKB": 290.3,
+   "dims": "4000x2500",
+   "ssim": 0.999,
+   "formatPreserved": true,
+   "minAlpha": 255,
+   "note": "photo-landscape-compressed.jpg | 290.3 KB · 4000×2500 | Saved 15% (290.3 KB from 343.0 KB) | Download",
+   "issues": []
+  },
+  {
+   "test": "T1 image-compressor auto",
+   "source": "logo-transparent.png",
+   "expectMime": "image/png",
+   "outputMime": "image/png",
+   "sizeKB": 21.1,
+   "dims": "800x600",
+   "ssim": 1,
+   "formatPreserved": true,
+   "minAlpha": 0,
+   "note": "logo-transparent-compressed.png | 21.1 KB · 800×600 | Same size | Download",
+   "issues": []
+  },
+  {
+   "test": "T1 image-compressor auto",
+   "source": "source-webp.webp",
+   "expectMime": "image/webp",
+   "outputMime": "image/webp",
+   "sizeKB": 12.8,
+   "dims": "1000x700",
+   "ssim": 0.9974,
+   "formatPreserved": true,
+   "minAlpha": 255,
+   "note": "source-webp-compressed.webp | 12.8 KB · 1000×700 | Saved 25% (12.8 KB from 17.0 KB) | Download",
+   "issues": []
+  },
+  {
+   "test": "T1 image-compressor auto",
+   "source": "screenshot-text.png",
+   "expectMime": "image/png",
+   "outputMime": "image/png",
+   "sizeKB": 272.1,
+   "dims": "1280x800",
+   "ssim": 1,
+   "formatPreserved": true,
+   "minAlpha": 255,
+   "note": "screenshot-text-compressed.png | 272.1 KB · 1280×800 | Same size | Download",
+   "issues": []
+  },
+  {
+   "test": "T2 image-resizer",
+   "source": "photo-landscape.jpg",
+   "outputMime": "image/jpeg",
+   "sizeKB": 32,
+   "dims": "800x500",
+   "ssimVsResizedRef": 0.9965,
+   "note": "photo-landscape-resized.jpg | 32 KB · 800×500 | 4000×2500 → 800×500 | Download",
+   "issues": []
+  },
+  {
+   "test": "T2 image-resizer",
+   "source": "portrait.jpg",
+   "outputMime": "image/jpeg",
+   "sizeKB": 15.5,
+   "dims": "400x600",
+   "ssimVsResizedRef": 0.9962,
+   "note": "portrait-resized.jpg | 15.5 KB · 400×600 | 1200×1800 → 400×600 | Download",
+   "issues": []
+  },
+  {
+   "test": "T3 compress-image-to-50kb",
+   "source": "screenshot-text.png",
+   "targetKB": 50,
+   "outputMime": "image/jpeg",
+   "sizeKB": 49.7,
+   "withinTarget": true,
+   "dims": "615x384",
+   "ssimVsResizedRef": 0.9903,
+   "displayedQuality": 81,
+   "transparencyNote": false,
+   "note": "screenshot-text-50kb.jpg | 49.7 KB · 615×384 | Quality 81% · 615×384 · 49.7 KB (target 50 KB) | Download",
+   "issues": []
+  },
+  {
+   "test": "T3 compress-image-to-100kb",
+   "source": "logo-transparent.png",
+   "targetKB": 100,
+   "outputMime": "image/jpeg",
+   "sizeKB": 16.2,
+   "withinTarget": true,
+   "dims": "800x600",
+   "ssimVsResizedRef": 0.9999,
+   "displayedQuality": 95,
+   "transparencyNote": true,
+   "note": "logo-transparent-100kb.jpg | 16.2 KB · 800×600 | Quality 95% · 16.2 KB (target 100 KB) · transparency flattened onto white (WebP keeps transparency) | Download",
+   "issues": []
+  },
+  {
+   "test": "T3 compress-image-to-200kb",
+   "source": "portrait.jpg",
+   "targetKB": 200,
+   "outputMime": "image/jpeg",
+   "sizeKB": 126.2,
+   "withinTarget": true,
+   "dims": "1200x1800",
+   "ssimVsResizedRef": 0.9995,
+   "displayedQuality": 95,
+   "transparencyNote": false,
+   "note": "portrait-200kb.jpg | 126.2 KB · 1200×1800 | Quality 95% · 126.2 KB (target 200 KB) | Download",
+   "issues": []
+  },
+  {
+   "test": "T3 compress-image-to-500kb",
+   "source": "photo-landscape.jpg",
+   "targetKB": 500,
+   "outputMime": "image/jpeg",
+   "sizeKB": 489.5,
+   "withinTarget": true,
+   "dims": "4000x2500",
+   "ssimVsResizedRef": 0.9997,
+   "displayedQuality": 95,
+   "transparencyNote": false,
+   "note": "photo-landscape-500kb.jpg | 489.5 KB · 4000×2500 | Quality 95% · 489.5 KB (target 500 KB) | Download",
+   "issues": []
+  },
+  {
+   "test": "T3 compress-image-to-specific-size",
+   "source": "source-webp.webp",
+   "targetKB": 150,
+   "outputMime": "image/webp",
+   "sizeKB": 19.6,
+   "withinTarget": true,
+   "dims": "1000x700",
+   "ssimVsResizedRef": 0.9998,
+   "displayedQuality": 95,
+   "transparencyNote": false,
+   "note": "source-webp-150kb.webp | 19.6 KB · 1000×700 | Quality 95% · 19.6 KB (target 150 KB) | Download",
+   "issues": []
+  },
+  {
+   "test": "T3 resize-image-to-kb",
+   "source": "photo-landscape.jpg",
+   "targetKB": 200,
+   "outputMime": "image/jpeg",
+   "sizeKB": 199.7,
+   "withinTarget": true,
+   "dims": "3871x2419",
+   "ssimVsResizedRef": 0.9979,
+   "displayedQuality": 80,
+   "transparencyNote": false,
+   "note": "photo-landscape-200kb.jpg | 199.7 KB · 3871×2419 | 199.7 KB · Quality 80% · 3871×2419 | Download",
+   "issues": []
+  },
+  {
+   "test": "T4 50KB on 4000px photo (may honestly fail)",
+   "source": "photo-landscape.jpg",
+   "targetKB": 50,
+   "outputs": 1,
+   "withinTargetIfAny": true,
+   "errorShown": false,
+   "cards": [
+    "photo-landscape-50kb.jpg | 49.9 KB · 1428×892 | Quality 80% · 1428×892 · 49.9 KB (target 50 KB) | Download"
+   ],
+   "issues": []
+  },
+  {
+   "test": "T5 near-lossless",
+   "source": "photo-landscape.jpg",
+   "outputMime": "image/jpeg",
+   "sizeKB": 290.3,
+   "dims": "4000x2500",
+   "ssim": 0.999,
+   "filenameHasNearLossless": true,
+   "note": "photo-landscape-near-lossless.jpg | 290.3 KB · 4000×2500 | Near-lossless · quality 85 · Saved 15% (290.3 KB from 343.0 KB) | Download",
+   "issues": []
+  },
+  {
+   "test": "T6a resize-png alpha",
+   "outputMime": "image/png",
+   "dims": "800x600",
+   "minAlpha": 0,
+   "alphaPreserved": true,
+   "corner": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "ssimVsResizedRef": 1,
+   "issues": []
+  },
+  {
+   "test": "T6b tiny-alpha compressor auto",
+   "outputMime": "image/png",
+   "dims": "240x180",
+   "minAlpha": 0,
+   "tinyHolePreserved": true,
+   "issues": []
+  },
+  {
+   "test": "T6c tiny-alpha -> 100KB jpeg",
+   "outputMime": "image/jpeg",
+   "dims": "240x180",
+   "corner": [
+    66,
+    152,
+    225,
+    255
+   ],
+   "holeProbes": [
+    [
+     228,
+     255,
+     255,
+     255
+    ],
+    [
+     203,
+     255,
+     255,
+     255
+    ]
+   ],
+   "holesWhiteNotBlack": true,
+   "flattenNote": true,
+   "blackBg": false,
+   "note": "tiny-alpha-100kb.jpg | 2.6 KB · 240×180 | Quality 95% · 2.6 KB (target 100 KB) · transparency flattened onto white (WebP keeps transparency) | Download",
+   "issues": []
+  },
+  {
+   "test": "T7 pdf-single-portrait",
+   "files": [
+    "portrait.jpg"
+   ],
+   "pdfBytes": 74443,
+   "saved": "/tmp/pixkit-pdf-tests-live/pdf-single-portrait.pdf"
+  },
+  {
+   "test": "T7 pdf-single-portrait console",
+   "issues": []
+  },
+  {
+   "test": "T7 pdf-single-landscape-large",
+   "files": [
+    "photo-landscape.jpg"
+   ],
+   "pdfBytes": 340210,
+   "saved": "/tmp/pixkit-pdf-tests-live/pdf-single-landscape-large.pdf"
+  },
+  {
+   "test": "T7 pdf-single-landscape-large console",
+   "issues": []
+  },
+  {
+   "test": "T7 pdf-single-screenshot",
+   "files": [
+    "screenshot-text.png"
+   ],
+   "pdfBytes": 196660,
+   "saved": "/tmp/pixkit-pdf-tests-live/pdf-single-screenshot.pdf"
+  },
+  {
+   "test": "T7 pdf-single-screenshot console",
+   "issues": []
+  },
+  {
+   "test": "T7 pdf-multi-3",
+   "files": [
+    "photo-landscape.jpg",
+    "portrait.jpg",
+    "screenshot-text.png"
+   ],
+   "pdfBytes": 610612,
+   "saved": "/tmp/pixkit-pdf-tests-live/pdf-multi-3.pdf"
+  },
+  {
+   "test": "T7 pdf-multi-3 console",
+   "issues": []
+  }
+ ]
+}

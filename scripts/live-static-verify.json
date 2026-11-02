@@ -1,0 +1,158 @@
+{
+ "deployment": {
+  "state": "success",
+  "statuses": [
+   {
+    "context": "Vercel",
+    "state": "success"
+   }
+  ]
+ },
+ "checks": [
+  {
+   "check": "compressor default 85 in about",
+   "url": "https://www.pixkitapp.online/image-compressor",
+   "status": 200,
+   "final_url": "https://www.pixkitapp.online/image-compressor",
+   "present": [
+    "shrink substantially at 85% quality"
+   ],
+   "missing": [],
+   "forbidden_found": [],
+   "ok": true
+  },
+  {
+   "check": "optimize-for-web 85",
+   "url": "https://www.pixkitapp.online/optimize-image-for-web",
+   "status": 200,
+   "final_url": "https://www.pixkitapp.online/optimize-image-for-web",
+   "present": [
+    "WebP at 85"
+   ],
+   "missing": [],
+   "forbidden_found": [],
+   "ok": true
+  },
+  {
+   "check": "email resizer 90",
+   "url": "https://www.pixkitapp.online/email-image-resizer",
+   "status": 200,
+   "final_url": "https://www.pixkitapp.online/email-image-resizer",
+   "present": [
+    "JPEG quality 90"
+   ],
+   "missing": [],
+   "forbidden_found": [
+    "JPEG quality 70"
+   ],
+   "ok": false
+  },
+  {
+   "check": "near-lossless page up",
+   "url": "https://www.pixkitapp.online/near-lossless-image-compressor",
+   "status": 200,
+   "final_url": "https://www.pixkitapp.online/near-lossless-image-compressor",
+   "present": [
+    "Near-Lossless Image Compressor"
+   ],
+   "missing": [],
+   "forbidden_found": [],
+   "ok": true
+  },
+  {
+   "check": "KB tool 50kb up",
+   "url": "https://www.pixkitapp.online/compress-image-to-50kb",
+   "status": 200,
+   "final_url": "https://www.pixkitapp.online/compress-image-to-50kb",
+   "present": [
+    "Compress Image to 50KB or Less"
+   ],
+   "missing": [],
+   "forbidden_found": [],
+   "ok": true
+  },
+  {
+   "check": "custom kb up",
+   "url": "https://www.pixkitapp.online/compress-image-to-specific-size",
+   "status": 200,
+   "final_url": "https://www.pixkitapp.online/compress-image-to-specific-size",
+   "present": [
+    "Compress Image to a Custom Size"
+   ],
+   "missing": [],
+   "forbidden_found": [],
+   "ok": true
+  },
+  {
+   "check": "resize-to-kb up",
+   "url": "https://www.pixkitapp.online/resize-image-to-kb",
+   "status": 200,
+   "final_url": "https://www.pixkitapp.online/resize-image-to-kb",
+   "present": [
+    "Resize Image to a Target File Size"
+   ],
+   "missing": [],
+   "forbidden_found": [],
+   "ok": true
+  },
+  {
+   "check": "image-to-pdf up",
+   "url": "https://www.pixkitapp.online/image-to-pdf",
+   "status": 200,
+   "final_url": "https://www.pixkitapp.online/image-to-pdf",
+   "present": [
+    "Image to PDF Converter"
+   ],
+   "missing": [],
+   "forbidden_found": [],
+   "ok": true
+  },
+  {
+   "check": "privacy up",
+   "url": "https://www.pixkitapp.online/privacy",
+   "status": 200,
+   "final_url": "https://www.pixkitapp.online/privacy",
+   "present": [
+    "Google Analytics"
+   ],
+   "missing": [],
+   "forbidden_found": [],
+   "ok": true
+  },
+  {
+   "check": "sitemap",
+   "url": "https://www.pixkitapp.online/sitemap.xml",
+   "status": 200,
+   "final_url": "https://www.pixkitapp.online/sitemap.xml",
+   "present": [
+    "<urlset"
+   ],
+   "missing": [],
+   "forbidden_found": [],
+   "ok": true
+  },
+  {
+   "check": "robots",
+   "url": "https://www.pixkitapp.online/robots.txt",
+   "status": 200,
+   "final_url": "https://www.pixkitapp.online/robots.txt",
+   "present": [],
+   "missing": [
+    "User-agent"
+   ],
+   "forbidden_found": [],
+   "ok": false
+  },
+  {
+   "check": "308 redirect",
+   "url": "https://www.pixkitapp.online/lossless-image-compressor",
+   "status": 308,
+   "final_url": "https://www.pixkitapp.online/lossless-image-compressor",
+   "present": [],
+   "missing": [],
+   "forbidden_found": [],
+   "ok": true
+  }
+ ],
+ "verdict": "SOME LIVE CHECKS FAILED"
+}
