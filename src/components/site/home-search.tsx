@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Search, ArrowRight } from "lucide-react";
 
-const SUGGESTIONS = ["compress to 50kb", "webp to jpg", "passport photo", "crop circle", "remove background", "resize for instagram"];
+const SUGGESTIONS = ["compress to 50kb", "webp to jpg", "passport photo", "crop circle", "remove white background", "resize for instagram"];
 
 export function HomeSearch() {
   const router = useRouter();

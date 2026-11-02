@@ -385,7 +385,7 @@ export const METADATA_TOOLS: ToolDef[] = [
     slug: "image-metadata-viewer",
     name: "Metadata Viewer",
     h1: "Image Metadata & EXIF Viewer",
-    description: "Inspect EXIF, GPS and PNG metadata of any image — camera model, date, settings, location. private, in-browser — the file never leaves your device.",
+    description: "Inspect EXIF, GPS and PNG metadata of any image — camera model, date, settings, location. Private, in-browser — the file never leaves your device.",
     keywords: ["image metadata viewer", "exif viewer online", "photo info", "exif reader"],
     category: "metadata",
     icon: "FileSearch",

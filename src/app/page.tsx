@@ -52,6 +52,39 @@ const HOME_FAQS = [
   },
 ];
 
+/**
+ * Tool spotlight entries. Each note adds specific, code-verified detail
+ * beyond the tool's standard description (which already appears on every
+ * card elsewhere on this page) — so the spotlight never just repeats the
+ * popular-tools copy.
+ */
+const SPOTLIGHT: { slug: string; note: string }[] = [
+  {
+    slug: "image-compressor",
+    note: "One quality slider (75% suits most photos) — opaque PNGs converted to JPEG often shrink the most.",
+  },
+  {
+    slug: "image-to-pdf",
+    note: "Up to 10 images become one document — pick A4 or Letter paper with your own orientation and margins.",
+  },
+  {
+    slug: "passport-photo-maker",
+    note: "Print-ready 300 DPI output with alignment guides — size presets for US, UK, EU, India and more.",
+  },
+  {
+    slug: "remove-white-background",
+    note: "Flood-fill transparency protects white details inside your subject and exports a real alpha-channel PNG.",
+  },
+  {
+    slug: "resize-image-to-kb",
+    note: "Searches dimensions and quality together, so big photos land under your KB cap without going soft.",
+  },
+  {
+    slug: "image-metadata-viewer",
+    note: "See what your camera embeds before you share: EXIF settings, GPS coordinates and PNG chunks, decoded on-device.",
+  },
+];
+
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
@@ -140,7 +173,7 @@ export default function HomePage() {
             <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
               Popular <span className="text-shine">tools</span>
             </h2>
-            <p className="mt-1 text-muted-foreground">The most-used image utilities on PixKitApp.</p>
+            <p className="mt-1 text-muted-foreground">The go-to image utilities on PixKitApp.</p>
           </div>
           <Link href="/tools" className="hidden shrink-0 text-sm font-medium text-primary hover:underline sm:block">
             View all {TOOLS.length} →
@@ -215,7 +248,7 @@ export default function HomePage() {
           <div className="glass-card min-w-0 rounded-2xl p-6 shadow-sm">
             <h3 className="font-semibold">Tool spotlight</h3>
             <div className="mt-4 grid grid-cols-1 gap-2">
-              {["image-compressor", "image-to-pdf", "passport-photo-maker", "remove-white-background", "resize-image-to-kb", "image-metadata-viewer"].map((slug) => {
+              {SPOTLIGHT.map(({ slug, note }) => {
                 const tool = TOOLS.find((t) => t.slug === slug)!;
                 const style = categoryStyle(tool.category);
                 return (
@@ -225,7 +258,7 @@ export default function HomePage() {
                     </div>
                     <div className="min-w-0">
                       <p className="truncate text-sm font-medium">{tool.name}</p>
-                      <p className="truncate text-xs text-muted-foreground">{tool.description}</p>
+                      <p className="truncate text-xs text-muted-foreground">{note}</p>
                     </div>
                   </Link>
                 );

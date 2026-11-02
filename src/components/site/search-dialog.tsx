@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useSyncExternalStore } from "react";
 import { useRouter } from "next/navigation";
 import { CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
 import { searchIndexTools } from "@/lib/tools/search-index";
@@ -65,7 +65,26 @@ export function SearchDialog({ open, onOpenChange }: { open: boolean; onOpenChan
   );
 }
 
+/** Platform-appropriate search shortcut label, measured once per client.
+ *  Touch-first devices (phones/tablets as primary input) get no badge —
+ *  a desktop keyboard hint would be wrong there. The server snapshot is
+ *  null so hydration is clean; the badge appears after hydration. */
+const noopSubscribe = () => () => {};
+let cachedShortcut: string | null | undefined;
+function clientShortcut(): string | null {
+  if (cachedShortcut === undefined) {
+    if (typeof window === "undefined" || window.matchMedia?.("(pointer: coarse)")?.matches) {
+      cachedShortcut = null;
+    } else {
+      const apple = /Mac|iPhone|iPad|iPod/i.test(`${navigator.userAgent} ${navigator.platform || ""}`);
+      cachedShortcut = apple ? "⌘K" : "Ctrl K";
+    }
+  }
+  return cachedShortcut;
+}
+
 export function SearchTrigger({ onClick, className }: { onClick: () => void; className?: string }) {
+  const shortcut = useSyncExternalStore(noopSubscribe, clientShortcut, () => null);
   return (
     <button
       onClick={onClick}
@@ -74,7 +93,7 @@ export function SearchTrigger({ onClick, className }: { onClick: () => void; cla
     >
       <Search className="h-4 w-4" />
       <span className="hidden sm:inline">Search tools…</span>
-      <kbd className="hidden ml-2 rounded border bg-muted px-1.5 font-mono text-[10px] md:inline-block">⌘K</kbd>
+      {shortcut && <kbd className="hidden ml-2 rounded border bg-muted px-1.5 font-mono text-[10px] md:inline-block">{shortcut}</kbd>}
     </button>
   );
 }

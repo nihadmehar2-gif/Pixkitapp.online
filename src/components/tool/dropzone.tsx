@@ -78,7 +78,7 @@ export function Dropzone({ accept, multiple, maxFiles, maxSize, onFiles, compact
         <ImageIcon className="mr-2 h-5 w-5" />
         Select {multiple ? "Images" : "Image"}
       </Button>
-      <p className="text-xs text-muted-foreground">You can also paste (Ctrl+V) an image from your clipboard</p>
+      <p className="text-xs text-muted-foreground">You can also paste an image from your clipboard</p>
       {compact && <X className="hidden" />}
     </div>
   );
