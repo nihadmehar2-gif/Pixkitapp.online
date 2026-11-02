@@ -43,14 +43,15 @@ const SECTIONS = [
     title: "4. Automatic technical data",
     body: [
       "Like most websites, our hosting provider may record standard server logs — IP address, user-agent, requested URL, timestamp and referrer — for security, abuse prevention and aggregate analytics. These logs relate to page requests only; they never contain your image data because image data is never requested or sent.",
-      "We currently do not run any third-party web analytics service. If we enable one in the future, this policy will be updated first to name the provider and describe exactly what is measured, and any applicable cookie consent choices will be offered where required by law.",
+      "We use Google Analytics 4 (Google Ireland Limited / Google LLC) to understand aggregate usage of the site — pages viewed, session counts, device and browser type, general geographic region and referrer. GA4 does not log or store your IP address, and it never receives your images, because images are processed only inside your browser.",
+      "Google Analytics uses first-party cookies (such as _ga) to distinguish visits and can be disabled without affecting any tool: you can opt out with Google's official browser add-on (tools.google.com/dlpage/gaoptout) or your browser's cookie / Do Not Track settings. Where local law requires a consent choice for measurement cookies, we will surface it.",
     ],
   },
   {
     title: "5. Cookies and local storage",
     body: [
       "PixKitApp stores one small preference in your browser's local storage: your light/dark theme choice. This preference never leaves your device and is not shared with anyone.",
-      "We do not currently set advertising or tracking cookies of our own. If advertising is enabled in the future (see section 6), the advertising provider may set its own cookies — that will be disclosed here before it happens, together with any legally required consent mechanisms.",
+      "We do not set advertising cookies of our own. Google Analytics 4 (section 4) sets first-party measurement cookies such as _ga for the aggregate usage measurement described above. If advertising is enabled in the future (see section 6), the advertising provider may set its own cookies — that will be disclosed here before it happens, together with any legally required consent mechanisms.",
     ],
   },
   {
@@ -65,7 +66,7 @@ const SECTIONS = [
     title: "7. Third-party services",
     body: [
       "Today the site is served through standard web hosting and content delivery infrastructure. Fonts and framework code may be delivered by CDN providers under their own technical logs. We do not share your information with third parties for marketing, and there is no image data to share in any case.",
-      "If advertising or analytics is enabled later, the providers named in sections 4 and 6 will become additional third-party processors for the specific data they collect (for example, ad-serving cookies), but never for your images.",
+      "Google, as the provider of Google Analytics 4 described in section 4, acts as a processor for the aggregate usage data it measures on our behalf. If advertising is enabled later, the provider named in section 6 will become an additional third-party processor for the specific data it collects (for example, ad-serving cookies) — but never for your images.",
     ],
   },
   {
@@ -106,11 +107,10 @@ export default function PrivacyPage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
       <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">Privacy Policy</h1>
-      <p className="mt-2 text-sm text-muted-foreground">Effective date: October 14, 2026 · Applies to www.pixkitapp.online and all PixKitApp tools.</p>
+      <p className="mt-2 text-sm text-muted-foreground">Effective date: November 2, 2026 (updated when Google Analytics 4 was added) · Applies to www.pixkitapp.online and all PixKitApp tools.</p>
 
       <div className="mt-4 rounded-xl border border-primary/30 bg-primary/5 p-4 text-sm leading-relaxed">
-        <strong>TL;DR:</strong> All {TOOLS_COUNT} tools process images locally in your browser — we never receive, store or see your images. No accounts, and no
-        third-party analytics or ad scripts are active today. Ad containers on the page are reserved placeholders; section 6 explains exactly what will change
+        <strong>TL;DR:</strong> All {TOOLS_COUNT} tools process images locally in your browser — we never receive, store or see your images. No accounts. Aggregate usage measurement via Google Analytics 4 is active (section 4) — it measures page views and device type, never your images. Ad containers on the page are reserved placeholders; section 6 explains exactly what will change
         if we enable advertising.
       </div>
 

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
+import Script from "next/script";
 import { ThemeProvider } from "@/components/site/theme-provider";
 import { SiteHeader } from "@/components/site/header";
 import { SiteFooter } from "@/components/site/footer";
@@ -10,7 +11,8 @@ import { FloatLayer } from "@/components/site/float-layer";
 import { ClickFx } from "@/components/site/click-fx";
 import { PageFade } from "@/components/site/page-fade";
 import { SITE_URL } from "@/lib/tools";
-import { OG_IMAGES, ROBOTS_DIRECTIVES } from "@/lib/seo";
+import { OG_IMAGES, ROBOTS_DIRECTIVES, IS_PREVIEW } from "@/lib/seo";
+import { GA_MEASUREMENT_ID, GA_SPA_TRACKER_SNIPPET } from "@/lib/analytics";
 
 // Body font — warm, modern geometric sans with friendly curves.
 const jakarta = Plus_Jakarta_Sans({
@@ -123,12 +125,42 @@ export default function RootLayout({
             <SiteFooter />
           </div>
           <Toaster />
+          {/* Google Analytics 4 — official gtag.js snippet via next/script.
+              Both scripts load asynchronously (afterInteractive — never
+              blocks rendering/LCP). The init inline script is the official
+              snippet (dataLayer + gtag('js') + gtag('config')).
+              GA_SPA_TRACKER_SNIPPET fires page_view on client-side
+              navigations (App Router never reloads the page).
+              Rendered only in production indexing mode — preview/staging
+              never reports to the production property (see src/lib/seo.ts). */}
+          {!IS_PREVIEW && (
+            <>
+              <Script
+                src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+                strategy="afterInteractive"
+              />
+              <Script
+                id="ga4-init"
+                strategy="afterInteractive"
+                dangerouslySetInnerHTML={{
+                  __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', '${GA_MEASUREMENT_ID}');
+          `,
+                }}
+              />
+              <script dangerouslySetInnerHTML={{ __html: GA_SPA_TRACKER_SNIPPET }} />
+            </>
+          )}
           {/*
             Runtime hostname guard: on any non-production hostname the
             robots directive is flipped to noindex,nofollow at parse time
             (reuses the existing meta tag, so no duplicates are created).
             Belt-and-braces alongside the build-time env switches and the
-            middleware X-Robots-Tag header — see src/middleware.ts.
+            proxy X-Robots-Tag header — see src/proxy.ts.
           */}
           <script
             dangerouslySetInnerHTML={{
