@@ -16,12 +16,15 @@ const IS_PREVIEW =
 
 const securityHeaders = [
   { key: "X-Content-Type-Options", value: "nosniff" },
-  // Framing: the sandbox preview embeds this site in a cross-origin iframe,
-  // so frame-ancestors must allow any parent. X-Frame-Options:SAMEORIGIN was
-  // removed because it made the preview show "refused to connect" and cannot
-  // express per-origin allowlists. The site has no authenticated actions, so
-  // embeddability is acceptable.
-  { key: "Content-Security-Policy", value: "frame-ancestors *" },
+  // Framing: preview/dev builds allow any parent (frame-ancestors *) because
+  // the sandbox preview embeds this site in a cross-origin iframe; production
+  // is hardened to frame-ancestors 'self' (same-origin framing only).
+  // X-Frame-Options:SAMEORIGIN was removed because it made the preview show
+  // "refused to connect" and cannot express per-origin allowlists.
+  {
+    key: "Content-Security-Policy",
+    value: IS_PREVIEW ? "frame-ancestors *" : "frame-ancestors 'self'",
+  },
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
   // No camera/mic/geolocation needed — image processing is canvas-only.
   { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
@@ -30,9 +33,6 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   output: "standalone",
-  typescript: {
-    ignoreBuildErrors: true,
-  },
   reactStrictMode: false,
   async redirects() {
     return [

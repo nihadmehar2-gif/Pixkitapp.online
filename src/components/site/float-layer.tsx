@@ -88,11 +88,11 @@ export function FloatLayer() {
       {/* --- Two soft glow orbs for depth (no icons, no confetti) --- */}
       <span
         className="float-item float-dot float-tw"
-        style={{ left: "14%", top: "68%", width: 10, height: 10, "--dur": "7s" }}
+        style={{ left: "14%", top: "68%", width: 10, height: 10, "--dur": "7s" } as CSSProperties}
       />
       <span
         className="float-item float-dot float-tw float-hide-sm"
-        style={{ right: "10%", top: "36%", width: 12, height: 12, "--dur": "8s", animationDelay: "1.4s" }}
+        style={{ right: "10%", top: "36%", width: 12, height: 12, "--dur": "8s", animationDelay: "1.4s" } as CSSProperties}
       />
     </div>
   );
