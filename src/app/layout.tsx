@@ -13,6 +13,7 @@ import { PageFade } from "@/components/site/page-fade";
 import { SITE_URL } from "@/lib/tools";
 import { OG_IMAGES, ROBOTS_DIRECTIVES, IS_PREVIEW } from "@/lib/seo";
 import { GA_MEASUREMENT_ID, GA_SPA_TRACKER_SNIPPET } from "@/lib/analytics";
+import { Analytics } from "@vercel/analytics/next";
 
 // Body font — warm, modern geometric sans with friendly curves.
 const jakarta = Plus_Jakarta_Sans({
@@ -127,6 +128,9 @@ export default function RootLayout({
             <SiteFooter />
           </div>
           <Toaster />
+          {/* Vercel Web Analytics — tracks page views and web vitals.
+              Analytics component is only active in production deployments on Vercel. */}
+          <Analytics />
           {/* Google Analytics 4 — official gtag.js snippet via next/script.
               Both scripts load asynchronously (afterInteractive — never
               blocks rendering/LCP). The init inline script is the official
