@@ -115,9 +115,9 @@ export const COMPRESSION_SEO: Record<string, ToolSeo> = {
   ),
   "optimize-image-for-web": seo(
     "Optimize Images for the Web – WebP Preset",
-    "One-click web optimization: resize to 1920px max and compress to WebP quality 80. Lighthouse-friendly images in seconds — no upload, no account, 100% free.",
+    "One-click web optimization: resize to 1920px max and compress to WebP quality 85. Lighthouse-friendly images in seconds — no upload, no account, 100% free.",
     "optimize image for web",
-    "The tool applies proven web defaults automatically: longest edge capped at 1920 pixels, re-encoded as WebP at quality 80. That combination clears most image audits in Lighthouse and PageSpeed Insights because it attacks both dimensions and codec efficiency, the two things image audits actually measure.",
+    "The tool applies proven web defaults automatically: longest edge capped at 1920 pixels, re-encoded as WebP at quality 85. That combination clears most image audits in Lighthouse and PageSpeed Insights because it attacks both dimensions and codec efficiency, the two things image audits actually measure.",
     "Drop your images and press process — the preset does the deciding. If you want to tune it, adjust the max-dimension and quality sliders before running. Results show final dimensions, byte size and savings; grab a ZIP when you're happy.",
     "Accepts .jpg, .png and .webp up to 30MB each, 10 per batch; output is always WebP with this preset. WebP is supported by every current browser; if you must support legacy software, use the universal converter to emit JPG instead.",
     "Built for developers and site owners prepping page images, hero banners and blog posts. E-commerce teams run every product photo through it before upload, and agencies use it to hand back weight-reduced media libraries."
@@ -151,9 +151,9 @@ export const COMPRESSION_SEO: Record<string, ToolSeo> = {
   ),
   "email-image-resizer": seo(
     "Resize Images for Email – 800px Preset",
-    "Prepare photos for email automatically: 800px wide, JPEG quality 70 — small enough to send, sharp enough to enjoy. Batch up to 10 photos, free and private.",
+    "Prepare photos for email automatically: 800px wide, JPEG quality 90 — small enough to send, sharp enough to enjoy. Batch up to 10 photos, free and private.",
     "resize image for email",
-    "The preset resizes each image so its longest edge is 800 pixels and re-encodes as JPEG at quality 70 — the proven sweet spot where photos stay pleasant on laptop screens while shrinking from megabytes to tens of kilobytes. Recipients on slow connections and strict corporate mail servers both thank you.",
+    "The preset resizes each image so its longest edge is 800 pixels and re-encodes as JPEG at quality 90 — high quality that keeps photos pleasant on laptop screens while still cutting multi-megabyte camera files down to a size most mail servers accept. Recipients on slow connections and strict corporate mail servers both thank you.",
     "Drop up to 10 photos and press process — the preset is deliberately opinionated. Adjust the dimension or quality sliders if your audience differs, check the before/after sizes, and download the batch as a ZIP ready to attach.",
     "Accepts .jpg, .png and .webp inputs up to 30MB each; output is JPEG at your chosen size. Text in screenshots stays readable at 800px for most uses, but dense documents may need 1200px — raise the slider for those.",
     "Built for photo-heavy emails: family updates, property tours to clients, progress reports with site photos, and anything headed for a 10MB or 25MB attachment ceiling. It's also a polite habit for mailing lists where oversized images get stripped."

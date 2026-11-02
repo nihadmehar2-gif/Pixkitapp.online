@@ -938,7 +938,7 @@ export const SEARCH_ITEMS: SearchItem[] = [
   {
     "slug": "optimize-image-for-web",
     "name": "Optimize for Web",
-    "description": "One-click web optimization: resize to 1920px max and compress to WebP quality 80. Lighthouse-friendly output in seconds.",
+    "description": "One-click web optimization: resize to 1920px max and compress to WebP quality 85. Lighthouse-friendly output in seconds.",
     "category": "optimization",
     "icon": "Globe",
     "keywords": [
@@ -988,7 +988,7 @@ export const SEARCH_ITEMS: SearchItem[] = [
   {
     "slug": "email-image-resizer",
     "name": "Email Image Resizer",
-    "description": "Prepare photos for email: 800px wide, JPEG quality 70 — small enough to send, sharp enough to enjoy. Batch up to 10.",
+    "description": "Prepare photos for email: 800px wide, JPEG quality 90 — small enough to send, sharp enough to enjoy. Batch up to 10.",
     "category": "optimization",
     "icon": "Mail",
     "keywords": [
