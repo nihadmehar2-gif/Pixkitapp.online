@@ -240,10 +240,80 @@ function pdfEscape(s: string): string {
   return s.replace(/\\/g, "\\\\").replace(/\(/g, "\\(").replace(/\)/g, "\\)");
 }
 
-/** Build a valid multi-page PDF embedding JPEG images. Runs entirely in browser. */
+/** Parse pixel dimensions from a JPEG SOF marker (baseline + progressive). */
+export function jpegDimensions(data: Uint8Array): { width: number; height: number } {
+  for (let off = 2; off < data.length - 9;) {
+    if (data[off] !== 0xff) { off++; continue; }
+    const marker = data[off + 1];
+    const len = (data[off + 2] << 8) | data[off + 3];
+    if (marker >= 0xc0 && marker <= 0xcf && marker !== 0xc4 && marker !== 0xc8 && marker !== 0xcc) {
+      return {
+        height: (data[off + 5] << 8) | data[off + 6],
+        width: (data[off + 7] << 8) | data[off + 8],
+      };
+    }
+    off += 2 + len;
+  }
+  return { width: 0, height: 0 };
+}
+
+/** Serialize a PDF with BYTE-ACCURATE xref offsets.
+ *  `objects[id]` is the body of `id 0 obj` (index 0 unused). `streams[id]`,
+ *  when present, is written as a raw stream between "stream\n" and
+ *  "\nendstream". Every xref offset is computed from the actual encoded
+ *  BYTE lengths (never JS string lengths over placeholder text), so each
+ *  entry points exactly at its "N 0 obj" header and startxref points at
+ *  the xref keyword. `trailer` is the full trailer dictionary string. */
+export function serializePdf(
+  objects: string[],
+  streams: (Uint8Array | null)[],
+  trailer: string
+): { blob: Blob; offsets: number[]; startxref: number } {
+  const encoder = new TextEncoder();
+  const chunks: Uint8Array[] = [];
+  let byteLen = 0;
+  const pushStr = (s: string) => {
+    if (!s) return;
+    const b = encoder.encode(s);
+    chunks.push(b);
+    byteLen += b.length;
+  };
+  const pushBytes = (b: Uint8Array) => {
+    chunks.push(b);
+    byteLen += b.length;
+  };
+
+  const count = objects.length; // highest object id + 1
+  const offsets: number[] = [];
+  pushStr("%PDF-1.4\n");
+  for (let id = 1; id < count; id++) {
+    offsets[id] = byteLen;
+    pushStr(`${id} 0 obj\n${objects[id] ?? ""}\n`);
+    const bin = streams[id];
+    if (bin) {
+      pushStr("stream\n");
+      pushBytes(bin);
+      pushStr("\nendstream\n");
+    }
+    pushStr("endobj\n");
+  }
+  const startxref = byteLen;
+  let xref = `xref\n0 ${count}\n0000000000 65535 f \n`;
+  for (let id = 1; id < count; id++) {
+    xref += `${String(offsets[id] ?? 0).padStart(10, "0")} 00000 n \n`;
+  }
+  xref += `trailer\n${trailer}\nstartxref\n${startxref}\n%%EOF`;
+  pushStr(xref);
+  return { blob: new Blob(chunks as BlobPart[], { type: "application/pdf" }), offsets, startxref };
+}
+
+/** Build a valid multi-page PDF embedding JPEG images. Runs entirely in browser.
+ *  Image /Width and /Height are parsed from the actual JPEG SOF marker (never
+ *  assumed from the page placement), and xref offsets come from serializePdf's
+ *  byte-accurate accounting. */
 export function buildPdf(pages: PdfPageInput[]): Blob {
   const objects: string[] = [];
-  const binaryChunks: (Uint8Array | null)[] = [];
+  const streams: (Uint8Array | null)[] = [];
   let nextId = 1;
 
   const catalogId = nextId++;
@@ -272,40 +342,15 @@ export function buildPdf(pages: PdfPageInput[]): Blob {
       `q\n${p.width.toFixed(2)} 0 0 ${p.height.toFixed(2)} 0 0 cm\n/Im${i} Do\nQ\n`;
     objects[contentIds[i]] = `<< /Length ${content.length} >>\nstream\n${content}endstream`;
 
-    binaryChunks[imageIds[i]] = p.jpegData;
+    streams[imageIds[i]] = p.jpegData;
+    const dims = jpegDimensions(p.jpegData);
     objects[imageIds[i]] =
-      `<< /Type /XObject /Subtype /Image /Width ${Math.round(p.width * 2)} /Height ${Math.round(p.height * 2)} ` +
+      `<< /Type /XObject /Subtype /Image /Width ${dims.width} /Height ${dims.height} ` +
       `/ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${p.jpegData.length} >>`;
   }
   objects[infoId] = `<< /Title (PixKitApp Image) /Producer (PixKitApp) /Creator (PixKitApp) >>`;
 
-  // Serialize
-  let pdf = "%PDF-1.4\n";
-  const offsets: number[] = [];
-  const encoder = new TextEncoder();
-  const chunks: Uint8Array[] = [encoder.encode(pdf)];
-
-  for (let id = 1; id < nextId; id++) {
-    offsets[id] = pdf.length;
-    const header = `${id} 0 obj\n`;
-    const body = objects[id] ?? "";
-    chunks.push(encoder.encode(header + body));
-    if (binaryChunks[id]) {
-      chunks.push(encoder.encode("\nstream\n"));
-      chunks.push(binaryChunks[id]!);
-      chunks.push(encoder.encode("\nendstream"));
-    }
-    chunks.push(encoder.encode("\nendobj\n"));
-    pdf += header + body + (binaryChunks[id] ? "\nstream\n...\nendstream" : "") + "\nendobj\n";
-  }
-
-  const xrefStart = pdf.length;
-  let xref = `xref\n0 ${nextId}\n0000000000 65535 f \n`;
-  for (let id = 1; id < nextId; id++) {
-    xref += `${String(offsets[id]).padStart(10, "0")} 00000 n \n`;
-  }
-  xref += `trailer\n<< /Size ${nextId} /Root ${catalogId} 0 R /Info ${infoId} 0 R >>\nstartxref\n${xrefStart}\n%%EOF`;
-  chunks.push(encoder.encode(xref));
-
-  return new Blob(chunks as BlobPart[], { type: "application/pdf" });
+  const trailer = `<< /Size ${nextId} /Root ${catalogId} 0 R /Info ${infoId} 0 R >>`;
+  const { blob } = serializePdf(objects, streams, trailer);
+  return blob;
 }

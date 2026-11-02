@@ -3,7 +3,7 @@
 import type { LoadedImage } from "@/lib/image/loader";
 import type { ProcessedResult, ProcessContext, ToolOptionValues } from "../types";
 import { createCanvas, ctx2d, drawFlattened, outputName, downloadBlob } from "@/lib/image/canvas";
-import { canvasToIcoBlob, buildPdf } from "@/lib/image/encoders";
+import { canvasToIcoBlob, serializePdf, jpegDimensions } from "@/lib/image/encoders";
 import { num, str, bool, canvasFromImage, formatKB, encodeImageResult } from "./helpers";
 
 /* ---------- Image(s) → PDF ---------- */
@@ -70,7 +70,7 @@ function buildCenteredPdf(
 ): Blob {
   // Build PDF manually with centered image placement
   const objects: string[] = [];
-  const binaryChunks: (Uint8Array | null)[] = [];
+  const streams: (Uint8Array | null)[] = [];
   let nextId = 1;
   const catalogId = nextId++;
   const pagesId = nextId++;
@@ -98,51 +98,20 @@ function buildCenteredPdf(
       `<< /Type /Page /Parent ${pagesId} 0 R /MediaBox [0 0 ${pw} ${ph}] /Resources << /XObject << /Im${i} ${imageIds[i]} 0 R >> /ProcSet [/PDF /ImageC] >> /Contents ${contentIds[i]} 0 R >>`;
     const content = `q\n${p.width.toFixed(2)} 0 0 ${p.height.toFixed(2)} ${x.toFixed(2)} ${y.toFixed(2)} cm\n/Im${i} Do\nQ\n`;
     objects[contentIds[i]] = `<< /Length ${content.length} >>\nstream\n${content}endstream`;
-    binaryChunks[imageIds[i]] = p.jpegData;
-    // read actual jpeg dims from canvas ratio: store separately — use aspect to derive
-    const jpeg = p.jpegData;
-    let jw = 1000, jh = 1000;
-    // parse JPEG SOF for dims
-    for (let off = 2; off < jpeg.length - 9;) {
-      if (jpeg[off] !== 0xff) { off++; continue; }
-      const marker = jpeg[off + 1];
-      const len = (jpeg[off + 2] << 8) | jpeg[off + 3];
-      if (marker >= 0xc0 && marker <= 0xcf && marker !== 0xc4 && marker !== 0xc8 && marker !== 0xcc) {
-        jh = (jpeg[off + 5] << 8) | jpeg[off + 6];
-        jw = (jpeg[off + 7] << 8) | jpeg[off + 8];
-        break;
-      }
-      off += 2 + len;
-    }
+    streams[imageIds[i]] = p.jpegData;
+    // /Width and /Height must be the REAL pixel dimensions of the embedded
+    // JPEG — parse them from the SOF marker instead of assuming from layout.
+    const dims = jpegDimensions(p.jpegData);
     objects[imageIds[i]] =
-      `<< /Type /XObject /Subtype /Image /Width ${jw} /Height ${jh} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${jpeg.length} >>`;
+      `<< /Type /XObject /Subtype /Image /Width ${dims.width} /Height ${dims.height} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${p.jpegData.length} >>`;
   }
   objects[infoId] = `<< /Title (PixKitApp PDF) /Producer (PixKitApp - www.pixkitapp.online) >>`;
 
-  let pdfLen = 0;
-  const encoder = new TextEncoder();
-  const chunks: Uint8Array[] = [];
-  const offsets: number[] = [];
-  const push = (s: string) => { chunks.push(encoder.encode(s)); pdfLen += encoder.encode(s).length; };
-
-  push("%PDF-1.4\n");
-  for (let id = 1; id < nextId; id++) {
-    offsets[id] = pdfLen;
-    push(`${id} 0 obj\n${objects[id]}\n`);
-    if (binaryChunks[id]) {
-      push("stream\n");
-      chunks.push(binaryChunks[id]!);
-      pdfLen += binaryChunks[id]!.length;
-      push("\nendstream\n");
-    }
-    push("endobj\n");
-  }
-  const xrefStart = pdfLen;
-  let xref = `xref\n0 ${nextId}\n0000000000 65535 f \n`;
-  for (let id = 1; id < nextId; id++) xref += `${String(offsets[id]).padStart(10, "0")} 00000 n \n`;
-  xref += `trailer\n<< /Size ${nextId} /Root ${catalogId} 0 R /Info ${infoId} 0 R >>\nstartxref\n${xrefStart}\n%%EOF`;
-  push(xref);
-  return new Blob(chunks as BlobPart[], { type: "application/pdf" });
+  // Byte-accurate shared serializer: xref offsets are computed from real
+  // encoded byte positions, so every entry points at its "N 0 obj" header.
+  const trailer = `<< /Size ${nextId} /Root ${catalogId} 0 R /Info ${infoId} 0 R >>`;
+  const { blob } = serializePdf(objects, streams, trailer);
+  return blob;
 }
 
 /* ---------- Image → ICO (multi-size) ---------- */
