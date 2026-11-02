@@ -31,7 +31,7 @@ export function ContactForm() {
     // Compose a mailto — nothing is transmitted over the web; your email client sends it.
     const subject = `[PixKitApp ${type}] ${message.slice(0, 60).replace(/\s+/g, " ")}`;
     const body = `${message}\n\n—\nName: ${name}\nEmail: ${email}\nSent from www.pixkitapp.online contact page`;
-    window.location.href = `mailto:nihadmehar2@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = `mailto:pixkitapp1@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     setSent(true);
   };
 
@@ -105,7 +105,7 @@ export function ContactForm() {
       </button>
       <p className="text-xs leading-relaxed text-muted-foreground">
         This form composes an email in your own mail client — PixKitApp servers never receive your message or contact details.
-        You can also reach us directly at <span className="inline-flex items-center gap-1 font-medium text-foreground"><Mail className="h-3.5 w-3.5" /> nihadmehar2@gmail.com</span>.
+        You can also reach us directly at <span className="inline-flex items-center gap-1 font-medium text-foreground"><Mail className="h-3.5 w-3.5" /> pixkitapp1@gmail.com</span>.
       </p>
     </form>
   );

@@ -31,7 +31,7 @@ export default function ContactPage() {
         {[
           { title: "Feedback & ideas", body: "Tell us which tool to build next — user requests drive our roadmap." },
           { title: "Bug reports", body: "Include your browser (e.g. Chrome 130, Android) and what you expected to happen." },
-          { title: "Everything else", body: "Press, partnerships, education use — all welcome at nihadmehar2@gmail.com." },
+          { title: "Everything else", body: "Press, partnerships, education use — all welcome at pixkitapp1@gmail.com." },
         ].map((item) => (
           <div key={item.title} className="rounded-lg border bg-card p-4">
             <h2 className="text-sm font-semibold">{item.title}</h2>

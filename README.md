@@ -184,7 +184,7 @@ the site owner, by nature outside the codebase:
    still owned, point it at the same Vercel project (the app 308s it).
 2. **Contact inbox** — all contact references site-wide (Contact/Privacy/
    Terms and the form's mailto action) route to the owner's personal inbox
-   **nihadmehar2@gmail.com**; no mailbox provisioning is needed.
+   **pixkitapp1@gmail.com**; no mailbox provisioning is needed.
 3. **AdSense** — apply at google.com/adsense, then set the env vars in §2.
    Placeholders remain until then. Ad placement already complies with flow/
    spacing rules, but AdSense approval itself is Google's decision.

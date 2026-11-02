@@ -21,7 +21,7 @@ const SECTIONS = [
     title: "1. Acceptance of terms",
     body: [
       "These Terms of Service (\"Terms\") govern your use of www.pixkitapp.online and all tools offered by PixKitApp (the \"Service\"). By accessing or using the Service you agree to be bound by these Terms. If you do not agree, do not use the Service.",
-      "We may revise these Terms from time to time. Continued use after changes are posted constitutes acceptance of the revised Terms. The effective date below indicates the current version.",
+      "We may revise these Terms from time to time. Continued use after changes are posted constitutes acceptance of the revised Terms. The effective date at the top of this page indicates the current version.",
     ],
   },
   {
@@ -93,7 +93,7 @@ const SECTIONS = [
   {
     title: "11. Contact",
     body: [
-      "Questions about these Terms: email nihadmehar2@gmail.com or use the contact page on the site.",
+      "Questions about these Terms: email pixkitapp1@gmail.com or use the contact page on the site.",
     ],
   },
 ];

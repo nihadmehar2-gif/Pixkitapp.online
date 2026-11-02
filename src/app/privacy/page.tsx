@@ -3,7 +3,7 @@ import { SITE_URL } from "@/lib/tools";
 import { socialMeta } from "@/lib/seo";
 
 const PRIVACY_DESCRIPTION =
-  "PixKitApp privacy policy: every image is processed locally in your browser — no uploads, no accounts, no tracking. Read exactly what we do and do not collect.";
+  "PixKitApp privacy policy: every image is processed locally in your browser — no uploads, no accounts. Usage is measured with Google Analytics 4.";
 
 export const metadata: Metadata = {
   title: "Privacy Policy — Zero-Upload Image Processing",
@@ -21,14 +21,14 @@ const SECTIONS = [
     title: "1. Overview",
     body: [
       "PixKitApp (\"we\", \"us\", \"our\") operates www.pixkitapp.online, a suite of free browser-based image tools. This policy explains what data we collect, what we deliberately do not collect, and how the site works technically. The short version: your images are processed entirely on your own device and are never transmitted to our servers.",
-      "By using PixKitApp you agree to this policy. If you disagree with any part of it, please discontinue use of the site. This policy describes only www.pixkitapp.online; it does not cover third-party services that load only after we enable them, which we describe in sections 4, 6 and 7 and will update before doing so.",
+      "By using PixKitApp you agree to this policy. If you disagree with any part of it, please discontinue use of the site. This policy describes only www.pixkitapp.online. One third-party service is active today: Google Analytics 4, which measures aggregate site usage and is described in section 4. Advertising (section 6) is planned but not yet enabled — if we enable it, this policy will be updated first.",
     ],
   },
   {
     title: "2. Your images are never uploaded",
     body: [
       "Every tool on PixKitApp — compression, resizing, cropping, conversion, watermarking, metadata inspection, passport photo generation and all others — performs its processing locally in your web browser using the Canvas API and related browser capabilities. When you select or drop an image, the file is read into your browser's memory, processed by JavaScript running on your device, and offered back to you as a download.",
-      "At no point is your image file, its contents, or any derivative of it sent to us. You can verify this yourself with your browser's developer tools: process any image and observe that no outbound request carries file data. If we later enable third-party advertising or analytics scripts (see sections 6 and 7), those scripts will still have no access to your image files, because image data exists only inside your browser's memory.",
+      "At no point is your image file, its contents, or any derivative of it sent to us. You can verify this yourself with your browser's developer tools: process any image and observe that no outbound request carries file data. No script on the site — including Google Analytics 4 (section 4) and any advertising we enable later (section 6) — has access to your image files, because image data exists only inside your browser's memory.",
       "Because of this architecture, we cannot access, view, store, share, or lose your images — they never exist on our systems. If you close the tab before downloading a result, the processed data is gone; we have no copy.",
     ],
   },
@@ -43,8 +43,8 @@ const SECTIONS = [
     title: "4. Automatic technical data",
     body: [
       "Like most websites, our hosting provider may record standard server logs — IP address, user-agent, requested URL, timestamp and referrer — for security, abuse prevention and aggregate analytics. These logs relate to page requests only; they never contain your image data because image data is never requested or sent.",
-      "We use Google Analytics 4 (Google Ireland Limited / Google LLC) to understand aggregate usage of the site — pages viewed, session counts, device and browser type, general geographic region and referrer. GA4 does not log or store your IP address, and it never receives your images, because images are processed only inside your browser.",
-      "Google Analytics uses first-party cookies (such as _ga) to distinguish visits and can be disabled without affecting any tool: you can opt out with Google's official browser add-on (tools.google.com/dlpage/gaoptout) or your browser's cookie / Do Not Track settings. Where local law requires a consent choice for measurement cookies, we will surface it.",
+      "We use Google Analytics 4 (Google Ireland Limited / Google LLC; measurement ID G-VXJMF2PERB) to understand aggregate usage of the site — pages and tools viewed, session counts, device and browser type, general geographic region and referrer — so we can improve the website. GA4 does not log or store your IP address, and it never receives your images, because images are processed only inside your browser.",
+      "Google Analytics sets first-party cookies (such as _ga) to distinguish visits, and loads its script from Google's googletagmanager.com domain. You can prevent Google Analytics from collecting your data without affecting any tool — for example with Google's official opt-out browser add-on (tools.google.com/dlpage/gaoptout) or a content blocker that filters googletagmanager.com. We do not currently operate a cookie-consent banner; where local law requires a consent choice for measurement cookies, we will surface one.",
     ],
   },
   {
@@ -65,8 +65,8 @@ const SECTIONS = [
   {
     title: "7. Third-party services",
     body: [
-      "Today the site is served through standard web hosting and content delivery infrastructure. Fonts and framework code may be delivered by CDN providers under their own technical logs. We do not share your information with third parties for marketing, and there is no image data to share in any case.",
-      "Google, as the provider of Google Analytics 4 described in section 4, acts as a processor for the aggregate usage data it measures on our behalf. If advertising is enabled later, the provider named in section 6 will become an additional third-party processor for the specific data it collects (for example, ad-serving cookies) — but never for your images.",
+      "Today the site is served through standard web hosting and content delivery infrastructure (Vercel). Fonts and framework code are bundled and served from the site's own domain rather than loaded from external font CDNs. Google, as the provider of Google Analytics 4 described in section 4, acts as a processor for the aggregate usage data it measures on our behalf. We do not share your information with third parties for marketing, and there is no image data to share in any case.",
+      "If advertising is enabled later, the provider named in section 6 will become an additional third-party processor for the specific data it collects (for example, ad-serving cookies) — but never for your images.",
     ],
   },
   {
@@ -85,20 +85,20 @@ const SECTIONS = [
   {
     title: "10. Your rights",
     body: [
-      "Under regulations such as the GDPR and CCPA, you have rights to access, correct, delete and port your personal data. Because we do not maintain user databases, there is generally no personal data held by us to act upon. For any question or request — including deleting correspondence you emailed us — contact nihadmehar2@gmail.com and we will respond within 30 days.",
+      "Under regulations such as the GDPR and CCPA, you have rights to access, correct, delete and port your personal data. Because we do not maintain user databases, there is generally no personal data held by us to act upon. For any question or request — including deleting correspondence you emailed us — contact pixkitapp1@gmail.com and we will respond within 30 days.",
       "If and when advertising cookies become active, the ad provider's own opt-out tools (such as Google Ads Settings and www.aboutads.info) will also be available to you, in addition to any consent interface we are required to offer in your region.",
     ],
   },
   {
     title: "11. Changes to this policy",
     body: [
-      "We may update this policy to reflect product or legal changes. The effective date below shows the current version. Material changes — especially enabling analytics or advertising — will be summarized at the top of this page before they take effect.",
+      "We may update this policy to reflect product or legal changes. The effective date at the top of this page shows the current version. Material changes — especially enabling advertising — will be summarized at the top of this page before they take effect.",
     ],
   },
   {
     title: "12. Contact",
     body: [
-      "Questions about this policy or about how PixKitApp works: email nihadmehar2@gmail.com or use the contact page.",
+      "Questions about this policy or about how PixKitApp works: email pixkitapp1@gmail.com or use the contact page.",
     ],
   },
 ];
@@ -107,7 +107,7 @@ export default function PrivacyPage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
       <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">Privacy Policy</h1>
-      <p className="mt-2 text-sm text-muted-foreground">Effective date: November 2, 2026 (updated when Google Analytics 4 was added) · Applies to www.pixkitapp.online and all PixKitApp tools.</p>
+      <p className="mt-2 text-sm text-muted-foreground">Effective date: November 2, 2026 · Applies to www.pixkitapp.online and all PixKitApp tools.</p>
 
       <div className="mt-4 rounded-xl border border-primary/30 bg-primary/5 p-4 text-sm leading-relaxed">
         <strong>TL;DR:</strong> All {TOOLS_COUNT} tools process images locally in your browser — we never receive, store or see your images. No accounts. Aggregate usage measurement via Google Analytics 4 is active (section 4) — it measures page views and device type, never your images. Ad containers on the page are reserved placeholders; section 6 explains exactly what will change
