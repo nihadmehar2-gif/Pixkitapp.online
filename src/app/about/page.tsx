@@ -48,7 +48,7 @@ export default function AboutPage() {
 
       <div className="mt-10 grid gap-4 sm:grid-cols-2">
         {[
-          { icon: ShieldCheck, title: "Private by architecture", body: "No uploads, no accounts, no tracking of the images you process. Privacy isn't a policy here — it's how the software works." },
+          { icon: ShieldCheck, title: "Private by architecture", body: "No uploads, no accounts — and nothing about your images is collected, because processing happens entirely on your device. Privacy isn't a policy here; it's how the software works." },
           { icon: Zap, title: "Fast by design", body: "No waiting for uploads or server queues. A 30MB photo compresses in about a second on a typical laptop." },
           { icon: Globe, title: "Free & open access", body: "Every tool is free with no signup, no watermark and no daily limit. Built to be linked, shared and used." },
           { icon: Lock, title: "No upload infrastructure", body: "Image files are never transmitted anywhere — there is no upload step to secure, breach or wait for. (Pages still load from the web like any other site; the processing itself happens entirely on your device.)" },
