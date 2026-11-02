@@ -51,7 +51,8 @@ async function socialResize(images: LoadedImage[], o: ToolOptionValues, ctx: Pro
     }
     const label = `${targetW}x${targetH}`;
     const result = await (async () => {
-      const encoded = await encodeCanvas(canvas, enc);
+      // Pass the real source MIME so 'auto' preserves the original format.
+      const encoded = await encodeCanvas(canvas, { ...enc, sourceType: img.type });
       const ext = encoded.mime.split("/")[1] === "jpeg" ? "jpg" : encoded.mime.split("/")[1];
       return {
         id: `${img.id}-social${i}`,

@@ -136,6 +136,7 @@ export const RESIZE_TOOLS: ToolDef[] = [
       optSelect("format", "Output format", "image/jpeg", [
         { value: "image/jpeg", label: "JPEG" },
         { value: "image/webp", label: "WebP" },
+        { value: "image/png", label: "PNG — lossless, keeps transparency (dimensions may shrink)" },
       ]),
     ],
     processor: "resizeToKB",

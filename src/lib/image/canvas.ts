@@ -67,15 +67,37 @@ export async function resolveAutoFormat(
   return "image/jpeg";
 }
 
+/** Cached alpha-scan result per canvas — an accurate scan is not free on
+ *  large images, and target-size searches inspect the same canvas many
+ *  times. Only valid for canvases that are not redrawn after the check;
+ *  processors scan freshly-derived canvases, so this holds in practice. */
+const alphaScanCache = new WeakMap<HTMLCanvasElement, boolean>();
+
+/** Accurate transparency detection: every pixel's alpha channel is checked
+ *  (no sampling), read in row bands so peak memory stays bounded on large
+ *  images and the scan can exit early. Fully-transparent AND partially
+ *  transparent pixels both count, so tiny transparent regions are never
+ *  missed (they used to turn black when flattened for JPEG). */
 export async function canvasHasAlpha(canvas: HTMLCanvasElement): Promise<boolean> {
+  const cached = alphaScanCache.get(canvas);
+  if (cached !== undefined) return cached;
   const ctx = ctxForRead(canvas);
-  const data = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
-  // Sample every 4th pixel alpha channel for speed on large images
-  const step = 4 * 4;
-  for (let i = 3; i < data.length; i += step) {
-    if (data[i] < 255) return true;
+  let found = false;
+  // ~4MB bands (width * rows * 4 bytes) balance getImageData call overhead
+  // against peak memory on large images.
+  const bandRows = Math.max(1, Math.floor(4000000 / Math.max(1, canvas.width * 4)));
+  for (let y = 0; y < canvas.height && !found; y += bandRows) {
+    const rows = Math.min(bandRows, canvas.height - y);
+    const data = ctx.getImageData(0, y, canvas.width, rows).data;
+    for (let i = 3; i < data.length; i += 4) {
+      if (data[i] < 255) {
+        found = true;
+        break;
+      }
+    }
   }
-  return false;
+  alphaScanCache.set(canvas, found);
+  return found;
 }
 
 /** Encode a canvas to a Blob. */
@@ -102,76 +124,44 @@ export interface EncodedResult {
 /** Encode canvas with auto format resolution + alpha flattening. */
 export async function encodeCanvas(canvas: HTMLCanvasElement, opts: EncodeOptions): Promise<EncodedResult> {
   const format = await resolveAutoFormat(canvas, opts.format, opts.sourceType);
-  const target = await flattenForJpeg(canvas, format, opts.background ?? "#ffffff");
+  // JPEG sources cannot carry alpha — skip the scan entirely; for other
+  // sources the accurate cached scan decides whether compositing is needed.
+  const target = await flattenForJpeg(canvas, format, opts.background ?? "#ffffff", opts.sourceType);
   const blob = await canvasToBlob(target, format, opts.quality);
   return { blob, mime: format, width: target.width, height: target.height };
 }
 
 /** For JPEG output, composite transparency over the background color once.
  *  Encoding a transparent canvas straight to JPEG turns transparent pixels
- *  BLACK in most browsers — this prevents that. Other formats pass through. */
+ *  BLACK in most browsers — this prevents that. Other formats pass through.
+ *  `sourceType` is the ORIGINAL file's MIME: JPEG sources can never carry
+ *  alpha, so the scan is skipped entirely for them. */
 export async function flattenForJpeg(
   canvas: HTMLCanvasElement,
   format: "image/jpeg" | "image/png" | "image/webp",
-  background: string = "#ffffff"
+  background: string = "#ffffff",
+  sourceType?: string | null
 ): Promise<HTMLCanvasElement> {
   if (format !== "image/jpeg") return canvas;
+  if (sourceType === "image/jpeg") return canvas; // JPEG sources have no alpha
   if (await canvasHasAlpha(canvas)) {
     return drawFlattened(canvas, canvas.width, canvas.height, background);
   }
   return canvas;
 }
 
-/** Convenience: alpha-safe encode to a fixed format/quality (target-KB tools). */
+/** Convenience: alpha-safe encode to a fixed format/quality (target-KB tools).
+ *  `sourceType` (the original file's MIME) lets JPEG sources skip the
+ *  alpha scan. */
 export async function encodeWithAlphaHandling(
   canvas: HTMLCanvasElement,
   format: Exclude<OutputFormat, "auto">,
   quality: number,
-  background: string = "#ffffff"
+  background: string = "#ffffff",
+  sourceType?: string | null
 ): Promise<Blob> {
-  const target = await flattenForJpeg(canvas, format, background);
+  const target = await flattenForJpeg(canvas, format, background, sourceType);
   return canvasToBlob(target, format, quality);
-}
-
-/** Cheap sampled PSNR between a canvas and an encoded candidate of the same
- *  dimensions (returns -1 when dimensions differ).
- *  Used by target-size searches to pick the highest-fidelity candidate:
- *  browser encoders are NOT strictly monotonic in the 0.95-1.0 quality range
- *  (measured: q=0.97 can produce a larger yet LESS faithful file than q=0.95),
- *  so fidelity must be measured, not assumed from the quality label. */
-/** Cache of reference pixel data per canvas — avoids re-reading a possibly
- *  huge ImageData on every scored candidate during target-size searches. */
-const psnrRefCache = new WeakMap<HTMLCanvasElement, Uint8ClampedArray>();
-
-export async function quickPsnr(source: HTMLCanvasElement, candidate: Blob): Promise<number> {
-  try {
-    const bmp = await createImageBitmap(candidate);
-    if (bmp.width !== source.width || bmp.height !== source.height) return -1;
-    const c = createCanvas(bmp.width, bmp.height);
-    const cctx = ctxForRead(c);
-    cctx.drawImage(bmp, 0, 0);
-    bmp.close();
-    const a = cctx.getImageData(0, 0, c.width, c.height).data;
-    let b = psnrRefCache.get(source);
-    if (!b) {
-      b = ctxForRead(source).getImageData(0, 0, source.width, source.height).data;
-      psnrRefCache.set(source, b);
-    }
-    let se = 0;
-    let n = 0;
-    const stride = 4 * Math.max(1, Math.floor((c.width * c.height) / 200000));
-    for (let i = 0; i < a.length; i += stride) {
-      for (let k = 0; k < 3; k++) {
-        const d = a[i + k] - b[i + k];
-        se += d * d;
-        n++;
-      }
-    }
-    const mse = se / n;
-    return mse === 0 ? 99 : 10 * Math.log10(255 * 255 / mse);
-  } catch {
-    return -1;
-  }
 }
 
 /** High-quality multi-step rescale for BOTH directions (avoids aliasing on

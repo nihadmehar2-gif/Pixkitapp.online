@@ -80,12 +80,15 @@ function kbScaledDims(width: number, height: number, scale: number): { w: number
 }
 
 /** Run the A/B/C target-size search for one image.
- *  Returns null when the target cannot be reached within the quality floor
- *  and the minimum-size constraints (the caller turns this into an error). */
+ *  `sourceType` is the original file's MIME (lets JPEG sources skip the
+ *  alpha scan). Returns null when the target cannot be reached within the
+ *  quality floor and the minimum-size constraints (the caller turns this
+ *  into an error). */
 async function searchTargetSize(
   original: HTMLCanvasElement,
   format: "image/jpeg" | "image/webp" | "image/png",
-  targetBytes: number
+  targetBytes: number,
+  sourceType?: string | null
 ): Promise<TargetSizeOutcome | null> {
   const srcW = original.width;
   const srcH = original.height;
@@ -94,7 +97,9 @@ async function searchTargetSize(
   // final encode) can be derived from this flattened ORIGINAL. This also
   // keeps candidate encodes alpha-safe without re-scanning per candidate.
   const source =
-    format === "image/jpeg" ? await flattenForJpeg(original, "image/jpeg", "#ffffff") : original;
+    format === "image/jpeg"
+      ? await flattenForJpeg(original, "image/jpeg", "#ffffff", sourceType)
+      : original;
 
   const encodeAt = async (scale: number, quality?: number): Promise<Blob> => {
     const { w, h } = kbScaledDims(srcW, srcH, scale);
@@ -217,7 +222,7 @@ async function compressToSize(images: LoadedImage[], o: ToolOptionValues, ctx: P
   for (let i = 0; i < images.length; i++) {
     const img = images[i];
     const canvas = canvasFromImage(img);
-    const result = await searchTargetSize(canvas, format, targetBytes);
+    const result = await searchTargetSize(canvas, format, targetBytes, img.type);
     if (!result) {
       throw new Error(
         `Could not bring "${img.name}" under ${Math.round(targetBytes / 1024)}KB while keeping quality ≥ ` +
@@ -306,13 +311,18 @@ async function compressNearLossless(images: LoadedImage[], o: ToolOptionValues, 
     let bestBlob: Blob | null = null;
     let usedQ = 100;
     for (const q of [0.95, 0.9, 0.85, 0.8]) {
-      const blob = await encodeWithAlphaHandling(canvas, format, q);
+      const blob = await encodeWithAlphaHandling(canvas, format, q, "#ffffff", img.type);
       if (blob.size < img.size) { bestBlob = blob; usedQ = Math.round(q * 100); break; }
     }
     if (!bestBlob) {
-      bestBlob = await encodeWithAlphaHandling(canvas, format, 0.92);
+      bestBlob = await encodeWithAlphaHandling(canvas, format, 0.92, "#ffffff", img.type);
       usedQ = 92;
     }
+    // JPEG output of a transparent source flattens onto white — never silent.
+    const alphaNote =
+      format === "image/jpeg" && img.type !== "image/jpeg" && (await canvasHasAlpha(canvas))
+        ? " · transparency flattened onto white (WebP keeps transparency)"
+        : "";
     const ext = MIME_EXT[format] ?? "jpg";
     const { outputName } = await import("@/lib/image/canvas");
     out.push({
@@ -325,7 +335,7 @@ async function compressNearLossless(images: LoadedImage[], o: ToolOptionValues, 
       height: canvas.height,
       originalSize: img.size,
       previewUrl: URL.createObjectURL(bestBlob),
-      note: `Near-lossless · quality ${usedQ} · ${savingsNote(img.size, bestBlob.size)}`,
+      note: `Near-lossless · quality ${usedQ} · ${savingsNote(img.size, bestBlob.size)}${alphaNote}`,
     });
     ctx.onProgress?.(i + 1, images.length);
   }
@@ -392,7 +402,9 @@ async function resizeToKB(images: LoadedImage[], o: ToolOptionValues, ctx: Proce
     if (sentinel) {
       const q = Math.min(1, Math.max(0.05, num(o, "quality", 85) / 100));
       const source =
-        format === "image/jpeg" ? await flattenForJpeg(canvas, "image/jpeg", "#ffffff") : canvas;
+        format === "image/jpeg"
+          ? await flattenForJpeg(canvas, "image/jpeg", "#ffffff", img.type)
+          : canvas;
       const blob = await canvasToBlob(source, format, format === "image/png" ? undefined : q);
       result = { blob, width: canvas.width, height: canvas.height, scale: 1, quality: format === "image/png" ? undefined : q };
       qualityLabel = format === "image/png" ? "PNG (lossless)" : `Quality ${Math.round(q * 100)}%`;
@@ -402,7 +414,7 @@ async function resizeToKB(images: LoadedImage[], o: ToolOptionValues, ctx: Proce
           : "";
       note = `${qualityLabel} · ${formatKB(blob.size)} · ${canvas.width}×${canvas.height}${alphaNote}`;
     } else {
-      const searched = await searchTargetSize(canvas, format, targetBytes);
+      const searched = await searchTargetSize(canvas, format, targetBytes, img.type);
       if (!searched) {
         throw new Error(
           `Could not bring "${img.name}" under ${Math.round(targetBytes / 1024)}KB while keeping quality ≥ ` +

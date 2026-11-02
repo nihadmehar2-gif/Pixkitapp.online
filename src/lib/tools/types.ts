@@ -149,7 +149,7 @@ export const FORMAT_OPTS = (def = "auto"): ToolOption =>
     { value: "image/jpeg", label: "JPEG (.jpg)" },
     { value: "image/png", label: "PNG (.png)" },
     { value: "image/webp", label: "WebP (.webp)" },
-  ]);
+  ], "Keep original re-encodes in the SAME format (JPEG→JPEG, PNG→PNG, WebP→WebP) — no hidden conversion. Pick a format to convert; JPEG flattens transparency onto white.");
 
 export const QUALITY_OPTS = (def = 80): ToolOption[] => [
   optSlider("quality", "Image quality", def, 5, 100, 1, "%", "Lower quality = smaller file. 80% is a good balance."),

@@ -96,7 +96,8 @@ export const COMPRESSION_TOOLS: ToolDef[] = [
     multiple: true,
     options: [optSelect("format", "Output format", "image/jpeg", [
       { value: "image/jpeg", label: "JPEG — best for photos" },
-      { value: "image/webp", label: "WebP — best compression" },
+      { value: "image/webp", label: "WebP — best compression, keeps transparency" },
+      { value: "image/png", label: "PNG — lossless, keeps transparency (dimensions may shrink)" },
     ])],
     processor: "compressToSize",
     params: { __targetKB: 50 },
@@ -118,7 +119,8 @@ export const COMPRESSION_TOOLS: ToolDef[] = [
     multiple: true,
     options: [optSelect("format", "Output format", "image/jpeg", [
       { value: "image/jpeg", label: "JPEG — best for photos" },
-      { value: "image/webp", label: "WebP — best compression" },
+      { value: "image/webp", label: "WebP — best compression, keeps transparency" },
+      { value: "image/png", label: "PNG — lossless, keeps transparency (dimensions may shrink)" },
     ])],
     processor: "compressToSize",
     params: { __targetKB: 100 },
@@ -136,7 +138,8 @@ export const COMPRESSION_TOOLS: ToolDef[] = [
     multiple: true,
     options: [optSelect("format", "Output format", "image/jpeg", [
       { value: "image/jpeg", label: "JPEG — best for photos" },
-      { value: "image/webp", label: "WebP — best compression" },
+      { value: "image/webp", label: "WebP — best compression, keeps transparency" },
+      { value: "image/png", label: "PNG — lossless, keeps transparency (dimensions may shrink)" },
     ])],
     processor: "compressToSize",
     params: { __targetKB: 200 },
@@ -154,7 +157,8 @@ export const COMPRESSION_TOOLS: ToolDef[] = [
     multiple: true,
     options: [optSelect("format", "Output format", "image/jpeg", [
       { value: "image/jpeg", label: "JPEG — best for photos" },
-      { value: "image/webp", label: "WebP — best compression" },
+      { value: "image/webp", label: "WebP — best compression, keeps transparency" },
+      { value: "image/png", label: "PNG — lossless, keeps transparency (dimensions may shrink)" },
     ])],
     processor: "compressToSize",
     params: { __targetKB: 500 },
@@ -174,7 +178,8 @@ export const COMPRESSION_TOOLS: ToolDef[] = [
       { key: "targetKB", label: "Target file size (KB)", type: "number", default: 150, min: 10, max: 10000, step: 10, suffix: " KB" },
       optSelect("format", "Output format", "image/jpeg", [
         { value: "image/jpeg", label: "JPEG — best for photos" },
-        { value: "image/webp", label: "WebP — best compression" },
+        { value: "image/webp", label: "WebP — best compression, keeps transparency" },
+        { value: "image/png", label: "PNG — lossless, keeps transparency (dimensions may shrink)" },
       ]),
     ],
     processor: "compressToSize",
