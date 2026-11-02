@@ -158,6 +158,26 @@ export default function RootLayout({
             </>
           )}
           {/*
+            Google AdSense site-verification loader — the official snippet
+            Google requires in the document head. Rendered as a plain async
+            <script> because React 19 hoists async scripts into <head> and
+            emits them in the server-rendered HTML — next/script strategies
+            (afterInteractive/beforeInteractive) inject the tag client-side
+            after hydration, so the raw HTML a verification crawler fetches
+            would not contain it. Rendered only in production indexing mode —
+            preview/staging never loads ad scripts. NOTE: keep the dormant
+            AdSlot system (ad-slot.tsx + NEXT_PUBLIC_ADSENSE_* env) disabled
+            while this loader exists, otherwise the AdSense library would
+            load twice.
+          */}
+          {!IS_PREVIEW && (
+            <script
+              async
+              src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1791950384087416"
+              crossOrigin="anonymous"
+            />
+          )}
+          {/*
             Runtime hostname guard: on any non-production hostname the
             robots directive is flipped to noindex,nofollow at parse time
             (reuses the existing meta tag, so no duplicates are created).
