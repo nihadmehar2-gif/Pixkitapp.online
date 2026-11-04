@@ -17,6 +17,29 @@ import sys
 PROJECT = "/home/z/my-project"
 LOG = os.path.join(PROJECT, "dev.log")
 
+# Canonical preview env files. Sandbox recovery has repeatedly wiped these
+# gitignored dotfiles between sessions, which silently flipped the preview
+# server to frame-ancestors 'self' (broken preview iframe). ensure_preview_env()
+# restores them at every dev-mode daemon start, so recovery can no longer
+# break the preview. Content must stay in sync with next.config.ts + src/lib/seo.ts:
+# NEXT_PUBLIC_INDEXING_MODE=preview -> IS_PREVIEW=true -> frame-ancestors *
+# + X-Robots-Tag: noindex, nofollow. Neither file is ever read by `next build`.
+PREVIEW_ENV_FILES = {
+    ".env.development.local": (
+        "# Local dev overrides (gitignored via .gitignore `.env*`).\n"
+        "# Loaded automatically by `next dev`. Drives IS_PREVIEW in next.config.ts and\n"
+        "# src/lib/seo.ts: frame-ancestors * + X-Robots-Tag noindex + noindex metas.\n"
+        "# Auto-restored by scripts/dev-daemon.py if sandbox recovery wipes it.\n"
+        "NEXT_PUBLIC_INDEXING_MODE=preview\n"
+    ),
+    ".env.preview": (
+        "# Preview-only flags — read ONLY by scripts/dev-daemon.py (never by next build\n"
+        "# in production), so these values cannot leak into a production deployment.\n"
+        "# Auto-restored by scripts/dev-daemon.py if sandbox recovery wipes it.\n"
+        "NEXT_PUBLIC_INDEXING_MODE=preview\n"
+    ),
+}
+
 
 def log(msg: str) -> None:
     with open(LOG, "a", encoding="utf-8") as fh:
@@ -74,8 +97,33 @@ def load_preview_env(env: dict) -> dict:
     return env
 
 
+def ensure_preview_env() -> None:
+    """Recreate the preview env files if sandbox recovery wiped them.
+
+    Idempotent: a file that already contains the preview switch is left
+    untouched (no mtime churn, extra user vars preserved). Runs before the
+    port check, so even a no-op daemon invocation heals the files.
+    """
+    for name, content in PREVIEW_ENV_FILES.items():
+        path = os.path.join(PROJECT, name)
+        try:
+            with open(path, encoding="utf-8") as fh:
+                if "NEXT_PUBLIC_INDEXING_MODE=preview" in fh.read():
+                    continue
+        except OSError:
+            pass
+        try:
+            with open(path, "w", encoding="utf-8") as fh:
+                fh.write(content)
+            log(f"recreated {name} (preview protections restored)")
+        except OSError as exc:
+            log(f"ERROR: could not restore {name}: {exc}")
+
+
 def main() -> int:
     port, mode = parse_args(sys.argv[1:])
+    if mode == "dev":
+        ensure_preview_env()
     import socket
 
     s = socket.socket()
