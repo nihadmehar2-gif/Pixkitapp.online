@@ -107,15 +107,46 @@ daemon_call()
 check("RESTORE files canonical again",
       all(read(n) == dd.PREVIEW_ENV_FILES[n] for n in ENV_FILES))
 
-# T5: edge case — file with custom var but WITHOUT the switch line
+# T5: switchless file with a custom var -> var preserved, switch appended
 with open(pv, "w", encoding="utf-8") as f:
     f.write("CUSTOM_ONLY=1\n")
 daemon_call()
-check("T5(edge) switchless file overwritten to canonical — custom var in it is lost (documented)",
-      read(".env.preview") == dd.PREVIEW_ENV_FILES[".env.preview"])
+content = read(".env.preview")
+check("T5 switchless file keeps custom var AND gains active switch",
+      "CUSTOM_ONLY=1" in content
+      and any(l.strip() == "NEXT_PUBLIC_INDEXING_MODE=preview" for l in content.splitlines()))
+
+# T6: comment merely MENTIONING the switch must not block healing
+with open(pv, "w", encoding="utf-8") as f:
+    f.write("# NEXT_PUBLIC_INDEXING_MODE=preview was wiped by recovery\n")
+daemon_call()
+content = read(".env.preview")
+check("T6 comment-only mention does not count as active switch",
+      any(l.strip() == "NEXT_PUBLIC_INDEXING_MODE=preview" for l in content.splitlines()))
+
+# T7: empty (truncated) file -> switch restored, nothing else lost
+with open(pv, "w", encoding="utf-8") as f:
+    f.write("")
+daemon_call()
+content = read(".env.preview")
+check("T7 empty file gains active switch via append (no clobber)",
+      any(l.strip() == "NEXT_PUBLIC_INDEXING_MODE=preview" for l in content.splitlines()))
+
+# T8: healthy file remains byte-identical (idempotence after repair paths)
+before = sha(pv)
+daemon_call()
+check("T8 healthy file byte-identical after repair cycles (idempotent)", sha(pv) == before)
 
 # F1: server still up and untouched throughout
 check("F1 dev server still serving 200 on :3000 (non-disruptive)", port_up())
+
+# F2: leave the sandbox in the canonical env state
+for n, c in dd.PREVIEW_ENV_FILES.items():
+    with open(os.path.join(PROJ, n), "w", encoding="utf-8") as f:
+        f.write(c)
+daemon_call()
+check("F2 sandbox left in canonical env state",
+      all(read(n) == dd.PREVIEW_ENV_FILES[n] for n in ENV_FILES))
 
 print("RESULT_JSON=" + json.dumps({k: v for k, v in results}))
 sys.exit(0 if all(c for _, c in results) else 1)

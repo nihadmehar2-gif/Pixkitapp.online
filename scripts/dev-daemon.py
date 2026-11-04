@@ -98,26 +98,41 @@ def load_preview_env(env: dict) -> dict:
 
 
 def ensure_preview_env() -> None:
-    """Recreate the preview env files if sandbox recovery wiped them.
+    """Recreate/repair the preview env files if sandbox recovery wiped them.
 
-    Idempotent: a file that already contains the preview switch is left
-    untouched (no mtime churn, extra user vars preserved). Runs before the
-    port check, so even a no-op daemon invocation heals the files.
+    Idempotent and lossless, per file:
+    - file missing            -> created from the canonical template
+    - file lacks the switch   -> switch APPENDED (any user vars survive)
+    - file has the switch     -> untouched (no mtime churn)
+    The switch is matched per whole line, so a comment that merely mentions
+    it can no longer block healing. Runs before the port check, so even a
+    no-op daemon invocation heals the files.
     """
+    switch = "NEXT_PUBLIC_INDEXING_MODE=preview"
     for name, content in PREVIEW_ENV_FILES.items():
         path = os.path.join(PROJECT, name)
         try:
             with open(path, encoding="utf-8") as fh:
-                if "NEXT_PUBLIC_INDEXING_MODE=preview" in fh.read():
-                    continue
-        except OSError:
-            pass
-        try:
-            with open(path, "w", encoding="utf-8") as fh:
-                fh.write(content)
-            log(f"recreated {name} (preview protections restored)")
+                lines = fh.readlines()
+        except FileNotFoundError:
+            lines = None
         except OSError as exc:
-            log(f"ERROR: could not restore {name}: {exc}")
+            log(f"ERROR: could not inspect {name}: {exc}")
+            continue
+        if lines is None:
+            try:
+                with open(path, "w", encoding="utf-8") as fh:
+                    fh.write(content)
+                log(f"recreated {name} (preview protections restored)")
+            except OSError as exc:
+                log(f"ERROR: could not restore {name}: {exc}")
+        elif not any(line.strip() == switch for line in lines):
+            try:
+                with open(path, "a", encoding="utf-8") as fh:
+                    fh.write(f"\n# Auto-restored by scripts/dev-daemon.py:\n{switch}\n")
+                log(f"restored preview switch in {name} (existing content preserved)")
+            except OSError as exc:
+                log(f"ERROR: could not repair {name}: {exc}")
 
 
 def main() -> int:
