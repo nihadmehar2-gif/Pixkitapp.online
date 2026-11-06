@@ -72,6 +72,11 @@ export const metadata: Metadata = {
   },
   // Preview/staging environments must never be indexable (see src/lib/seo.ts).
   robots: ROBOTS_DIRECTIVES,
+  // Monetag publisher site-verification — emitted into <head> on every page
+  // as <meta name="monetag" content="..."> (verification tags are public).
+  other: {
+    monetag: "fc91e716faf8b5d724195354b78bd1cc",
+  },
 };
 
 export const viewport: Viewport = {
