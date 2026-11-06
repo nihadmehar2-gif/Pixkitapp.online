@@ -183,6 +183,33 @@ export default function RootLayout({
             />
           )}
           {/*
+            Monetag banner-stack zone loaders — the owner-selected, non-
+            popunder replacement for the removed MultiTag (zone 306556):
+              - zone 12203276 via nap5k.com/tag.min.js (In-Page Push banner
+                slot; the served format follows the zone's dashboard config)
+              - zone 12203278 via n6wxm.com/vignette.min.js (Vignette Banner:
+                native-style centre overlay with Close/CTA buttons, shown on
+                page visit — no new tabs, no popunder/OnClick mechanics)
+            Both snippets are the official self-appending inline loaders;
+            they render inline like the GA4 init script above and are gated
+            to production indexing mode — preview/staging never loads ad
+            scripts.
+          */}
+          {!IS_PREVIEW && (
+            <script
+              dangerouslySetInnerHTML={{
+                __html: "(function(s){s.dataset.zone='12203276',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))",
+              }}
+            />
+          )}
+          {!IS_PREVIEW && (
+            <script
+              dangerouslySetInnerHTML={{
+                __html: "(function(s){s.dataset.zone='12203278',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))",
+              }}
+            />
+          )}
+          {/*
             Runtime hostname guard: on any non-production hostname the
             robots directive is flipped to noindex,nofollow at parse time
             (reuses the existing meta tag, so no duplicates are created).
