@@ -183,6 +183,23 @@ export default function RootLayout({
             />
           )}
           {/*
+            Monetag MultiTag loader (zone 306556) — same plain async <script>
+            pattern as the AdSense loader above: React 19 hoists it into
+            <head> of the server-rendered HTML, so crawlers and the Monetag
+            dashboard see it in the raw document. data-cfasync="false" opts
+            the tag out of Cloudflare Rocket Loader rewriting. Rendered only
+            in production indexing mode — preview/staging never loads ad
+            scripts (same policy as the GA4 and AdSense loaders above).
+          */}
+          {!IS_PREVIEW && (
+            <script
+              async
+              src="https://quge5.com/88/tag.min.js"
+              data-zone="306556"
+              data-cfasync="false"
+            />
+          )}
+          {/*
             Runtime hostname guard: on any non-production hostname the
             robots directive is flipped to noindex,nofollow at parse time
             (reuses the existing meta tag, so no duplicates are created).
