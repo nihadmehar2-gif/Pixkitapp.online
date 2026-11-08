@@ -117,6 +117,21 @@ export default async function CategoryPage({ params }: Props) {
         ))}
       </div>
 
+      {/* Hand-written category introduction (categories.ts) — same section
+          pattern as the tool pages' "About" block. */}
+      {cat.intro && cat.intro.length > 0 && (
+        <section className="mt-12 max-w-3xl" aria-label={`About these ${cat.name} tools`}>
+          <h2 className="text-lg font-semibold">About these {cat.name} tools</h2>
+          <div className="mt-3 space-y-4">
+            {cat.intro.map((para) => (
+              <p key={para.slice(0, 32)} className="leading-relaxed text-muted-foreground">
+                {para}
+              </p>
+            ))}
+          </div>
+        </section>
+      )}
+
       <section className="mt-12 border-t pt-8">
         <h2 className="text-lg font-semibold">Other categories</h2>
         <div className="mt-3 flex flex-wrap gap-2">

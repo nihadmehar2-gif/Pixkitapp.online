@@ -14,6 +14,12 @@ export interface ToolCategory {
   metaTitle?: string;
   /** Hand-authored 150–160c meta description; falls back to a formula when absent. */
   metaDescription?: string;
+  /**
+   * Hand-written category introduction (2–3 paragraphs, ~80–150 words total),
+   * rendered below the tool grid on the category page. Unique per category —
+   * explains what the tools do, when to use them and practical tips.
+   */
+  intro?: string[];
 }
 
 /** One configurable control on a tool page. */
