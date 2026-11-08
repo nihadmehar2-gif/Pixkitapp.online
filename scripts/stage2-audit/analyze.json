@@ -1,0 +1,381 @@
+{
+ "titles": {
+  "count": 147,
+  "duplicates": {},
+  "short(<30)": [],
+  "long(>65)": [],
+  "missing": [],
+  "len_stats": {
+   "min": 50,
+   "max": 60,
+   "avg": 54.7
+  }
+ },
+ "descriptions": {
+  "count": 147,
+  "duplicates": {},
+  "near_duplicates(60char-prefix)": {},
+  "missing": [],
+  "short(<70)": [],
+  "long(>165)": [
+   [
+    "/categories/transparency",
+    173
+   ]
+  ],
+  "len_stats": {
+   "min": 144,
+   "max": 173,
+   "avg": 154.0
+  }
+ },
+ "h1": {
+  "missing": [],
+  "multiple": [],
+  "duplicate_h1_text_across_pages": {},
+  "len_stats": {
+   "min": 14,
+   "max": 62
+  }
+ },
+ "canonical": {
+  "self_mismatches": [],
+  "ogurl_mismatches": []
+ },
+ "content": {
+  "thin(<150 words in <main>)": [
+   [
+    "/tools",
+    22
+   ],
+   [
+    "/categories/metadata",
+    131
+   ],
+   [
+    "/contact",
+    145
+   ]
+  ],
+  "lowest15": [
+   [
+    "/tools",
+    22,
+    3077,
+    128
+   ],
+   [
+    "/categories/metadata",
+    131,
+    241,
+    4
+   ],
+   [
+    "/contact",
+    145,
+    255,
+    3
+   ],
+   [
+    "/categories/watermark",
+    162,
+    272,
+    6
+   ],
+   [
+    "/categories/text",
+    165,
+    275,
+    6
+   ],
+   [
+    "/categories/transparency",
+    211,
+    321,
+    8
+   ],
+   [
+    "/categories/rotate",
+    212,
+    322,
+    8
+   ],
+   [
+    "/categories/optimize",
+    227,
+    337,
+    8
+   ],
+   [
+    "/categories/crop",
+    240,
+    350,
+    9
+   ],
+   [
+    "/categories/passport-photos",
+    242,
+    352,
+    8
+   ],
+   [
+    "/categories/color",
+    262,
+    372,
+    10
+   ],
+   [
+    "/categories/social",
+    297,
+    407,
+    13
+   ],
+   [
+    "/categories/resize",
+    313,
+    423,
+    12
+   ],
+   [
+    "/categories/compress",
+    344,
+    454,
+    12
+   ],
+   [
+    "/categories/filters",
+    375,
+    485,
+    16
+   ]
+  ],
+  "highest5": [
+   [
+    "/photo-print-sheet",
+    668,
+    778,
+    3
+   ],
+   [
+    "/resize-image-to-kb",
+    684,
+    794,
+    3
+   ],
+   [
+    "/terms",
+    750,
+    860,
+    11
+   ],
+   [
+    "/",
+    1299,
+    1409,
+    5
+   ],
+   [
+    "/privacy",
+    1550,
+    1660,
+    12
+   ]
+  ],
+  "avg_main_words": 518
+ },
+ "duplication_structural": {},
+ "images": {
+  "total_img_tags": 882,
+  "alt_missing(null)": [],
+  "alt_empty(decorative-ok)": 882,
+  "alt_empty_list": [
+   [
+    "/",
+    "/floating/f1.webp"
+   ],
+   [
+    "/",
+    "/floating/f2.webp"
+   ],
+   [
+    "/",
+    "/floating/f3.webp"
+   ],
+   [
+    "/",
+    "/floating/f4.webp"
+   ],
+   [
+    "/",
+    "/floating/f5.webp"
+   ],
+   [
+    "/",
+    "/floating/f6.webp"
+   ],
+   [
+    "/about",
+    "/floating/f1.webp"
+   ],
+   [
+    "/about",
+    "/floating/f2.webp"
+   ],
+   [
+    "/about",
+    "/floating/f3.webp"
+   ],
+   [
+    "/about",
+    "/floating/f4.webp"
+   ],
+   [
+    "/about",
+    "/floating/f5.webp"
+   ],
+   [
+    "/about",
+    "/floating/f6.webp"
+   ],
+   [
+    "/add-background-color",
+    "/floating/f1.webp"
+   ],
+   [
+    "/add-background-color",
+    "/floating/f2.webp"
+   ],
+   [
+    "/add-background-color",
+    "/floating/f3.webp"
+   ],
+   [
+    "/add-background-color",
+    "/floating/f4.webp"
+   ],
+   [
+    "/add-background-color",
+    "/floating/f5.webp"
+   ],
+   [
+    "/add-background-color",
+    "/floating/f6.webp"
+   ],
+   [
+    "/add-caption-to-image",
+    "/floating/f1.webp"
+   ],
+   [
+    "/add-caption-to-image",
+    "/floating/f2.webp"
+   ]
+  ],
+  "svg_icons_total": 3358,
+  "svg_icons_aria_hidden": 3358
+ },
+ "links": {
+  "orphans": [],
+  "lowest_inlink_20": [
+   [
+    3,
+    "/avif-to-jpg"
+   ],
+   [
+    3,
+    "/avif-to-png"
+   ],
+   [
+    3,
+    "/base64-to-image"
+   ],
+   [
+    3,
+    "/bmp-to-jpg"
+   ],
+   [
+    3,
+    "/brightness-adjuster"
+   ],
+   [
+    3,
+    "/compress-image-to-200kb"
+   ],
+   [
+    3,
+    "/compress-image-to-500kb"
+   ],
+   [
+    3,
+    "/contrast-adjuster"
+   ],
+   [
+    3,
+    "/crop-image-3-2"
+   ],
+   [
+    3,
+    "/crop-image-4-3"
+   ],
+   [
+    3,
+    "/enlarge-image"
+   ],
+   [
+    3,
+    "/film-grain-effect"
+   ],
+   [
+    3,
+    "/gif-to-webp"
+   ],
+   [
+    3,
+    "/image-format-converter"
+   ],
+   [
+    3,
+    "/image-to-base64"
+   ],
+   [
+    3,
+    "/jpg-to-bmp"
+   ],
+   [
+    3,
+    "/jpg-to-webp"
+   ],
+   [
+    3,
+    "/linkedin-post-resizer"
+   ],
+   [
+    3,
+    "/near-lossless-image-compressor"
+   ],
+   [
+    3,
+    "/photo-print-sheet"
+   ]
+  ],
+  "external_domains": {
+   "policies.google.com": 1,
+   "tools.google.com": 1
+  },
+  "avg_outlinks": 43.0
+ },
+ "structured_data": {
+  "type_matrix": {
+   "FAQPage + Organization + WebSite": 1,
+   "BreadcrumbList + FAQPage + WebApplication": 127,
+   "BreadcrumbList + CollectionPage": 14
+  },
+  "pages_without_jsonld": [
+   "/about",
+   "/contact",
+   "/privacy",
+   "/terms",
+   "/tools"
+  ],
+  "issues": []
+ }
+}

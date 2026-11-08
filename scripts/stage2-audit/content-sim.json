@@ -1,0 +1,1349 @@
+{
+ "coverage": {
+  "noSeo": 0,
+  "noGuide": 0,
+  "noAbout": 0,
+  "noFaq": 0
+ },
+ "sharedFaqAnswers": [
+  {
+   "answer": "everything runs locally in your browser via the canvas api. your picture never leaves your machine — there is no upload step at all, so processing is as private as working in an offline editor.",
+   "count": 96,
+   "tools": [
+    "compress-jpeg-image",
+    "compress-webp-image",
+    "compress-image-to-100kb",
+    "compress-image-to-200kb",
+    "compress-image-to-500kb",
+    "compress-image-to-specific-size",
+    "near-lossless-image-compressor",
+    "bulk-image-compressor",
+    "resize-image-by-percentage",
+    "resize-image-to-width",
+    "resize-image-to-height",
+    "resize-image-to-dimensions",
+    "resize-image-to-kb",
+    "resize-png-image",
+    "resize-jpg-image",
+    "resize-webp-image",
+    "enlarge-image",
+    "thumbnail-maker",
+    "crop-image-to-square",
+    "crop-image-to-circle",
+    "crop-image-16-9",
+    "crop-image-9-16",
+    "crop-image-4-3",
+    "crop-image-3-2",
+    "crop-borders-auto",
+    "webp-to-png",
+    "jpg-to-png",
+    "png-to-jpg",
+    "png-to-webp",
+    "jpg-to-webp",
+    "gif-to-png",
+    "gif-to-webp",
+    "bmp-to-jpg",
+    "bmp-to-png",
+    "jpg-to-bmp",
+    "png-to-bmp",
+    "avif-to-jpg",
+    "avif-to-png",
+    "image-to-ico",
+    "image-to-base64",
+    "base64-to-image",
+    "svg-to-png",
+    "image-format-converter",
+    "rotate-image",
+    "rotate-image-90",
+    "rotate-image-180",
+    "rotate-image-270",
+    "flip-image-horizontal",
+    "flip-image-vertical",
+    "straighten-image",
+    "grayscale-image",
+    "sepia-image",
+    "invert-image-colors",
+    "blur-image",
+    "sharpen-image",
+    "brightness-adjuster",
+    "contrast-adjuster",
+    "saturation-adjuster",
+    "hue-rotate-image",
+    "vintage-filter",
+    "posterize-image",
+    "pixelate-image",
+    "duotone-image",
+    "film-grain-effect",
+    "vignette-effect",
+    "image-optimizer",
+    "optimize-image-for-web",
+    "optimize-png-for-web",
+    "optimize-jpg-for-web",
+    "email-image-resizer",
+    "image-size-reducer",
+    "remove-gps-data",
+    "image-color-picker",
+    "image-color-palette",
+    "image-dominant-color",
+    "image-average-color",
+    "replace-color-in-image",
+    "remove-color-from-image",
+    "image-color-temperature",
+    "threshold-image",
+    "swap-color-channels",
+    "add-logo-watermark",
+    "tiled-watermark",
+    "date-watermark",
+    "bulk-watermark",
+    "add-text-to-image",
+    "add-caption-to-image",
+    "meme-generator",
+    "quote-card-maker",
+    "add-title-to-image",
+    "make-image-transparent",
+    "add-white-background",
+    "add-background-color",
+    "round-corners-image",
+    "transparent-png-maker",
+    "png-drop-shadow"
+   ]
+  },
+  {
+   "answer": "up to 10 images per batch, 30 mb per file, and unlimited runs — no signup, no counters, and no watermark stamped on results.",
+   "count": 21,
+   "tools": [
+    "compress-image-to-100kb",
+    "near-lossless-image-compressor",
+    "resize-image-to-width",
+    "resize-png-image",
+    "thumbnail-maker",
+    "crop-image-16-9",
+    "crop-borders-auto",
+    "png-to-jpg",
+    "image-format-converter",
+    "rotate-image-270",
+    "grayscale-image",
+    "sharpen-image",
+    "hue-rotate-image",
+    "duotone-image",
+    "optimize-image-for-web",
+    "email-image-resizer",
+    "remove-gps-data",
+    "image-average-color",
+    "threshold-image",
+    "tiled-watermark",
+    "add-caption-to-image"
+   ]
+  },
+  {
+   "answer": "there are no artificial limits: use it as often as you like, free. practical caps are 30 mb per image and 10 files per batch, and outputs stay watermark-free.",
+   "count": 20,
+   "tools": [
+    "compress-jpeg-image",
+    "compress-image-to-200kb",
+    "bulk-image-compressor",
+    "resize-image-to-height",
+    "resize-jpg-image",
+    "crop-image-9-16",
+    "png-to-webp",
+    "bmp-to-jpg",
+    "avif-to-jpg",
+    "rotate-image",
+    "flip-image-horizontal",
+    "sepia-image",
+    "brightness-adjuster",
+    "vintage-filter",
+    "film-grain-effect",
+    "optimize-png-for-web",
+    "image-size-reducer",
+    "replace-color-in-image",
+    "swap-color-channels",
+    "date-watermark"
+   ]
+  },
+  {
+   "answer": "you can queue 10 files per run, each up to 30 mb. results download individually or bundled as a single zip.",
+   "count": 19,
+   "tools": [
+    "compress-webp-image",
+    "compress-image-to-500kb",
+    "resize-image-to-dimensions",
+    "resize-webp-image",
+    "crop-image-to-square",
+    "crop-image-4-3",
+    "webp-to-png",
+    "jpg-to-webp",
+    "bmp-to-png",
+    "avif-to-png",
+    "rotate-image-90",
+    "flip-image-vertical",
+    "invert-image-colors",
+    "contrast-adjuster",
+    "posterize-image",
+    "vignette-effect",
+    "optimize-jpg-for-web",
+    "bulk-watermark",
+    "add-white-background"
+   ]
+  },
+  {
+   "answer": "common formats are covered: jpg, png or webp, each up to 30 mb. paste from the clipboard, drag and drop, or use the select button.",
+   "count": 18,
+   "tools": [
+    "compress-image-to-100kb",
+    "near-lossless-image-compressor",
+    "resize-image-to-width",
+    "thumbnail-maker",
+    "crop-image-16-9",
+    "crop-borders-auto",
+    "rotate-image-270",
+    "grayscale-image",
+    "sharpen-image",
+    "hue-rotate-image",
+    "duotone-image",
+    "optimize-image-for-web",
+    "email-image-resizer",
+    "image-average-color",
+    "threshold-image",
+    "tiled-watermark",
+    "add-caption-to-image",
+    "round-corners-image"
+   ]
+  },
+  {
+   "answer": "batch runs take up to 10 files at once (30 mb each). there's no account, no daily quota and no watermark — process as many batches as you need.",
+   "count": 15,
+   "tools": [
+    "compress-image-to-specific-size",
+    "resize-image-by-percentage",
+    "resize-image-to-kb",
+    "crop-image-3-2",
+    "jpg-to-png",
+    "rotate-image-180",
+    "blur-image",
+    "saturation-adjuster",
+    "pixelate-image",
+    "image-optimizer",
+    "image-dominant-color",
+    "image-color-temperature",
+    "add-logo-watermark",
+    "add-title-to-image",
+    "add-background-color"
+   ]
+  },
+  {
+   "answer": "jpg, png or webp files up to 30 mb each are accepted. drop in one file or a whole batch (paste and drag also work), check the preview, and export in the format shown at the download step.",
+   "count": 14,
+   "tools": [
+    "compress-image-to-200kb",
+    "bulk-image-compressor",
+    "resize-image-to-height",
+    "crop-image-9-16",
+    "rotate-image",
+    "flip-image-horizontal",
+    "sepia-image",
+    "brightness-adjuster",
+    "vintage-filter",
+    "film-grain-effect",
+    "image-size-reducer",
+    "replace-color-in-image",
+    "swap-color-channels",
+    "date-watermark"
+   ]
+  },
+  {
+   "answer": "jpg, png or webp inputs are supported, up to 30 mb per file. for exotic formats, convert them first with one of the converter tools, then come back.",
+   "count": 14,
+   "tools": [
+    "compress-image-to-500kb",
+    "resize-image-to-dimensions",
+    "crop-image-to-square",
+    "crop-image-4-3",
+    "rotate-image-90",
+    "flip-image-vertical",
+    "invert-image-colors",
+    "contrast-adjuster",
+    "posterize-image",
+    "vignette-effect",
+    "image-color-palette",
+    "remove-color-from-image",
+    "bulk-watermark",
+    "quote-card-maker"
+   ]
+  },
+  {
+   "answer": "the common formats are covered — jpg, png or webp, each up to 30 mb. queue them one batch at a time.",
+   "count": 13,
+   "tools": [
+    "compress-image-to-specific-size",
+    "resize-image-by-percentage",
+    "resize-image-to-kb",
+    "crop-image-3-2",
+    "rotate-image-180",
+    "blur-image",
+    "saturation-adjuster",
+    "pixelate-image",
+    "image-optimizer",
+    "image-dominant-color",
+    "image-color-temperature",
+    "add-logo-watermark",
+    "add-title-to-image"
+   ]
+  },
+  {
+   "answer": "files can be up to 30 mb each, one per run. there's no account, no daily quota and no watermark — process as many images as you need, one after another.",
+   "count": 7,
+   "tools": [
+    "enlarge-image",
+    "crop-image-to-circle",
+    "gif-to-png",
+    "jpg-to-bmp",
+    "svg-to-png",
+    "straighten-image",
+    "add-text-to-image"
+   ]
+  },
+  {
+   "answer": "cover fills the frame completely (crops edges); contain shows the full image with padded bars. use cover for photos, contain for logos or graphics you don't want cropped.",
+   "count": 7,
+   "tools": [
+    "instagram-post-resizer",
+    "instagram-story-resizer",
+    "instagram-portrait-resizer",
+    "facebook-profile-resizer",
+    "x-post-resizer",
+    "linkedin-banner-resizer",
+    "linkedin-post-resizer"
+   ]
+  },
+  {
+   "answer": "there are no artificial limits: use it as often as you like, free. the practical cap is 30 mb per image, and outputs stay watermark-free.",
+   "count": 5,
+   "tools": [
+    "image-to-base64",
+    "image-color-picker",
+    "meme-generator",
+    "make-image-transparent",
+    "transparent-png-maker"
+   ]
+  },
+  {
+   "answer": "this tool handles one image at a time (up to 30 mb). for batch work, use one of the multi-file tools instead — the per-image result is the same.",
+   "count": 5,
+   "tools": [
+    "base64-to-image",
+    "image-color-palette",
+    "remove-color-from-image",
+    "quote-card-maker",
+    "png-drop-shadow"
+   ]
+  },
+  {
+   "answer": "yes — output at 300 dpi prints at the selected size. use the print sheet tool to arrange copies on 4×6\" paper.",
+   "count": 5,
+   "tools": [
+    "us-passport-photo",
+    "schengen-visa-photo",
+    "china-visa-photo",
+    "id-photo-1-inch",
+    "linkedin-profile-photo"
+   ]
+  },
+  {
+   "answer": "the tool guarantees the exact pixel dimensions and print size, but every authority sets its own rules for lighting, expression, head position and recency — and they change over time. always verify the current requirements with the issuing authority (embassy, consulate or agency) before submitting.",
+   "count": 5,
+   "tools": [
+    "us-passport-photo",
+    "schengen-visa-photo",
+    "china-visa-photo",
+    "id-photo-1-inch",
+    "linkedin-profile-photo"
+   ]
+  },
+  {
+   "answer": "the common formats are covered — jpg, png or webp, each up to 30 mb. one photo is processed per run.",
+   "count": 4,
+   "tools": [
+    "enlarge-image",
+    "crop-image-to-circle",
+    "straighten-image",
+    "add-text-to-image"
+   ]
+  },
+  {
+   "answer": "one image is processed per run, up to 30 mb — and you can run it as many times as you like. no signup, no counters, and no watermark on results.",
+   "count": 4,
+   "tools": [
+    "gif-to-webp",
+    "png-to-bmp",
+    "image-to-ico",
+    "round-corners-image"
+   ]
+  },
+  {
+   "answer": "jpg, png or webp files up to 30 mb each are accepted. drop a single file in (paste and drag also work), check the preview, and export in the format shown at the download step.",
+   "count": 4,
+   "tools": [
+    "image-color-picker",
+    "meme-generator",
+    "make-image-transparent",
+    "transparent-png-maker"
+   ]
+  },
+  {
+   "answer": "webp inputs are supported, up to 30 mb per file. for exotic formats, convert them first with one of the converter tools, then come back.",
+   "count": 3,
+   "tools": [
+    "compress-webp-image",
+    "resize-webp-image",
+    "webp-to-png"
+   ]
+  },
+  {
+   "answer": "common formats are covered: png, each up to 30 mb. paste from the clipboard, drag and drop, or use the select button.",
+   "count": 3,
+   "tools": [
+    "resize-png-image",
+    "png-to-jpg",
+    "png-to-bmp"
+   ]
+  },
+  {
+   "answer": "jpg files up to 30 mb each are accepted. drop in one file or a whole batch (paste and drag also work), check the preview, and export in the format shown at the download step.",
+   "count": 2,
+   "tools": [
+    "compress-jpeg-image",
+    "resize-jpg-image"
+   ]
+  },
+  {
+   "answer": "the controls cover output format. nothing is baked in until you press the action button, and every run gives you a fresh preview to check.",
+   "count": 2,
+   "tools": [
+    "compress-image-to-200kb",
+    "near-lossless-image-compressor"
+   ]
+  },
+  {
+   "answer": "you can adjust output format. results are previewed after processing, so tweak values and re-run until the output looks right.",
+   "count": 2,
+   "tools": [
+    "compress-image-to-500kb",
+    "add-white-background"
+   ]
+  },
+  {
+   "answer": "you can adjust vertical anchor, output format. results are previewed after processing, so tweak values and re-run until the output looks right.",
+   "count": 2,
+   "tools": [
+    "crop-image-16-9",
+    "crop-image-3-2"
+   ]
+  },
+  {
+   "answer": "png files up to 30 mb each are accepted. drop in one file or a whole batch (paste and drag also work), check the preview, and export in the format shown at the download step.",
+   "count": 2,
+   "tools": [
+    "png-to-webp",
+    "optimize-png-for-web"
+   ]
+  },
+  {
+   "answer": "you can adjust webp quality. results are previewed after processing, so tweak values and re-run until the output looks right.",
+   "count": 2,
+   "tools": [
+    "png-to-webp",
+    "gif-to-webp"
+   ]
+  },
+  {
+   "answer": "jpg inputs are supported, up to 30 mb per file. for exotic formats, convert them first with one of the converter tools, then come back.",
+   "count": 2,
+   "tools": [
+    "jpg-to-webp",
+    "optimize-jpg-for-web"
+   ]
+  },
+  {
+   "answer": "png or webp inputs are supported, up to 30 mb per file. for exotic formats, convert them first with one of the converter tools, then come back.",
+   "count": 2,
+   "tools": [
+    "add-white-background",
+    "png-drop-shadow"
+   ]
+  }
+ ],
+ "fullyUniqueFaqTools": 19,
+ "similarPairs": [
+  {
+   "j": 0.301,
+   "a": "x-post-resizer",
+   "b": "linkedin-post-resizer"
+  },
+  {
+   "j": 0.297,
+   "a": "instagram-post-resizer",
+   "b": "instagram-portrait-resizer"
+  },
+  {
+   "j": 0.294,
+   "a": "linkedin-banner-resizer",
+   "b": "linkedin-post-resizer"
+  },
+  {
+   "j": 0.289,
+   "a": "instagram-post-resizer",
+   "b": "linkedin-post-resizer"
+  },
+  {
+   "j": 0.289,
+   "a": "instagram-portrait-resizer",
+   "b": "linkedin-banner-resizer"
+  },
+  {
+   "j": 0.285,
+   "a": "brightness-adjuster",
+   "b": "replace-color-in-image"
+  },
+  {
+   "j": 0.284,
+   "a": "instagram-story-resizer",
+   "b": "linkedin-post-resizer"
+  },
+  {
+   "j": 0.283,
+   "a": "instagram-post-resizer",
+   "b": "linkedin-banner-resizer"
+  },
+  {
+   "j": 0.283,
+   "a": "instagram-portrait-resizer",
+   "b": "x-post-resizer"
+  },
+  {
+   "j": 0.282,
+   "a": "instagram-post-resizer",
+   "b": "x-post-resizer"
+  },
+  {
+   "j": 0.281,
+   "a": "x-post-resizer",
+   "b": "linkedin-banner-resizer"
+  },
+  {
+   "j": 0.281,
+   "a": "crop-image-9-16",
+   "b": "brightness-adjuster"
+  },
+  {
+   "j": 0.281,
+   "a": "film-grain-effect",
+   "b": "date-watermark"
+  },
+  {
+   "j": 0.279,
+   "a": "instagram-portrait-resizer",
+   "b": "linkedin-post-resizer"
+  },
+  {
+   "j": 0.279,
+   "a": "instagram-story-resizer",
+   "b": "x-post-resizer"
+  },
+  {
+   "j": 0.279,
+   "a": "sepia-image",
+   "b": "film-grain-effect"
+  },
+  {
+   "j": 0.278,
+   "a": "facebook-profile-resizer",
+   "b": "linkedin-post-resizer"
+  },
+  {
+   "j": 0.278,
+   "a": "sepia-image",
+   "b": "date-watermark"
+  },
+  {
+   "j": 0.277,
+   "a": "crop-image-4-3",
+   "b": "contrast-adjuster"
+  },
+  {
+   "j": 0.277,
+   "a": "rotate-image",
+   "b": "brightness-adjuster"
+  },
+  {
+   "j": 0.277,
+   "a": "resize-image-to-height",
+   "b": "brightness-adjuster"
+  },
+  {
+   "j": 0.277,
+   "a": "instagram-story-resizer",
+   "b": "instagram-portrait-resizer"
+  },
+  {
+   "j": 0.276,
+   "a": "facebook-profile-resizer",
+   "b": "x-post-resizer"
+  },
+  {
+   "j": 0.276,
+   "a": "instagram-post-resizer",
+   "b": "instagram-story-resizer"
+  },
+  {
+   "j": 0.275,
+   "a": "crop-image-9-16",
+   "b": "replace-color-in-image"
+  },
+  {
+   "j": 0.274,
+   "a": "remove-color-from-image",
+   "b": "quote-card-maker"
+  },
+  {
+   "j": 0.274,
+   "a": "compress-image-to-200kb",
+   "b": "vintage-filter"
+  },
+  {
+   "j": 0.273,
+   "a": "vintage-filter",
+   "b": "swap-color-channels"
+  },
+  {
+   "j": 0.272,
+   "a": "facebook-profile-resizer",
+   "b": "linkedin-banner-resizer"
+  },
+  {
+   "j": 0.271,
+   "a": "saturation-adjuster",
+   "b": "image-color-temperature"
+  },
+  {
+   "j": 0.27,
+   "a": "instagram-story-resizer",
+   "b": "linkedin-banner-resizer"
+  },
+  {
+   "j": 0.269,
+   "a": "invert-image-colors",
+   "b": "vignette-effect"
+  },
+  {
+   "j": 0.269,
+   "a": "vintage-filter",
+   "b": "image-size-reducer"
+  },
+  {
+   "j": 0.268,
+   "a": "resize-image-to-height",
+   "b": "crop-image-9-16"
+  },
+  {
+   "j": 0.267,
+   "a": "rotate-image",
+   "b": "replace-color-in-image"
+  },
+  {
+   "j": 0.267,
+   "a": "resize-image-to-height",
+   "b": "replace-color-in-image"
+  },
+  {
+   "j": 0.266,
+   "a": "instagram-portrait-resizer",
+   "b": "facebook-profile-resizer"
+  },
+  {
+   "j": 0.264,
+   "a": "facebook-cover-resizer",
+   "b": "youtube-thumbnail-resizer"
+  },
+  {
+   "j": 0.263,
+   "a": "crop-image-9-16",
+   "b": "rotate-image"
+  },
+  {
+   "j": 0.263,
+   "a": "instagram-post-resizer",
+   "b": "facebook-profile-resizer"
+  },
+  {
+   "j": 0.263,
+   "a": "facebook-cover-resizer",
+   "b": "youtube-banner-resizer"
+  },
+  {
+   "j": 0.263,
+   "a": "flip-image-horizontal",
+   "b": "vintage-filter"
+  },
+  {
+   "j": 0.262,
+   "a": "resize-image-to-dimensions",
+   "b": "contrast-adjuster"
+  },
+  {
+   "j": 0.262,
+   "a": "youtube-thumbnail-resizer",
+   "b": "youtube-banner-resizer"
+  },
+  {
+   "j": 0.261,
+   "a": "compress-image-to-200kb",
+   "b": "image-size-reducer"
+  },
+  {
+   "j": 0.261,
+   "a": "instagram-story-resizer",
+   "b": "facebook-profile-resizer"
+  },
+  {
+   "j": 0.26,
+   "a": "avif-to-jpg",
+   "b": "vintage-filter"
+  },
+  {
+   "j": 0.26,
+   "a": "resize-image-to-height",
+   "b": "rotate-image"
+  },
+  {
+   "j": 0.259,
+   "a": "resize-image-to-dimensions",
+   "b": "crop-image-4-3"
+  },
+  {
+   "j": 0.258,
+   "a": "resize-jpg-image",
+   "b": "vintage-filter"
+  },
+  {
+   "j": 0.258,
+   "a": "resize-image-by-percentage",
+   "b": "blur-image"
+  },
+  {
+   "j": 0.258,
+   "a": "resize-jpg-image",
+   "b": "avif-to-jpg"
+  },
+  {
+   "j": 0.257,
+   "a": "image-size-reducer",
+   "b": "swap-color-channels"
+  },
+  {
+   "j": 0.257,
+   "a": "invert-image-colors",
+   "b": "bulk-watermark"
+  },
+  {
+   "j": 0.257,
+   "a": "crop-image-to-circle",
+   "b": "add-text-to-image"
+  },
+  {
+   "j": 0.255,
+   "a": "crop-image-3-2",
+   "b": "saturation-adjuster"
+  },
+  {
+   "j": 0.255,
+   "a": "pixelate-image",
+   "b": "add-background-color"
+  },
+  {
+   "j": 0.255,
+   "a": "saturation-adjuster",
+   "b": "add-title-to-image"
+  },
+  {
+   "j": 0.255,
+   "a": "compress-image-to-200kb",
+   "b": "swap-color-channels"
+  },
+  {
+   "j": 0.254,
+   "a": "replace-color-in-image",
+   "b": "date-watermark"
+  },
+  {
+   "j": 0.254,
+   "a": "twitter-header-resizer",
+   "b": "pinterest-pin-resizer"
+  },
+  {
+   "j": 0.254,
+   "a": "grayscale-image",
+   "b": "tiled-watermark"
+  },
+  {
+   "j": 0.254,
+   "a": "flip-image-horizontal",
+   "b": "date-watermark"
+  },
+  {
+   "j": 0.253,
+   "a": "pixelate-image",
+   "b": "add-logo-watermark"
+  },
+  {
+   "j": 0.252,
+   "a": "image-color-temperature",
+   "b": "add-title-to-image"
+  },
+  {
+   "j": 0.252,
+   "a": "vintage-filter",
+   "b": "date-watermark"
+  },
+  {
+   "j": 0.252,
+   "a": "flip-image-horizontal",
+   "b": "replace-color-in-image"
+  },
+  {
+   "j": 0.252,
+   "a": "duotone-image",
+   "b": "tiled-watermark"
+  },
+  {
+   "j": 0.251,
+   "a": "resize-image-by-percentage",
+   "b": "image-optimizer"
+  },
+  {
+   "j": 0.251,
+   "a": "vignette-effect",
+   "b": "bulk-watermark"
+  },
+  {
+   "j": 0.251,
+   "a": "vintage-filter",
+   "b": "replace-color-in-image"
+  },
+  {
+   "j": 0.251,
+   "a": "resize-jpg-image",
+   "b": "image-size-reducer"
+  }
+ ],
+ "wordCounts": [
+  {
+   "slug": "avif-to-png",
+   "words": 258
+  },
+  {
+   "slug": "bmp-to-png",
+   "words": 269
+  },
+  {
+   "slug": "flip-image-vertical",
+   "words": 269
+  },
+  {
+   "slug": "jpg-to-bmp",
+   "words": 283
+  },
+  {
+   "slug": "image-average-color",
+   "words": 284
+  },
+  {
+   "slug": "remove-white-background",
+   "words": 285
+  },
+  {
+   "slug": "rotate-image-180",
+   "words": 286
+  },
+  {
+   "slug": "gif-to-png",
+   "words": 287
+  },
+  {
+   "slug": "rotate-image-270",
+   "words": 287
+  },
+  {
+   "slug": "image-dominant-color",
+   "words": 290
+  },
+  {
+   "slug": "invert-image-colors",
+   "words": 291
+  },
+  {
+   "slug": "add-background-color",
+   "words": 292
+  },
+  {
+   "slug": "add-white-background",
+   "words": 293
+  },
+  {
+   "slug": "linkedin-post-resizer",
+   "words": 293
+  },
+  {
+   "slug": "flip-image-horizontal",
+   "words": 295
+  },
+  {
+   "slug": "resize-png-image",
+   "words": 296
+  },
+  {
+   "slug": "youtube-banner-resizer",
+   "words": 296
+  },
+  {
+   "slug": "jpg-to-png",
+   "words": 298
+  },
+  {
+   "slug": "posterize-image",
+   "words": 298
+  },
+  {
+   "slug": "threshold-image",
+   "words": 298
+  },
+  {
+   "slug": "watermark-image",
+   "words": 300
+  },
+  {
+   "slug": "png-to-bmp",
+   "words": 301
+  },
+  {
+   "slug": "facebook-cover-resizer",
+   "words": 302
+  },
+  {
+   "slug": "youtube-thumbnail-resizer",
+   "words": 302
+  },
+  {
+   "slug": "linkedin-banner-resizer",
+   "words": 304
+  },
+  {
+   "slug": "hue-rotate-image",
+   "words": 305
+  },
+  {
+   "slug": "sharpen-image",
+   "words": 307
+  },
+  {
+   "slug": "pinterest-pin-resizer",
+   "words": 308
+  },
+  {
+   "slug": "saturation-adjuster",
+   "words": 309
+  },
+  {
+   "slug": "image-color-palette",
+   "words": 309
+  },
+  {
+   "slug": "add-caption-to-image",
+   "words": 309
+  },
+  {
+   "slug": "resize-webp-image",
+   "words": 311
+  },
+  {
+   "slug": "twitter-header-resizer",
+   "words": 311
+  },
+  {
+   "slug": "x-post-resizer",
+   "words": 311
+  },
+  {
+   "slug": "gif-to-webp",
+   "words": 312
+  },
+  {
+   "slug": "facebook-profile-resizer",
+   "words": 312
+  },
+  {
+   "slug": "vignette-effect",
+   "words": 313
+  },
+  {
+   "slug": "bulk-watermark",
+   "words": 313
+  },
+  {
+   "slug": "meme-generator",
+   "words": 313
+  },
+  {
+   "slug": "jpg-to-webp",
+   "words": 314
+  },
+  {
+   "slug": "pixelate-image",
+   "words": 314
+  },
+  {
+   "slug": "instagram-portrait-resizer",
+   "words": 315
+  },
+  {
+   "slug": "tiled-watermark",
+   "words": 316
+  },
+  {
+   "slug": "crop-image-3-2",
+   "words": 317
+  },
+  {
+   "slug": "brightness-adjuster",
+   "words": 317
+  },
+  {
+   "slug": "image-color-temperature",
+   "words": 317
+  },
+  {
+   "slug": "add-logo-watermark",
+   "words": 317
+  },
+  {
+   "slug": "round-corners-image",
+   "words": 317
+  },
+  {
+   "slug": "transparent-png-maker",
+   "words": 317
+  },
+  {
+   "slug": "image-metadata-viewer",
+   "words": 318
+  },
+  {
+   "slug": "remove-image-metadata",
+   "words": 319
+  },
+  {
+   "slug": "instagram-story-resizer",
+   "words": 319
+  },
+  {
+   "slug": "image-to-pdf",
+   "words": 320
+  },
+  {
+   "slug": "image-format-converter",
+   "words": 320
+  },
+  {
+   "slug": "film-grain-effect",
+   "words": 320
+  },
+  {
+   "slug": "instagram-post-resizer",
+   "words": 320
+  },
+  {
+   "slug": "crop-image-4-3",
+   "words": 321
+  },
+  {
+   "slug": "grayscale-image",
+   "words": 321
+  },
+  {
+   "slug": "contrast-adjuster",
+   "words": 321
+  },
+  {
+   "slug": "add-title-to-image",
+   "words": 321
+  },
+  {
+   "slug": "favicon-generator",
+   "words": 322
+  },
+  {
+   "slug": "linkedin-profile-photo",
+   "words": 323
+  },
+  {
+   "slug": "compress-image-to-500kb",
+   "words": 324
+  },
+  {
+   "slug": "duotone-image",
+   "words": 324
+  },
+  {
+   "slug": "base64-to-image",
+   "words": 325
+  },
+  {
+   "slug": "blur-image",
+   "words": 325
+  },
+  {
+   "slug": "png-drop-shadow",
+   "words": 325
+  },
+  {
+   "slug": "enlarge-image",
+   "words": 326
+  },
+  {
+   "slug": "crop-image-16-9",
+   "words": 326
+  },
+  {
+   "slug": "png-to-webp",
+   "words": 326
+  },
+  {
+   "slug": "image-resizer",
+   "words": 327
+  },
+  {
+   "slug": "id-photo-1-inch",
+   "words": 328
+  },
+  {
+   "slug": "resize-image-to-height",
+   "words": 329
+  },
+  {
+   "slug": "compress-image-to-100kb",
+   "words": 330
+  },
+  {
+   "slug": "crop-borders-auto",
+   "words": 330
+  },
+  {
+   "slug": "webp-to-png",
+   "words": 330
+  },
+  {
+   "slug": "remove-color-from-image",
+   "words": 330
+  },
+  {
+   "slug": "resize-image-to-width",
+   "words": 331
+  },
+  {
+   "slug": "crop-image",
+   "words": 332
+  },
+  {
+   "slug": "optimize-image-for-web",
+   "words": 332
+  },
+  {
+   "slug": "date-watermark",
+   "words": 332
+  },
+  {
+   "slug": "sepia-image",
+   "words": 333
+  },
+  {
+   "slug": "optimize-jpg-for-web",
+   "words": 333
+  },
+  {
+   "slug": "compress-png-image",
+   "words": 334
+  },
+  {
+   "slug": "remove-gps-data",
+   "words": 334
+  },
+  {
+   "slug": "replace-color-in-image",
+   "words": 334
+  },
+  {
+   "slug": "add-text-to-image",
+   "words": 334
+  },
+  {
+   "slug": "resize-jpg-image",
+   "words": 335
+  },
+  {
+   "slug": "crop-image-9-16",
+   "words": 335
+  },
+  {
+   "slug": "rotate-image-90",
+   "words": 335
+  },
+  {
+   "slug": "make-image-transparent",
+   "words": 335
+  },
+  {
+   "slug": "quote-card-maker",
+   "words": 336
+  },
+  {
+   "slug": "compress-image-to-specific-size",
+   "words": 337
+  },
+  {
+   "slug": "resize-image-to-dimensions",
+   "words": 337
+  },
+  {
+   "slug": "thumbnail-maker",
+   "words": 337
+  },
+  {
+   "slug": "crop-image-to-circle",
+   "words": 337
+  },
+  {
+   "slug": "avif-to-jpg",
+   "words": 340
+  },
+  {
+   "slug": "optimize-png-for-web",
+   "words": 340
+  },
+  {
+   "slug": "resize-image-by-percentage",
+   "words": 341
+  },
+  {
+   "slug": "image-optimizer",
+   "words": 342
+  },
+  {
+   "slug": "email-image-resizer",
+   "words": 342
+  },
+  {
+   "slug": "crop-image-to-square",
+   "words": 344
+  },
+  {
+   "slug": "schengen-visa-photo",
+   "words": 344
+  },
+  {
+   "slug": "bmp-to-jpg",
+   "words": 345
+  },
+  {
+   "slug": "rotate-image",
+   "words": 345
+  },
+  {
+   "slug": "vintage-filter",
+   "words": 345
+  },
+  {
+   "slug": "webp-to-jpg",
+   "words": 346
+  },
+  {
+   "slug": "image-to-ico",
+   "words": 350
+  },
+  {
+   "slug": "compress-webp-image",
+   "words": 351
+  },
+  {
+   "slug": "us-passport-photo",
+   "words": 354
+  },
+  {
+   "slug": "image-color-picker",
+   "words": 360
+  },
+  {
+   "slug": "compress-image-to-200kb",
+   "words": 365
+  },
+  {
+   "slug": "swap-color-channels",
+   "words": 365
+  },
+  {
+   "slug": "compress-jpeg-image",
+   "words": 367
+  },
+  {
+   "slug": "straighten-image",
+   "words": 367
+  },
+  {
+   "slug": "image-size-reducer",
+   "words": 369
+  },
+  {
+   "slug": "png-to-jpg",
+   "words": 377
+  },
+  {
+   "slug": "near-lossless-image-compressor",
+   "words": 379
+  },
+  {
+   "slug": "passport-photo-maker",
+   "words": 384
+  },
+  {
+   "slug": "svg-to-png",
+   "words": 385
+  },
+  {
+   "slug": "image-compressor",
+   "words": 387
+  },
+  {
+   "slug": "compress-image-to-50kb",
+   "words": 388
+  },
+  {
+   "slug": "image-to-base64",
+   "words": 388
+  },
+  {
+   "slug": "china-visa-photo",
+   "words": 388
+  },
+  {
+   "slug": "bulk-image-compressor",
+   "words": 398
+  },
+  {
+   "slug": "photo-print-sheet",
+   "words": 405
+  },
+  {
+   "slug": "resize-image-to-kb",
+   "words": 468
+  }
+ ]
+}
