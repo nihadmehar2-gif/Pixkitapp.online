@@ -397,4 +397,54 @@ export const FAQ_UPGRADES: Record<string, {
     privacyAnswer:
       "Web optimization is a local re-encode: each JPEG in your batch is decoded in this tab, rebuilt at web-friendly quality settings, and previewed with its new file size before you download. The originals stay on your disk untouched, no statistics about your images are collected anywhere, and nothing is transmitted while the optimizer works.",
   },
+
+  /* ---------- Change B, batch 3 (10 more tools) ----------
+   * Same rules as batches 1-2: every answer describes the tool's real
+   * processor code (color.ts addBackground, annotate.ts captionBar and
+   * titleBanner, documents.ts base64Decode, effects.ts cssFilterProcessor
+   * blur/brightness, basic.ts convert for avif and bmp), batch claims only
+   * where multiple: true, and no two answers share sentence structure.
+   * NOTE (base64-to-image): the decoder is byte-exact (atob -> Blob, no
+   * canvas re-encode), so its answer deliberately does NOT claim metadata
+   * removal — embedded metadata passes through unchanged by design. */
+  "add-background-color": {
+    privacyAnswer:
+      "Compositing happens entirely in your browser: the transparent image is drawn over the solid color you selected on a canvas inside this tab, the flattened copy is re-encoded, and the download is generated locally. No upload step exists — you can load the page, disconnect from the internet and keep working. The canvas re-encode also means GPS, EXIF and camera metadata from the source file do not survive into the flattened copy.",
+  },
+  "add-caption-to-image": {
+    privacyAnswer:
+      "Your caption is rendered on your device: the tool extends the canvas by the bar height you set, draws the bar and your word-wrapped text into it inside this tab, and encodes the extended image as a local download. The caption you type exists only in browser memory — it is never transmitted, logged or stored — and the source image is read but never sent anywhere.",
+  },
+  "add-title-to-image": {
+    privacyAnswer:
+      "Title rendering is fully local: the banner, accent stripe, title and optional subtitle are drawn onto a canvas in this tab with your chosen colors, opacity and position, and the finished cover is encoded in browser memory before the download appears. Nothing about your image or your text reaches a server, and closing the tab leaves no trace of either.",
+  },
+  "add-white-background": {
+    privacyAnswer:
+      "Flattening onto white runs entirely in this tab: your transparent PNG or WebP is drawn over a pure white fill on a local canvas, then re-encoded as the JPG or PNG you selected and saved straight to your disk. There is no upload anywhere in the pipeline — your product photos stay on your device until you deliberately upload them to the marketplace yourself.",
+  },
+  "avif-to-jpg": {
+    privacyAnswer:
+      "The conversion is a local decode-and-re-encode: your browser's built-in AVIF decoder opens the file in this tab, the image is drawn onto a canvas, and the JPEG is encoded at your chosen quality before the download is created on your device. No file transfer happens at any step, and because the output is a fresh canvas encode it carries no AVIF container data and none of the original metadata.",
+  },
+  "avif-to-png": {
+    privacyAnswer:
+      "Decoding happens in your browser and nothing leaves it: the AVIF is rendered in this tab by the browser's native decoder, redrawn as a lossless PNG with the alpha channel preserved, and handed to you as a local download. Once the page has loaded, the tool keeps working with the network disconnected, and no copy of your image is kept or transmitted anywhere.",
+  },
+  "base64-to-image": {
+    privacyAnswer:
+      "Decoding is pure text processing in your browser: the Base64 string — pasted or read from a local .txt file — is converted with a built-in JavaScript function back into the exact original bytes, which are saved as an image file for download. Nothing is uploaded, and because the bytes are rebuilt one-for-one rather than re-encoded, the output is a byte-for-byte copy of the image the text encodes.",
+  },
+  "blur-image": {
+    privacyAnswer:
+      "Blurring runs on your device: the image is redrawn through the browser's Gaussian blur filter at the radius you set, entirely inside this tab, and the softened copy is re-encoded and downloaded locally. That matters most here — the very photos you blur often contain faces or documents — and since the pixels never leave your machine, even the censored result is never transmitted or stored.",
+  },
+  "bmp-to-png": {
+    privacyAnswer:
+      "The conversion happens entirely in your browser: the BMP is decoded with the browser's built-in image decoder, its exact pixels are wrapped in a lossless PNG container, and the download is created locally. No upload occurs at any step — the often-huge bitmap never leaves your machine, and because PNG is lossless every pixel arrives identical.",
+  },
+  "brightness-adjuster": {
+    privacyAnswer:
+      "Brightness is applied locally through the browser's GPU-accelerated filter pipeline: each image is redrawn with the brightness value you chose on a canvas in this tab, re-encoded, and downloaded directly. The original file on your disk is never modified, nothing is transmitted while the filter runs, and the brightened or darkened copy exists only in browser memory until you save it.",
+  },
 };
