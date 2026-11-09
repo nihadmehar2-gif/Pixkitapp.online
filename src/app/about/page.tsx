@@ -54,7 +54,7 @@ export default function AboutPage() {
           { icon: Lock, title: "No upload infrastructure", body: "Image files are never transmitted anywhere — there is no upload step to secure, breach or wait for. (Pages still load from the web like any other site; the processing itself happens entirely on your device.)" },
         ].map(({ icon: Icon, title, body }) => (
           <div key={title} className="rounded-xl border bg-card p-5">
-            <Icon className="h-6 w-6 text-primary" />
+            <Icon className="h-6 w-6 text-accent-foreground" />
             <h2 className="mt-3 font-semibold text-foreground">{title}</h2>
             <p className="mt-1 text-sm leading-relaxed">{body}</p>
           </div>
@@ -63,7 +63,7 @@ export default function AboutPage() {
 
       <div className="mt-10 rounded-xl border bg-card p-6">
         <h2 className="flex items-center gap-2 text-lg font-semibold text-foreground">
-          <Heart className="h-5 w-5 text-primary" /> How it&apos;s made
+          <Heart className="h-5 w-5 text-accent-foreground" /> How it&apos;s made
         </h2>
         <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
           PixKitApp is built with Next.js, TypeScript and Tailwind CSS, and is designed to deploy to edge platforms like Vercel

@@ -42,7 +42,7 @@ export function SearchDialog({ open, onOpenChange }: { open: boolean; onOpenChan
           <CommandGroup heading="Browse categories">
             {CATEGORIES.map((cat) => (
               <CommandItem key={cat.id} value={`category-${cat.id}`} onSelect={() => { onOpenChange(false); router.push(`/categories/${cat.slug}`); }}>
-                <ToolIcon name={cat.icon} className="mr-2 h-4 w-4 text-primary" />
+                <ToolIcon name={cat.icon} className="mr-2 h-4 w-4 text-accent-foreground" />
                 <span>{cat.name}</span>
                 <span className="ml-auto text-xs text-muted-foreground">Category</span>
               </CommandItem>
@@ -53,7 +53,7 @@ export function SearchDialog({ open, onOpenChange }: { open: boolean; onOpenChan
           <CommandGroup heading={`${results.length} tool${results.length > 1 ? "s" : ""} found`}>
             {results.map((tool) => (
               <CommandItem key={tool.slug} value={tool.slug} onSelect={() => run(tool.slug)}>
-                <ToolIcon name={tool.icon} className="mr-2 h-4 w-4 text-primary" />
+                <ToolIcon name={tool.icon} className="mr-2 h-4 w-4 text-accent-foreground" />
                 <span className="font-medium">{tool.name}</span>
                 <span className="ml-auto hidden max-w-[200px] truncate text-xs text-muted-foreground sm:block">{tool.description}</span>
               </CommandItem>

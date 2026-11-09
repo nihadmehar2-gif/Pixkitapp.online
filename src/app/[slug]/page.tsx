@@ -138,11 +138,11 @@ export default async function ToolPage({ params }: Props) {
 
       <nav aria-label="Breadcrumb" className="mb-4 flex items-center gap-1 text-sm text-muted-foreground">
         {/* Padding + negative margin: hit area ~36px tall without changing the visual layout. */}
-        <Link href="/" className="inline-block py-2.5 -my-2.5 px-1.5 -mx-1.5 hover:text-primary">Home</Link>
+        <Link href="/" className="inline-block py-2.5 -my-2.5 px-1.5 -mx-1.5 hover:text-foreground">Home</Link>
         <ChevronRight className="h-3.5 w-3.5" />
         {category && (
           <>
-            <Link href={`/categories/${category.slug}`} className="inline-block py-2.5 -my-2.5 px-1.5 -mx-1.5 hover:text-primary">{category.name}</Link>
+            <Link href={`/categories/${category.slug}`} className="inline-block py-2.5 -my-2.5 px-1.5 -mx-1.5 hover:text-foreground">{category.name}</Link>
             <ChevronRight className="h-3.5 w-3.5" />
           </>
         )}
@@ -151,7 +151,7 @@ export default async function ToolPage({ params }: Props) {
 
       <header className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-start">
         <div
-          className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br text-white shadow-lg ${categoryStyle(tool.category).gradient}`}
+          className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl shadow-lg ${categoryStyle(tool.category).gradient}`}
           aria-hidden="true"
         >
           <ToolIcon name={tool.icon} className="h-7 w-7" />
@@ -170,7 +170,7 @@ export default async function ToolPage({ params }: Props) {
           { icon: Wifi, label: "No uploads, no waiting" },
         ].map(({ icon: Icon, label }) => (
           <span key={label} className="inline-flex items-center gap-1.5 rounded-full border bg-card px-3 py-1.5 text-muted-foreground">
-            <Icon className="h-3.5 w-3.5 text-primary" /> {label}
+            <Icon className="h-3.5 w-3.5 text-accent-foreground" /> {label}
           </span>
         ))}
       </div>
@@ -178,7 +178,7 @@ export default async function ToolPage({ params }: Props) {
       {tool.requirementNote && (
         <aside
           aria-label="Requirement accuracy note"
-          className="mb-6 flex max-w-3xl items-start gap-2.5 rounded-xl border border-amber-500/40 bg-amber-500/10 px-4 py-3 text-sm text-amber-900 dark:text-amber-200"
+          className="mb-6 flex max-w-3xl items-start gap-2.5 rounded-xl border border-primary/50 bg-primary/10 px-4 py-3 text-sm text-foreground"
         >
           <Info className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
           <p>{tool.requirementNote}</p>
@@ -246,7 +246,7 @@ export default async function ToolPage({ params }: Props) {
             ))}
           </div>
           <div className="mt-4">
-            <Link href="/tools" className="inline-block py-2.5 -my-2.5 text-sm font-medium text-primary hover:underline">
+            <Link href="/tools" className="inline-block py-2.5 -my-2.5 text-sm font-medium text-foreground hover:underline">
               Browse all {TOOLS.length} tools →
             </Link>
           </div>

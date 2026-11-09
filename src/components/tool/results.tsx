@@ -124,7 +124,7 @@ export function ProgressBanner({ done, total, label }: { done: number; total: nu
   return (
     <div className={cn("rounded-xl border bg-card p-4")} role="status" aria-live="polite">
       <div className="flex items-center gap-3">
-        <Loader2 className="h-5 w-5 shrink-0 animate-spin text-primary" aria-hidden="true" />
+        <Loader2 className="h-5 w-5 shrink-0 animate-spin text-accent-foreground" aria-hidden="true" />
         <div className="min-w-0 flex-1">
           <p className="text-sm font-medium">
             {label ? `${label} in progress… ` : "Processing… "}

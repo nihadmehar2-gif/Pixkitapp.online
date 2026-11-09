@@ -7,8 +7,6 @@ import { ThemeProvider } from "@/components/site/theme-provider";
 import { SiteHeader } from "@/components/site/header";
 import { SiteFooter } from "@/components/site/footer";
 import { AdSlot } from "@/components/site/ad-slot";
-import { FloatLayer } from "@/components/site/float-layer";
-import { ClickFx } from "@/components/site/click-fx";
 import { PageFade } from "@/components/site/page-fade";
 import { SITE_URL } from "@/lib/tools";
 import { OG_IMAGES, ROBOTS_DIRECTIVES, IS_PREVIEW } from "@/lib/seo";
@@ -81,8 +79,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#fafafa" },
-    { media: "(prefers-color-scheme: dark)", color: "#1a1625" },
+    { media: "(prefers-color-scheme: light)", color: "#f5ebdd" },
+    { media: "(prefers-color-scheme: dark)", color: "#2b211a" },
   ],
   width: "device-width",
   initialScale: 1,
@@ -96,28 +94,13 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
       <body className={`${jakarta.variable} ${bricolage.variable} font-sans antialiased bg-background text-foreground`}>
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <a
             href="#main-content"
             className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-primary-foreground focus:shadow-lg"
           >
             Skip to content
           </a>
-          {/* Animated aurora lighting layer — purely decorative, behind all
-              content, ignores pointer events, honours reduced motion. */}
-          <div className="aurora" aria-hidden="true">
-            <div className="aurora-blob aurora-blob-1" />
-            <div className="aurora-blob aurora-blob-2" />
-            <div className="aurora-blob aurora-blob-3" />
-          </div>
-          {/* Floating photo background layer — real images drifting slowly,
-              purely decorative, behind all content, ignores pointer events,
-              honours reduced motion. Sits above the aurora wash, below the
-              page. */}
-          <FloatLayer />
-          {/* Click burst effect — decorative, passive listener, honours
-              reduced motion. Renders nothing itself. */}
-          <ClickFx />
           <div className="flex min-h-screen flex-col">
             <SiteHeader />
             {/* Ad container below the header — reserved space, in normal flow. */}

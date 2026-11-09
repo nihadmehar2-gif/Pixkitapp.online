@@ -85,26 +85,26 @@ export default async function CategoryPage({ params }: Props) {
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <nav aria-label="Breadcrumb" className="mb-4 flex items-center gap-1 text-sm text-muted-foreground">
-        <Link href="/" className="hover:text-primary">Home</Link>
+        <Link href="/" className="hover:text-foreground">Home</Link>
         <ChevronRight className="h-3.5 w-3.5" />
         <span className="text-foreground">{cat.name} Tools</span>
       </nav>
 
       <header className="mb-8 flex items-start gap-4">
-        <div className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br text-white ${cat.color}`}>
+        <div className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl ${cat.color}`}>
           <ToolIcon name={cat.icon} className="h-7 w-7" />
         </div>
         <div>
           <h1 className="text-3xl font-bold tracking-tight">{cat.name} Tools</h1>
           <p className="mt-1.5 max-w-2xl text-muted-foreground">{cat.description}</p>
-          <p className="mt-1 text-sm font-medium text-primary">{tools.length} free tools</p>
+          <p className="mt-1 text-sm font-medium text-muted-foreground">{tools.length} free tools</p>
         </div>
       </header>
 
       {cat.id === "passport" && DOCUMENT_PHOTO_NOTE && (
         <aside
           aria-label="Requirement accuracy note"
-          className="mb-8 flex max-w-3xl items-start gap-2.5 rounded-xl border border-amber-500/40 bg-amber-500/10 px-4 py-3 text-sm text-amber-900 dark:text-amber-200"
+          className="mb-8 flex max-w-3xl items-start gap-2.5 rounded-xl border border-primary/50 bg-primary/10 px-4 py-3 text-sm text-foreground"
         >
           <Info className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
           <p>{DOCUMENT_PHOTO_NOTE}</p>

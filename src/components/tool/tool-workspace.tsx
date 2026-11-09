@@ -209,7 +209,7 @@ export function ToolWorkspace({ tool }: { tool: ToolDef }) {
               {images.length} image{images.length > 1 ? "s" : ""} · {formatBytes(images.reduce((s, i) => s + i.size, 0))}
             </p>
             {tool.multiple && images.length < maxFiles && (
-              <label className="inline-flex h-10 cursor-pointer items-center rounded-lg border bg-card px-3 text-sm font-medium text-primary transition-colors hover:bg-accent focus-within:outline-none focus-within:ring-2 focus-within:ring-ring">
+              <label className="inline-flex h-10 cursor-pointer items-center rounded-lg border bg-card px-3 text-sm font-medium text-foreground transition-colors hover:bg-accent focus-within:outline-none focus-within:ring-2 focus-within:ring-ring">
                 + Add more
                 <input
                   type="file"

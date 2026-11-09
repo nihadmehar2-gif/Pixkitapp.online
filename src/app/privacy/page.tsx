@@ -134,7 +134,7 @@ export default function PrivacyPage() {
               <ul className="mt-3 space-y-1.5 text-sm">
                 {s.links.map((l) => (
                   <li key={l.href}>
-                    <a href={l.href} rel="noopener noreferrer" className="text-primary hover:underline">{l.label}</a>
+                    <a href={l.href} rel="noopener noreferrer" className="text-foreground underline hover:underline">{l.label}</a>
                   </li>
                 ))}
               </ul>

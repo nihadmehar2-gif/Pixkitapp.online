@@ -66,7 +66,7 @@ export function ContactForm() {
               onClick={() => setType(id)}
               className={cn(
                 "flex flex-col items-center gap-1.5 rounded-lg border p-3 text-xs font-medium transition-colors",
-                type === id ? "border-primary bg-primary/10 text-primary" : "text-muted-foreground hover:bg-accent"
+                type === id ? "border-primary bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-accent"
               )}
             >
               <Icon className="h-5 w-5" />

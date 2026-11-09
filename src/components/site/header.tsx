@@ -27,7 +27,7 @@ export function SiteHeader() {
   const { resolvedTheme, setTheme } = useTheme();
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/85 backdrop-blur supports-[backdrop-filter]:bg-background/75">
+    <header className="sticky top-0 z-50 w-full border-b bg-background">
       <div className="mx-auto flex h-16 max-w-7xl items-center gap-3 px-4 sm:px-6">
         <Link href="/" className="shrink-0" aria-label="PixKitApp home">
           <PixKitLogo />
@@ -39,7 +39,7 @@ export function SiteHeader() {
               key={item.href}
               href={item.href}
               className={`inline-flex min-h-[44px] items-center rounded-full px-3.5 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground ${
-                pathname === item.href ? "text-primary" : "text-muted-foreground"
+                pathname === item.href ? "text-foreground font-semibold" : "text-muted-foreground"
               }`}
             >
               {item.label}
@@ -105,8 +105,6 @@ export function SiteHeader() {
           </Sheet>
         </div>
       </div>
-      {/* Glowing hairline under the header */}
-      <div className="h-px w-full bg-gradient-to-r from-transparent via-primary/50 to-transparent" aria-hidden="true" />
       <SearchDialog open={searchOpen} onOpenChange={setSearchOpen} />
     </header>
   );

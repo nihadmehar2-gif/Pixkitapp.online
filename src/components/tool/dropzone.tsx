@@ -62,7 +62,7 @@ export function Dropzone({ accept, multiple, maxFiles, maxSize, onFiles, compact
         onClick={(e) => e.stopPropagation()}
         onChange={(e) => { handleFiles(e.target.files); e.target.value = ""; }}
       />
-      <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-primary">
+      <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary text-primary-foreground">
         <Upload className="h-6 w-6" aria-hidden="true" />
       </div>
       <div>
