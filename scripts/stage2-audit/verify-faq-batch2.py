@@ -8,7 +8,7 @@ Reads Next.js prerendered production HTML. Checks:
 """
 import json, re, os, sys
 
-APP = "/home/z/my-project/.next/server/app"
+APP = sys.argv[1] if len(sys.argv) > 1 else "/tmp/faqb-review/.next/server/app"
 GENERIC = "Everything runs locally in your browser via the Canvas API"
 BATCH2 = {
   "compress-jpeg-image": "The trade-off between size and quality",
@@ -69,6 +69,18 @@ def check(label, slug, marker, generic_must_be_gone=True):
 
 print("=== BATCH 2 (10) ===")
 for slug, marker in BATCH2.items(): check("b2", slug, marker)
+print()
+print("=== CORRECTION 2 (/bmp-to-jpg: white flatten wording) ===")
+html = page_html("bmp-to-jpg")
+if html:
+    white = "flattened onto white" in html
+    old_gone = "the background color you pick" not in html
+    ok = white and old_gone
+    if not ok: fails += 1
+    print(f"  [{'OK' if ok else 'FAIL'}] bmp-to-jpg: white wording={white} old 'background color you pick' removed={old_gone}")
+else:
+    print("  [FAIL] bmp-to-jpg: HTML not found"); fails += 1
+
 print()
 print("=== BATCH 1 stability (10) ===")
 for slug, marker in BATCH1.items(): check("b1", slug, marker)

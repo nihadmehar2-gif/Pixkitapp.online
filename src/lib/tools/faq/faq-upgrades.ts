@@ -290,7 +290,7 @@ export const FAQ_UPGRADES: Record<string, {
   },
   "image-to-base64": {
     privacyAnswer:
-      "Purely local — and it doesn't even use canvas: the tool reads your file's raw bytes with the browser's FileReader, encodes them to Base64 text with a built-in JavaScript function, and offers the result as a .txt download. The bytes never leave your device, and the image itself is not modified in any way.",
+      "Purely local — and it doesn't even use canvas: the tool reads your file's raw bytes through the browser's File API (file.arrayBuffer()), encodes them to Base64 text with a built-in JavaScript function, and offers the result as a .txt download. The bytes never leave your device, and the image itself is not modified in any way.",
     add: [
       {
         q: "When should I use Base64 instead of an image file?",
@@ -311,7 +311,7 @@ export const FAQ_UPGRADES: Record<string, {
    * with a hand-written answer describing what THIS tool actually does.
    * Every claim is grounded in the processor code:
    *   basic.ts    compressToSize / convert / thumbnail / base64Encode
-   *               (base64 path uses FileReader + btoa — no canvas involved)
+   *               (base64 path uses File API file.arrayBuffer() + btoa — no canvas involved)
    *   color.ts    pickColor (single-pixel getImageData read, no output file)
    *   annotate.ts textOverlay (canvas text layer + flatten)
    *   geometry.ts rotate (fixed 90° remap), cropCircle (clip path, PNG out)
@@ -363,7 +363,7 @@ export const FAQ_UPGRADES: Record<string, {
   },
   "bmp-to-jpg": {
     privacyAnswer:
-      "Old-school BMP files are decoded right in your browser and re-encoded as JPEGs in memory — transparent pixels are flattened onto the background color you pick — with the download generated locally. The conversion runs entirely on your machine: no file transfer, no server-side converter, and the BMP originals are never altered.",
+      "Old-school BMP files are decoded right in your browser and re-encoded as JPEGs in memory — transparent pixels are flattened onto white — with the download generated locally. The conversion runs entirely on your machine: no file transfer, no server-side converter, and the BMP originals are never altered.",
   },
   "gif-to-webp": {
     privacyAnswer:

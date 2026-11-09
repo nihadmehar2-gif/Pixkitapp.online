@@ -10,13 +10,15 @@ For control (non-batch) pages:
 """
 import json, re, glob, os, sys
 
-APP = "/home/z/my-project/.next/server/app"
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(os.path.dirname(SCRIPT_DIR))
+APP = sys.argv[1] if len(sys.argv) > 1 else os.path.join(ROOT, ".next", "server", "app")
 GENERIC = "Everything runs locally in your browser via the Canvas API"
 BATCH = {
   "compress-image-to-500kb": "Compression happens entirely inside this browser tab",
   "png-to-jpg": "No upload ever happens",
   "webp-to-png": "The conversion runs locally",
-  "image-to-base64": "it doesn't even use canvas",
+  "image-to-base64": "file.arrayBuffer()",
   "image-color-picker": "Reading a color is as low-risk as it gets",
   "add-text-to-image": "combined entirely on your device",
   "remove-gps-data": "The check and the cleanup both happen in your browser",
@@ -27,7 +29,7 @@ BATCH = {
 CONTROLS = ["blur-image", "jpg-to-png", "resize-image-to-width", "sepia-image", "bulk-image-compressor"]
 
 # audit baseline FAQ counts (pre-change, from crawl.json)
-crawl = json.load(open("/home/z/my-project/scripts/stage2-audit/crawl.json", encoding="utf-8"))
+crawl = json.load(open(os.path.join(SCRIPT_DIR, "crawl.json"), encoding="utf-8"))
 def faq_count_from_crawl(url):
     for e in crawl:
         if e.get("url","").rstrip("/") == url.rstrip("/"):
@@ -75,6 +77,18 @@ for slug, marker in BATCH.items():
     ok = vis and ld_hit and generic_gone
     if not ok: fails += 1
     print(f"  [{'OK' if ok else 'FAIL'}] {slug}: visible={vis} jsonld={ld_hit} generic_removed={generic_gone} faq_count={n_q}")
+
+print()
+print("=== CORRECTION 1 (image-to-base64: File API wording, FileReader gone) ===")
+html = page_html("image-to-base64")
+if html:
+    api = "file.arrayBuffer()" in html
+    fr_gone = "FileReader" not in html
+    ok = api and fr_gone
+    if not ok: fails += 1
+    print(f"  [{'OK' if ok else 'FAIL'}] image-to-base64: file.arrayBuffer visible+jsonld={api} FileReader removed={fr_gone}")
+else:
+    print("  [FAIL] image-to-base64: HTML not found"); fails += 1
 
 print()
 print("=== CONTROL TOOLS (unchanged expected) ===")
