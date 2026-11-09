@@ -187,7 +187,7 @@ export function CropWorkspace({ tool, mode }: Props) {
     c.strokeRect(dispX, dispY, dispCropW, dispCropH);
     // corner handles
     const hs = 7;
-    c.fillStyle = "#b9875b";
+    c.fillStyle = "#e02e29";
     for (const [hx, hy] of [[dispX, dispY], [dispX + dispCropW, dispY], [dispX, dispY + dispCropH], [dispX + dispCropW, dispY + dispCropH]]) {
       c.fillRect(hx - hs / 2, hy - hs / 2, hs, hs);
     }

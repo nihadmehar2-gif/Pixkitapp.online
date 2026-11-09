@@ -1,38 +1,38 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="PixKitApp">
   <defs>
     <linearGradient id="pg" x1="0.9" y1="0" x2="0.1" y2="1">
-      <stop offset="0" stop-color="#38bdf8"/>
-      <stop offset="0.45" stop-color="#2563eb"/>
-      <stop offset="0.75" stop-color="#7c3aed"/>
-      <stop offset="1" stop-color="#d946ef"/>
+      <stop offset="0" stop-color="#ff7a72"/>
+      <stop offset="0.45" stop-color="#e02e29"/>
+      <stop offset="0.75" stop-color="#c81f1a"/>
+      <stop offset="1" stop-color="#bd060a"/>
     </linearGradient>
   </defs>
-  <rect width="512" height="512" fill="#000000"/>
+  <rect width="512" height="512" fill="#e02e29"/>
   <g transform="translate(21,21) scale(0.918)">
     <!-- pixel squares -->
-    <rect x="120" y="58" width="36" height="36" rx="9" fill="#38bdf8"/>
-    <rect x="62" y="94" width="32" height="32" rx="8" fill="#a855f7"/>
-    <rect x="106" y="112" width="36" height="36" rx="9" fill="#60a5fa"/>
-    <rect x="50" y="158" width="28" height="28" rx="7" fill="#d946ef"/>
-    <rect x="120" y="170" width="26" height="26" rx="7" fill="#c026d3"/>
+    <rect x="120" y="58" width="36" height="36" rx="9" fill="#ff8a80"/>
+    <rect x="62" y="94" width="32" height="32" rx="8" fill="#ffd9d6"/>
+    <rect x="106" y="112" width="36" height="36" rx="9" fill="#ffffff"/>
+    <rect x="50" y="158" width="28" height="28" rx="7" fill="#ffb4ab"/>
+    <rect x="120" y="170" width="26" height="26" rx="7" fill="#fde4df"/>
     <!-- P: stem -->
     <path d="M170 150 H254 V428 Q254 448 234 448 H190 Q170 448 170 428 Z" fill="url(#pg)"/>
     <!-- P: bowl -->
     <path d="M254 150 H300 A132 132 0 0 1 300 414 H254 V330 H300 A48 48 0 0 0 300 234 H254 Z" fill="url(#pg)"/>
     <!-- browser window -->
-    <rect x="200" y="190" width="182" height="172" rx="16" fill="#ffffff" stroke="#0b1020" stroke-width="6"/>
-    <path d="M200 206 a16 16 0 0 1 16 -16 h150 a16 16 0 0 1 16 16 v20 h-182 z" fill="#1e40af"/>
+    <rect x="200" y="190" width="182" height="172" rx="16" fill="#ffffff" stroke="#a01612" stroke-width="6"/>
+    <path d="M200 206 a16 16 0 0 1 16 -16 h150 a16 16 0 0 1 16 16 v20 h-182 z" fill="#bd060a"/>
     <circle cx="224" cy="208" r="5" fill="#ffffff"/>
     <circle cx="243" cy="208" r="5" fill="#ffffff"/>
     <circle cx="262" cy="208" r="5" fill="#ffffff"/>
     <!-- image placeholder: mountains + sun -->
-    <rect x="216" y="240" width="112" height="72" rx="8" fill="#dbeafe"/>
-    <path d="M216 304 L256 258 L284 286 L304 266 L328 304 Z" fill="#3b82f6"/>
+    <rect x="216" y="240" width="112" height="72" rx="8" fill="#fde4df"/>
+    <path d="M216 304 L256 258 L284 286 L304 266 L328 304 Z" fill="#e02e29"/>
     <circle cx="306" cy="256" r="9" fill="#ffffff"/>
     <!-- text lines -->
-    <rect x="216" y="320" width="134" height="11" rx="5.5" fill="#3b82f6"/>
-    <rect x="216" y="338" width="94" height="11" rx="5.5" fill="#60a5fa"/>
+    <rect x="216" y="320" width="134" height="11" rx="5.5" fill="#e02e29"/>
+    <rect x="216" y="338" width="94" height="11" rx="5.5" fill="#ffffff"/>
     <!-- cursor -->
-    <path d="M366 300 l0 66 l19 -17 l12 28 l16 -7 l-12 -27 l24 -5 z" fill="#ffffff" stroke="#0b1020" stroke-width="7" stroke-linejoin="round"/>
+    <path d="M366 300 l0 66 l19 -17 l12 28 l16 -7 l-12 -27 l24 -5 z" fill="#ffffff" stroke="#a01612" stroke-width="7" stroke-linejoin="round"/>
   </g>
 </svg>

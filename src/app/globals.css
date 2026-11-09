@@ -34,6 +34,7 @@
   --color-secondary: var(--secondary);
   --color-primary-foreground: var(--primary-foreground);
   --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
   --color-popover-foreground: var(--popover-foreground);
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
@@ -66,94 +67,107 @@ h4, h5, h6 {
 }
 
 /* ------------------------------------------------------------------
-   SOFT TAN THEME
-   Clean, warm, professional palette — solid surfaces only, no
-   glassmorphism, no backdrop blur, no decorative gradients.
+   ILOVEPDF-STYLE RED THEME
+   Clean, crisp, professional palette — solid white surfaces, thin
+   gray borders, one confident brand red. No glassmorphism, no
+   backdrop blur, no decorative gradients.
 
-   Brand palette (defined once here, consumed via semantic tokens):
-   - Primary Soft Tan        #D8B38A  → brand surfaces, buttons, tiles
-   - Warm Cream Background   #F5EBDD  → page background
-   - Secondary Tan           #C99A70  → secondary surfaces, hovers
-   - Accent Brown            #B9875B  → focus ring, scrollbar, accents
-   - Dark Brown Text         #49382B  → all body/heading text
-   - Off-white Cards         #FFFDF9  → card and popover surfaces
-   - Subtle Borders          #E5D2BC  → borders and input outlines
+   Brand palette (defined once here, consumed via semantic tokens;
+   values mirror ilovepdf.com's public design system):
+   - Brand Red               #E02E29  → buttons, tool icon tiles, brand
+     (iLovePDF red is #E5322D; this shade is darkened just enough to
+     pass WCAG AA for white button labels — visually identical)
+   - Hover Red               #BD060A  → button hover/focus, link red
+   - Ink Text                #161616  → headings and body text
+   - Secondary Ink           #33333B  → secondary surfaces text
+   - Muted Gray              #707078  → secondary text
+   - Light Gray Surfaces     #F5F5FA  → muted panels, hover fills
+   - Borders                 #D6D6DF  → thin gray outlines (16px cards)
+   - Light Red Tint          #FDE4DF  → accent hover fills
 
-   Contrast notes (WCAG 2.1):
-   - Dark brown text on cream / off-white / tan: 5.7–9.1:1 (AA/AAA)
-   - Dark brown text on secondary tan: 5.2:1 (AA)
-   - Tan buttons always carry dark brown text, never white.
+   Contrast notes (WCAG 2.1, computed):
+   - White on brand red: 4.57:1 (AA normal text)
+   - White on hover red: 6.57:1 (AA)
+   - Ink on white: 18.1:1, muted #707078 on white: 4.91:1 (AA)
+   - Link red #BD060A on white: 6.57:1 (AA)
+
+   Animation signatures (from iLovePDF): buttons transition all .1s
+   linear darkening on hover; tool cards keep a 16px radius and
+   darken their border on hover with a .4s ease-in-out; the page
+   keeps its existing fade/rise route transition.
 ------------------------------------------------------------------- */
 
 :root {
   --radius: 0.625rem;
-  --background: #f5ebdd;
-  --foreground: #49382b;
-  --card: #fffdf9;
-  --card-foreground: #49382b;
-  --popover: #fffdf9;
-  --popover-foreground: #49382b;
-  --primary: #d8b38a;
-  --primary-foreground: #49382b;
-  --secondary: #c99a70;
-  --secondary-foreground: #3e2e22;
-  --muted: #efe3d2;
-  --muted-foreground: #7a6552;
-  --accent: #e5d2bc;
-  --accent-foreground: #49382b;
-  --destructive: #b3402f;
-  --border: #e5d2bc;
-  --input: #e5d2bc;
-  --ring: #b9875b;
-  --chart-1: #d8b38a;
-  --chart-2: #c99a70;
-  --chart-3: #b9875b;
-  --chart-4: #8a6a4f;
-  --chart-5: #e5d2bc;
-  --sidebar: #fffdf9;
-  --sidebar-foreground: #49382b;
-  --sidebar-primary: #d8b38a;
-  --sidebar-primary-foreground: #49382b;
-  --sidebar-accent: #e5d2bc;
-  --sidebar-accent-foreground: #49382b;
-  --sidebar-border: #e5d2bc;
-  --sidebar-ring: #b9875b;
+  --primary-hover: #bd060a;
+  --background: #ffffff;
+  --foreground: #161616;
+  --card: #ffffff;
+  --card-foreground: #161616;
+  --popover: #ffffff;
+  --popover-foreground: #161616;
+  --primary: #e02e29;
+  --primary-foreground: #ffffff;
+  --secondary: #f5f5fa;
+  --secondary-foreground: #33333b;
+  --muted: #f5f5fa;
+  --muted-foreground: #707078;
+  --accent: #fde4df;
+  --accent-foreground: #bd060a;
+  --destructive: #bd060a;
+  --border: #d6d6df;
+  --input: #d6d6df;
+  --ring: #e02e29;
+  --chart-1: #e02e29;
+  --chart-2: #f87171;
+  --chart-3: #bd060a;
+  --chart-4: #fca5a5;
+  --chart-5: #fde4df;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #161616;
+  --sidebar-primary: #e02e29;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #fde4df;
+  --sidebar-accent-foreground: #bd060a;
+  --sidebar-border: #d6d6df;
+  --sidebar-ring: #e02e29;
 }
 
 .dark {
-  /* Warm dark variant of the same Soft Tan family — the theme toggle
-     stays functional; both modes share the tan accent identity. */
-  --background: #2b211a;
-  --foreground: #f5ebdd;
-  --card: #3a2d22;
-  --card-foreground: #f5ebdd;
-  --popover: #3a2d22;
-  --popover-foreground: #f5ebdd;
-  --primary: #d8b38a;
-  --primary-foreground: #2b211a;
-  --secondary: #4a3a2c;
-  --secondary-foreground: #f5ebdd;
-  --muted: #4a3a2c;
-  --muted-foreground: #cbb59d;
-  --accent: #4a3a2c;
-  --accent-foreground: #f5ebdd;
-  --destructive: #d26a55;
-  --border: #52412f;
-  --input: #52412f;
-  --ring: #d8b38a;
-  --chart-1: #d8b38a;
-  --chart-2: #c99a70;
-  --chart-3: #b9875b;
-  --chart-4: #8a6a4f;
-  --chart-5: #e5d2bc;
-  --sidebar: #3a2d22;
-  --sidebar-foreground: #f5ebdd;
-  --sidebar-primary: #d8b38a;
-  --sidebar-primary-foreground: #2b211a;
-  --sidebar-accent: #4a3a2c;
-  --sidebar-accent-foreground: #f5ebdd;
-  --sidebar-border: #52412f;
-  --sidebar-ring: #d8b38a;
+  /* Dark neutral variant sharing the same red identity — the theme
+     toggle stays functional; both modes carry the brand red. */
+  --primary-hover: #c62f2a;
+  --background: #1c1c22;
+  --foreground: #f5f5fa;
+  --card: #292931;
+  --card-foreground: #f5f5fa;
+  --popover: #292931;
+  --popover-foreground: #f5f5fa;
+  --primary: #e02e29;
+  --primary-foreground: #ffffff;
+  --secondary: #33333b;
+  --secondary-foreground: #f5f5fa;
+  --muted: #33333b;
+  --muted-foreground: #a6a6b3;
+  --accent: #3a2a2c;
+  --accent-foreground: #ffb4ab;
+  --destructive: #ff6b61;
+  --border: #3f3f4a;
+  --input: #3f3f4a;
+  --ring: #e02e29;
+  --chart-1: #e02e29;
+  --chart-2: #f87171;
+  --chart-3: #ff9d97;
+  --chart-4: #bd060a;
+  --chart-5: #3a2a2c;
+  --sidebar: #292931;
+  --sidebar-foreground: #f5f5fa;
+  --sidebar-primary: #e02e29;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #3a2a2c;
+  --sidebar-accent-foreground: #ffb4ab;
+  --sidebar-border: #3f3f4a;
+  --sidebar-ring: #e02e29;
 }
 
 @layer base {
@@ -169,16 +183,28 @@ h4, h5, h6 {
 }
 
 /* ------------------------------------------------------------------
-   SOFT CARDS — solid, opaque panels on the cream background. Subtle
-   border plus a soft warm shadow; no transparency, no backdrop blur.
+   SOFT CARDS — solid, opaque panels on the white background. Subtle
+   border plus a soft neutral shadow; no transparency, no backdrop blur.
 ------------------------------------------------------------------- */
 
 .soft-card {
   background: var(--card);
   border: 1px solid var(--border);
   box-shadow:
-    0 1px 2px rgb(73 56 43 / 0.05),
-    0 4px 12px rgb(73 56 43 / 0.04);
+    0 1px 2px rgb(22 22 22 / 0.05),
+    0 4px 12px rgb(22 22 22 / 0.04);
+}
+
+/* iLovePDF tool-card signature: the border darkens on hover with a
+   slow ease-in-out while the card keeps its existing lift/shadow
+   motion (applied per-component). */
+.soft-card:hover {
+  border-color: rgb(22 22 22 / 0.55);
+  transition: border-color 0.4s ease-in-out, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.dark .soft-card:hover {
+  border-color: rgb(245 245 250 / 0.45);
 }
 
 /* ------------------------------------------------------------------
@@ -248,6 +274,9 @@ h4, h5, h6 {
   background: transparent;
 }
 .thin-scroll::-webkit-scrollbar-thumb {
-  background: var(--secondary);
+  background: var(--border);
   border-radius: 3px;
+}
+.thin-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-foreground);
 }

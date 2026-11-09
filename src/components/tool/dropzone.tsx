@@ -40,11 +40,11 @@ export function Dropzone({ accept, multiple, maxFiles, maxSize, onFiles, compact
       onDragLeave={() => setDragging(false)}
       onDrop={(e) => { e.preventDefault(); setDragging(false); handleFiles(e.dataTransfer.files); }}
       className={cn(
-        "flex cursor-pointer flex-col items-center justify-center gap-3 rounded-xl border-2 border-dashed bg-card/50 text-center transition-colors",
+        "flex cursor-pointer flex-col items-center justify-center gap-3 rounded-xl border-2 border-dashed bg-muted/70 text-center transition-all duration-200",
         // Keyboard focus lands on the sr-only file input inside; highlight the
         // whole dropzone via :focus-within so focus stays visible.
         "focus-within:outline-none focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 focus-within:ring-offset-background",
-        dragging ? "border-primary bg-primary/5" : "border-border hover:border-primary/50 hover:bg-accent/40",
+        dragging ? "border-primary bg-accent scale-[1.01]" : "border-border hover:border-primary/60 hover:bg-accent/50",
         compact ? "p-5" : "p-6 sm:p-12"
       )}
     >
