@@ -34,7 +34,8 @@ BATCH1 = {
   "crop-image-to-circle": "Cropping to a circle happens on your device",
   "thumbnail-maker": "Thumbnailing runs entirely in the tab",
 }
-CONTROLS = ["blur-image", "jpg-to-webp", "resize-image-to-width", "bulk-watermark", "threshold-image"]
+# blur-image moved into batch 3 (2026-11-09) — replaced by grayscale-image as control
+CONTROLS = ["grayscale-image", "jpg-to-webp", "resize-image-to-width", "bulk-watermark", "threshold-image"]
 GPS_PAGE = ("remove-image-metadata", "the cleaned file comes out the same")
 GPS_BAD = "keeps the rest of the metadata"
 

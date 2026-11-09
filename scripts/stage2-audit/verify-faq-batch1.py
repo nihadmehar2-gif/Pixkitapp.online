@@ -26,7 +26,8 @@ BATCH = {
   "crop-image-to-circle": "Cropping to a circle happens on your device",
   "thumbnail-maker": "Thumbnailing runs entirely in the tab",
 }
-CONTROLS = ["blur-image", "jpg-to-png", "resize-image-to-width", "sepia-image", "bulk-image-compressor"]
+# blur-image moved into batch 3 (2026-11-09) — replaced by grayscale-image as control
+CONTROLS = ["grayscale-image", "jpg-to-png", "resize-image-to-width", "sepia-image", "bulk-image-compressor"]
 
 # audit baseline FAQ counts (pre-change, from crawl.json)
 crawl = json.load(open(os.path.join(SCRIPT_DIR, "crawl.json"), encoding="utf-8"))
