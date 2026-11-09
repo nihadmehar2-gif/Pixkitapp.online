@@ -114,7 +114,7 @@ for f in glob.glob(f"{ROOT}/definitions/*.ts"):
     # factory tools (socialTool/passportTool) have inline faq arrays BEFORE the slug arg — capture their faq params separately
 gen = parse_generated(open(f"{ROOT}/faq/generated-faqs.ts", encoding="utf-8").read())
 ups = parse_upgrades(f"{ROOT}/faq/faq-upgrades.ts")
-ups_old = parse_upgrades("/home/z/my-project/scripts/stage2-audit/backups-20261109-batch1/faq-upgrades.ts")
+ups_old = parse_upgrades("/home/z/my-project/scripts/stage2-audit/backups-20261109-batch2/faq-upgrades.ts.bak")
 
 def merge(slug, upgrades):
     base = defs.get(slug) or gen.get(slug) or []
@@ -132,8 +132,10 @@ def merge(slug, upgrades):
             if len(hits) == 1: hits[0][1] = up["privacyAnswer"]
     return [tuple(x) for x in final]
 
-BATCH = ["compress-image-to-500kb","png-to-jpg","webp-to-png","image-to-base64","image-color-picker",
-         "add-text-to-image","remove-gps-data","rotate-image-90","crop-image-to-circle","thumbnail-maker"]
+BATCH = ["compress-jpeg-image","bmp-to-jpg","gif-to-webp","image-dominant-color","add-logo-watermark",
+         "meme-generator","enlarge-image","flip-image-horizontal","round-corners-image","optimize-jpg-for-web"]
+BATCH1 = ["compress-image-to-500kb","png-to-jpg","webp-to-png","image-to-base64","image-color-picker",
+          "add-text-to-image","remove-gps-data","rotate-image-90","crop-image-to-circle","thumbnail-maker"]
 
 slugs = set(list(defs.keys()) + list(gen.keys()))
 print("=== A) batch tools: regex hit count + matched question ===")
