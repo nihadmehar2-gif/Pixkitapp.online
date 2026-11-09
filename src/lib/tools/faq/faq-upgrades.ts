@@ -11,8 +11,15 @@ export interface FaqItem {
 
 /** Per-slug upgrades. `replace` swaps the answer of an existing question
  *  (matched case-insensitively); `add` appends new Q&As (skipped if the same
- *  question already exists). */
-export const FAQ_UPGRADES: Record<string, { replace?: FaqItem[]; add?: FaqItem[] }> = {
+ *  question already exists). `privacyAnswer` swaps the answer of the ONE
+ *  privacy-topic question (matched by topic, not exact wording — the
+ *  generator rotates six phrasings) and only fires when exactly one question
+ *  matches, so it can never overwrite an unrelated FAQ. */
+export const FAQ_UPGRADES: Record<string, {
+  replace?: FaqItem[];
+  add?: FaqItem[];
+  privacyAnswer?: string;
+}> = {
   "resize-image-to-kb": {
     replace: [
       {
@@ -244,6 +251,8 @@ export const FAQ_UPGRADES: Record<string, { replace?: FaqItem[]; add?: FaqItem[]
     ],
   },
   "webp-to-png": {
+    privacyAnswer:
+      "The conversion runs locally: the WebP is decoded into your browser's memory and re-encoded as a lossless PNG, with the alpha channel carried over untouched, then saved straight back to your disk. There is no upload step, no processing queue and no stored copy — closing the tab leaves nothing behind.",
     add: [
       {
         q: "Does WebP to PNG keep transparency?",
@@ -252,6 +261,8 @@ export const FAQ_UPGRADES: Record<string, { replace?: FaqItem[]; add?: FaqItem[]
     ],
   },
   "png-to-jpg": {
+    privacyAnswer:
+      "No upload ever happens. Your PNG is decoded in the tab, transparent areas are flattened onto the background color you picked, and the JPEG is re-encoded in browser memory before the download link appears. The whole decode-flatten-encode cycle runs on your device — a server never sees the file or the result.",
     add: [
       {
         q: "What happens to transparency when converting PNG to JPG?",
@@ -260,6 +271,8 @@ export const FAQ_UPGRADES: Record<string, { replace?: FaqItem[]; add?: FaqItem[]
     ],
   },
   "image-color-picker": {
+    privacyAnswer:
+      "Reading a color is as low-risk as it gets: the tool loads your image into the tab, and a click samples exactly one pixel's red, green and blue values, converts them to HEX, RGB and HSL locally, and displays them. No output file is created and nothing is transmitted — your photo is only ever read, never sent or stored.",
     add: [
       {
         q: "How do I copy a color from an image?",
@@ -276,6 +289,8 @@ export const FAQ_UPGRADES: Record<string, { replace?: FaqItem[]; add?: FaqItem[]
     ],
   },
   "image-to-base64": {
+    privacyAnswer:
+      "Purely local — and it doesn't even use canvas: the tool reads your file's raw bytes with the browser's FileReader, encodes them to Base64 text with a built-in JavaScript function, and offers the result as a .txt download. The bytes never leave your device, and the image itself is not modified in any way.",
     add: [
       {
         q: "When should I use Base64 instead of an image file?",
@@ -290,6 +305,43 @@ export const FAQ_UPGRADES: Record<string, { replace?: FaqItem[]; add?: FaqItem[]
         a: "SVG is vector data, so the renderer redraws it at whatever scale you choose. Exporting at 1× matches the file's natural size; 2× and 4× produce more pixels, which stays crisp when the PNG is viewed on high-DPI screens or zoomed.",
       },
     ],
+  },
+  /* ---------- Tool-specific privacy answers (Change B, batch 1 of 4) ----------
+   * Replaces the auto-generated privacy answer (byte-identical on 96 pages)
+   * with a hand-written answer describing what THIS tool actually does.
+   * Every claim is grounded in the processor code:
+   *   basic.ts    compressToSize / convert / thumbnail / base64Encode
+   *               (base64 path uses FileReader + btoa — no canvas involved)
+   *   color.ts    pickColor (single-pixel getImageData read, no output file)
+   *   annotate.ts textOverlay (canvas text layer + flatten)
+   *   geometry.ts rotate (fixed 90° remap), cropCircle (clip path, PNG out)
+   *   documents.ts stripMetadata (local EXIF report + canvas re-encode)
+   * Batch claims appear only where the tool definition sets multiple: true.
+   * Tools that already had entries above (png-to-jpg, webp-to-png,
+   * image-color-picker, image-to-base64) carry their privacyAnswer there. */
+  "compress-image-to-500kb": {
+    privacyAnswer:
+      "Compression happens entirely inside this browser tab: the photo is decoded into memory, re-encoded at progressively lower quality settings until the file fits inside 500 KB, and the finished file is handed to your browser as a local download. No server is involved at any step — you can even disconnect from the internet once the page has loaded and the tool keeps working.",
+  },
+  "add-text-to-image": {
+    privacyAnswer:
+      "Your image and your caption are combined entirely on your device: the text is drawn onto a canvas overlay in this tab using the font size, color, weight and position you chose, then flattened into the exported file your browser downloads directly. No server renders the text, and no copy of your image is transmitted or kept.",
+  },
+  "remove-gps-data": {
+    privacyAnswer:
+      "The check and the cleanup both happen in your browser: a small EXIF parser reads the file locally and reports what it found, then the photo is re-encoded in the tab into a fresh file that contains no GPS tags — in fact no metadata structures at all. Nothing is uploaded and no coordinates are recorded; the cleaned image saves straight to your disk.",
+  },
+  "rotate-image-90": {
+    privacyAnswer:
+      "The 90° rotation is a simple pixel remap performed on a canvas inside this tab: the width and height are swapped, the image is redrawn quarter-turned, and the result is encoded and downloaded locally. The rotation works even with your network disconnected — nothing about the file, its name or its contents is sent anywhere.",
+  },
+  "crop-image-to-circle": {
+    privacyAnswer:
+      "Cropping to a circle happens on your device: the tool centers the largest possible square, clips it to a circle on a canvas, and encodes the result as a PNG with genuine transparency outside the ring — all in browser memory. There is no upload step, and the PNG is lossless, so the pixels inside the circle are exactly your original ones.",
+  },
+  "thumbnail-maker": {
+    privacyAnswer:
+      "Thumbnailing runs entirely in the tab: each image is resampled to your chosen size with the browser's high-quality scaler (cover fit adds a center crop), and the finished thumbnail is encoded and downloaded locally. Batches of up to 10 files are processed one after another on your device — no file is uploaded, queued on a server, or retained.",
   },
   "straighten-image": {
     add: [

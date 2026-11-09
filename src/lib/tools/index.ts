@@ -69,6 +69,24 @@ for (const tool of TOOLS) {
         if (!tool.faq.some((f) => norm(f.q) === norm(item.q))) tool.faq.push(item);
       }
     }
+    // Tool-specific privacy answer: the auto-generator rotates six privacy
+    // question phrasings ("How private is X?", "Is my image uploaded to a
+    // server…?", "Where are my images processed?" …), so the match is done by
+    // TOPIC, not exact wording. Safety: the answer is only swapped when
+    // exactly ONE question matches the privacy pattern — zero or multiple
+    // matches leave the FAQ untouched (and warn in dev), so unrelated Q&As
+    // can never be overwritten.
+    if (up.privacyAnswer) {
+      const PRIVACY_Q =
+        /(how private\b|uploaded to a server|upload my (?:images?|files?|photos?)|files? leave my device|where are my images processed|safe to use with personal)/i;
+      const hits = tool.faq.filter((f) => PRIVACY_Q.test(f.q));
+      if (hits.length === 1) hits[0].a = up.privacyAnswer;
+      else if (process.env.NODE_ENV !== "production") {
+        console.warn(
+          `[faq] privacyAnswer for ${tool.slug}: expected exactly 1 privacy question, found ${hits.length} — skipped`
+        );
+      }
+    }
   }
 }
 if (process.env.NODE_ENV !== "production") {
