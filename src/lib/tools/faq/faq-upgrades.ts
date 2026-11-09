@@ -351,4 +351,50 @@ export const FAQ_UPGRADES: Record<string, {
       },
     ],
   },
+  /* ---------- Change B, batch 2 (10 more tools) ----------
+   * Same rules as batch 1: every answer describes the tool's real processor
+   * code (basic.ts compress/convert/enlarge, color.ts dominantColor and
+   * roundCorners, annotate.ts logoWatermark/memeText, geometry.ts flip),
+   * batch claims only where multiple: true, and no two answers share
+   * sentence structure — these are descriptions, not paraphrases. */
+  "compress-jpeg-image": {
+    privacyAnswer:
+      "The trade-off between size and quality is computed on your device: each JPEG in the batch is decoded in this tab, re-encoded at your chosen quality, and the file-size savings are calculated locally before you download. There is no upload step at any point — your photos are never transmitted, and closing the tab erases everything, since no copies are kept anywhere.",
+  },
+  "bmp-to-jpg": {
+    privacyAnswer:
+      "Old-school BMP files are decoded right in your browser and re-encoded as JPEGs in memory — transparent pixels are flattened onto the background color you pick — with the download generated locally. The conversion runs entirely on your machine: no file transfer, no server-side converter, and the BMP originals are never altered.",
+  },
+  "gif-to-webp": {
+    privacyAnswer:
+      "Conversion happens locally: your GIF is decoded into the browser's memory and re-encoded as a WebP at the quality you choose, and the finished file downloads directly from your browser. Nothing is uploaded, queued or stored — the original GIF on your device is only ever read, never transmitted and never modified.",
+  },
+  "image-dominant-color": {
+    privacyAnswer:
+      "This is a pure read-and-analyze job: your image is loaded into the tab, its pixels are sampled and grouped into color clusters locally, and the dominant shades are returned as HEX codes with a small palette sheet generated in memory. No server performs the analysis, and the only output is the palette you download — the image itself is never sent anywhere or changed.",
+  },
+  "add-logo-watermark": {
+    privacyAnswer:
+      "Both files stay on your side: the photo and the logo you select are loaded into this tab, the logo is drawn onto the image at your chosen position, size and opacity on a canvas, and the watermarked copy is encoded and downloaded locally. Your logo file is never uploaded to a server — a real concern, since watermark assets are often brand-sensitive.",
+  },
+  "meme-generator": {
+    privacyAnswer:
+      "Meme text is composited entirely in your browser: the picture and your top and bottom captions are drawn together on a canvas in this tab, and the finished image is generated as a local download. No server renders the meme, nothing you type is transmitted, and the source picture never leaves your device.",
+  },
+  "enlarge-image": {
+    privacyAnswer:
+      "Upscaling runs on your device: the image is progressively doubled with the browser's high-quality smoothing until it reaches your target size, optionally sharpened with a pixel-level pass, then encoded — as PNG by default — and downloaded locally. The enlarged file never passes through a server, and your original stays exactly as it was on disk.",
+  },
+  "flip-image-horizontal": {
+    privacyAnswer:
+      "Mirroring is a pure pixel remap done in this tab: the image is redrawn left-to-right reversed on a canvas, re-encoded, and downloaded — no upload, no processing server, no stored copy. You can flip a whole batch of ten with the same privacy guarantee, since every file is handled locally, one after another.",
+  },
+  "round-corners-image": {
+    privacyAnswer:
+      "Rounding corners is done with a clipping path on a canvas inside your browser: the corners outside the rounded rectangle simply become transparent, and the lossless PNG is saved straight to your disk. The image is only ever read and redrawn locally — nothing is uploaded, and the transparent corners are produced in memory, not by an external service.",
+  },
+  "optimize-jpg-for-web": {
+    privacyAnswer:
+      "Web optimization is a local re-encode: each JPEG in your batch is decoded in this tab, rebuilt at web-friendly quality settings, and previewed with its new file size before you download. The originals stay on your disk untouched, no statistics about your images are collected anywhere, and nothing is transmitted while the optimizer works.",
+  },
 };
