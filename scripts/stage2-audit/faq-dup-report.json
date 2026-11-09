@@ -1,0 +1,595 @@
+{
+  "total_tools": 111,
+  "total_pairs": 431,
+  "ranked": [
+    {
+      "count": 96,
+      "answer": "Everything runs locally in your browser via the Canvas API. Your picture never leaves your machine — there is no upload step at all, so processing is as private as working in an offline editor.",
+      "questions": [
+        "How private is AVIF to PNG?",
+        "How private is Add White Background?",
+        "How private is Average Color?",
+        "How private is Bulk Image Compressor?",
+        "How private is Caption Bar?",
+        "How private is Color Picker?",
+        "How private is Color Temperature?",
+        "How private is Compress to 500KB or Less?",
+        "How private is Crop 16:9?",
+        "How private is Crop 3:2?",
+        "How private is Date Watermark?",
+        "How private is Film Grain?",
+        "How private is Flip Vertical?",
+        "How private is GIF to WebP?",
+        "How private is Image to Base64?",
+        "How private is JPG to BMP?",
+        "How private is Optimize for Web?",
+        "How private is PNG to WebP?",
+        "How private is Posterize Image?",
+        "How private is Resize WebP?",
+        "How private is Resize to KB?",
+        "How private is Resize to Width?",
+        "How private is Rotate 180°?",
+        "How private is Saturation Adjuster?",
+        "How private is Sepia Image?",
+        "How private is Sharpen Image?",
+        "How private is Title Banner?",
+        "How private is Transparent PNG Maker?",
+        "How private is Universal Converter?",
+        "How private is WebP to PNG?",
+        "Is my image uploaded to a server when I use AVIF to JPG?",
+        "Is my image uploaded to a server when I use Add Text to Image?",
+        "Is my image uploaded to a server when I use BMP to PNG?",
+        "Is my image uploaded to a server when I use Blur Image?",
+        "Is my image uploaded to a server when I use Channel Mixer?",
+        "Is my image uploaded to a server when I use Compress WebP?",
+        "Is my image uploaded to a server when I use Compress to 200KB or Less?",
+        "Is my image uploaded to a server when I use Contrast Adjuster?",
+        "Is my image uploaded to a server when I use Crop 4:3?",
+        "Is my image uploaded to a server when I use Crop to Circle?",
+        "Is my image uploaded to a server when I use Dominant Color?",
+        "Is my image uploaded to a server when I use Duotone Effect?",
+        "Is my image uploaded to a server when I use Flip Horizontal?",
+        "Is my image uploaded to a server when I use GIF to PNG?",
+        "Is my image uploaded to a server when I use Grayscale Image?",
+        "Is my image uploaded to a server when I use Image Optimizer?",
+        "Is my image uploaded to a server when I use Image Size Reducer?",
+        "Is my image uploaded to a server when I use Image to ICO?",
+        "Is my image uploaded to a server when I use Make Transparent?",
+        "Is my image uploaded to a server when I use Near-Lossless Compressor?",
+        "Is my image uploaded to a server when I use Optimize JPG for Web?",
+        "Is my image uploaded to a server when I use PNG to JPG?",
+        "Is my image uploaded to a server when I use Quote Card?",
+        "Is my image uploaded to a server when I use Remove Color (Chroma Key)?",
+        "Is my image uploaded to a server when I use Remove GPS Data?",
+        "Is my image uploaded to a server when I use Resize JPG?",
+        "Is my image uploaded to a server when I use Resize by Percentage?",
+        "Is my image uploaded to a server when I use Resize to Dimensions?",
+        "Is my image uploaded to a server when I use Rotate 90° Clockwise?",
+        "Is my image uploaded to a server when I use Round Corners?",
+        "Is my image uploaded to a server when I use SVG to PNG?",
+        "Is my image uploaded to a server when I use Thumbnail Maker?",
+        "Is my image uploaded to a server when I use Tiled Watermark?",
+        "Is my image uploaded to a server when I use Vintage Filter?",
+        "Where are my images processed?"
+      ],
+      "pages": [
+        "add-background-color",
+        "add-caption-to-image",
+        "add-logo-watermark",
+        "add-text-to-image",
+        "add-title-to-image",
+        "add-white-background",
+        "avif-to-jpg",
+        "avif-to-png",
+        "base64-to-image",
+        "blur-image",
+        "bmp-to-jpg",
+        "bmp-to-png",
+        "brightness-adjuster",
+        "bulk-image-compressor",
+        "bulk-watermark",
+        "compress-image-to-100kb",
+        "compress-image-to-200kb",
+        "compress-image-to-500kb",
+        "compress-image-to-specific-size",
+        "compress-jpeg-image",
+        "compress-webp-image",
+        "contrast-adjuster",
+        "crop-borders-auto",
+        "crop-image-16-9",
+        "crop-image-3-2",
+        "crop-image-4-3",
+        "crop-image-9-16",
+        "crop-image-to-circle",
+        "crop-image-to-square",
+        "date-watermark",
+        "duotone-image",
+        "email-image-resizer",
+        "enlarge-image",
+        "film-grain-effect",
+        "flip-image-horizontal",
+        "flip-image-vertical",
+        "gif-to-png",
+        "gif-to-webp",
+        "grayscale-image",
+        "hue-rotate-image",
+        "image-average-color",
+        "image-color-palette",
+        "image-color-picker",
+        "image-color-temperature",
+        "image-dominant-color",
+        "image-format-converter",
+        "image-optimizer",
+        "image-size-reducer",
+        "image-to-base64",
+        "image-to-ico",
+        "invert-image-colors",
+        "jpg-to-bmp",
+        "jpg-to-png",
+        "jpg-to-webp",
+        "make-image-transparent",
+        "meme-generator",
+        "near-lossless-image-compressor",
+        "optimize-image-for-web",
+        "optimize-jpg-for-web",
+        "optimize-png-for-web",
+        "pixelate-image",
+        "png-drop-shadow",
+        "png-to-bmp",
+        "png-to-jpg",
+        "png-to-webp",
+        "posterize-image",
+        "quote-card-maker",
+        "remove-color-from-image",
+        "remove-gps-data",
+        "replace-color-in-image",
+        "resize-image-by-percentage",
+        "resize-image-to-dimensions",
+        "resize-image-to-height",
+        "resize-image-to-kb",
+        "resize-image-to-width",
+        "resize-jpg-image",
+        "resize-png-image",
+        "resize-webp-image",
+        "rotate-image",
+        "rotate-image-180",
+        "rotate-image-270",
+        "rotate-image-90",
+        "round-corners-image",
+        "saturation-adjuster",
+        "sepia-image",
+        "sharpen-image",
+        "straighten-image",
+        "svg-to-png",
+        "swap-color-channels",
+        "threshold-image",
+        "thumbnail-maker",
+        "tiled-watermark",
+        "transparent-png-maker",
+        "vignette-effect",
+        "vintage-filter",
+        "webp-to-png"
+      ]
+    },
+    {
+      "count": 21,
+      "answer": "Up to 10 images per batch, 30 MB per file, and unlimited runs — no signup, no counters, and no watermark stamped on results.",
+      "questions": [
+        "What are the size and batch limits?"
+      ],
+      "pages": [
+        "add-caption-to-image",
+        "compress-image-to-100kb",
+        "crop-borders-auto",
+        "crop-image-16-9",
+        "duotone-image",
+        "email-image-resizer",
+        "grayscale-image",
+        "hue-rotate-image",
+        "image-average-color",
+        "image-format-converter",
+        "near-lossless-image-compressor",
+        "optimize-image-for-web",
+        "png-to-jpg",
+        "remove-gps-data",
+        "resize-image-to-width",
+        "resize-png-image",
+        "rotate-image-270",
+        "sharpen-image",
+        "threshold-image",
+        "thumbnail-maker",
+        "tiled-watermark"
+      ]
+    },
+    {
+      "count": 20,
+      "answer": "There are no artificial limits: use it as often as you like, free. Practical caps are 30 MB per image and 10 files per batch, and outputs stay watermark-free.",
+      "questions": [
+        "How many images can I process at once?"
+      ],
+      "pages": [
+        "avif-to-jpg",
+        "bmp-to-jpg",
+        "brightness-adjuster",
+        "bulk-image-compressor",
+        "compress-image-to-200kb",
+        "compress-jpeg-image",
+        "crop-image-9-16",
+        "date-watermark",
+        "film-grain-effect",
+        "flip-image-horizontal",
+        "image-size-reducer",
+        "optimize-png-for-web",
+        "png-to-webp",
+        "replace-color-in-image",
+        "resize-image-to-height",
+        "resize-jpg-image",
+        "rotate-image",
+        "sepia-image",
+        "swap-color-channels",
+        "vintage-filter"
+      ]
+    },
+    {
+      "count": 19,
+      "answer": "You can queue 10 files per run, each up to 30 MB. Results download individually or bundled as a single ZIP.",
+      "questions": [
+        "What are the size and batch limits?"
+      ],
+      "pages": [
+        "add-white-background",
+        "avif-to-png",
+        "bmp-to-png",
+        "bulk-watermark",
+        "compress-image-to-500kb",
+        "compress-webp-image",
+        "contrast-adjuster",
+        "crop-image-4-3",
+        "crop-image-to-square",
+        "flip-image-vertical",
+        "invert-image-colors",
+        "jpg-to-webp",
+        "optimize-jpg-for-web",
+        "posterize-image",
+        "resize-image-to-dimensions",
+        "resize-webp-image",
+        "rotate-image-90",
+        "vignette-effect",
+        "webp-to-png"
+      ]
+    },
+    {
+      "count": 18,
+      "answer": "Common formats are covered: JPG, PNG or WEBP, each up to 30 MB. Paste from the clipboard, drag and drop, or use the select button.",
+      "questions": [
+        "Which input formats does Auto Trim Borders accept?",
+        "Which input formats does Average Color accept?",
+        "Which input formats does B&W Threshold accept?",
+        "Which input formats does Caption Bar accept?",
+        "Which input formats does Compress to 100KB or Less accept?",
+        "Which input formats does Crop 16:9 accept?",
+        "Which input formats does Duotone Effect accept?",
+        "Which input formats does Email Image Resizer accept?",
+        "Which input formats does Grayscale Image accept?",
+        "Which input formats does Hue Rotate accept?",
+        "Which input formats does Near-Lossless Compressor accept?",
+        "Which input formats does Optimize for Web accept?",
+        "Which input formats does Resize to Width accept?",
+        "Which input formats does Rotate 270° (90° CCW) accept?",
+        "Which input formats does Round Corners accept?",
+        "Which input formats does Sharpen Image accept?",
+        "Which input formats does Thumbnail Maker accept?",
+        "Which input formats does Tiled Watermark accept?"
+      ],
+      "pages": [
+        "add-caption-to-image",
+        "compress-image-to-100kb",
+        "crop-borders-auto",
+        "crop-image-16-9",
+        "duotone-image",
+        "email-image-resizer",
+        "grayscale-image",
+        "hue-rotate-image",
+        "image-average-color",
+        "near-lossless-image-compressor",
+        "optimize-image-for-web",
+        "resize-image-to-width",
+        "rotate-image-270",
+        "round-corners-image",
+        "sharpen-image",
+        "threshold-image",
+        "thumbnail-maker",
+        "tiled-watermark"
+      ]
+    },
+    {
+      "count": 15,
+      "answer": "Batch runs take up to 10 files at once (30 MB each). There's no account, no daily quota and no watermark — process as many batches as you need.",
+      "questions": [
+        "How many images can I process at once?"
+      ],
+      "pages": [
+        "add-background-color",
+        "add-logo-watermark",
+        "add-title-to-image",
+        "blur-image",
+        "compress-image-to-specific-size",
+        "crop-image-3-2",
+        "image-color-temperature",
+        "image-dominant-color",
+        "image-optimizer",
+        "jpg-to-png",
+        "pixelate-image",
+        "resize-image-by-percentage",
+        "resize-image-to-kb",
+        "rotate-image-180",
+        "saturation-adjuster"
+      ]
+    },
+    {
+      "count": 14,
+      "answer": "JPG, PNG or WEBP inputs are supported, up to 30 MB per file. For exotic formats, convert them first with one of the converter tools, then come back.",
+      "questions": [
+        "What kind of image files work with this tool?"
+      ],
+      "pages": [
+        "bulk-watermark",
+        "compress-image-to-500kb",
+        "contrast-adjuster",
+        "crop-image-4-3",
+        "crop-image-to-square",
+        "flip-image-vertical",
+        "image-color-palette",
+        "invert-image-colors",
+        "posterize-image",
+        "quote-card-maker",
+        "remove-color-from-image",
+        "resize-image-to-dimensions",
+        "rotate-image-90",
+        "vignette-effect"
+      ]
+    },
+    {
+      "count": 14,
+      "answer": "JPG, PNG or WEBP files up to 30 MB each are accepted. Drop in one file or a whole batch (paste and drag also work), check the preview, and export in the format shown at the download step.",
+      "questions": [
+        "Which file types are supported?"
+      ],
+      "pages": [
+        "brightness-adjuster",
+        "bulk-image-compressor",
+        "compress-image-to-200kb",
+        "crop-image-9-16",
+        "date-watermark",
+        "film-grain-effect",
+        "flip-image-horizontal",
+        "image-size-reducer",
+        "replace-color-in-image",
+        "resize-image-to-height",
+        "rotate-image",
+        "sepia-image",
+        "swap-color-channels",
+        "vintage-filter"
+      ]
+    },
+    {
+      "count": 13,
+      "answer": "The common formats are covered — JPG, PNG or WEBP, each up to 30 MB. Queue them one batch at a time.",
+      "questions": [
+        "Can it open JPG, PNG and WebP files?"
+      ],
+      "pages": [
+        "add-logo-watermark",
+        "add-title-to-image",
+        "blur-image",
+        "compress-image-to-specific-size",
+        "crop-image-3-2",
+        "image-color-temperature",
+        "image-dominant-color",
+        "image-optimizer",
+        "pixelate-image",
+        "resize-image-by-percentage",
+        "resize-image-to-kb",
+        "rotate-image-180",
+        "saturation-adjuster"
+      ]
+    },
+    {
+      "count": 7,
+      "answer": "Files can be up to 30 MB each, one per run. There's no account, no daily quota and no watermark — process as many images as you need, one after another.",
+      "questions": [
+        "How many images can I process at once?"
+      ],
+      "pages": [
+        "add-text-to-image",
+        "crop-image-to-circle",
+        "enlarge-image",
+        "gif-to-png",
+        "jpg-to-bmp",
+        "straighten-image",
+        "svg-to-png"
+      ]
+    },
+    {
+      "count": 5,
+      "answer": "There are no artificial limits: use it as often as you like, free. The practical cap is 30 MB per image, and outputs stay watermark-free.",
+      "questions": [
+        "How many images can I process at once?"
+      ],
+      "pages": [
+        "image-color-picker",
+        "image-to-base64",
+        "make-image-transparent",
+        "meme-generator",
+        "transparent-png-maker"
+      ]
+    },
+    {
+      "count": 5,
+      "answer": "This tool handles one image at a time (up to 30 MB). For batch work, use one of the multi-file tools instead — the per-image result is the same.",
+      "questions": [
+        "What are the size and batch limits?"
+      ],
+      "pages": [
+        "base64-to-image",
+        "image-color-palette",
+        "png-drop-shadow",
+        "quote-card-maker",
+        "remove-color-from-image"
+      ]
+    },
+    {
+      "count": 4,
+      "answer": "JPG, PNG or WEBP files up to 30 MB each are accepted. Drop a single file in (paste and drag also work), check the preview, and export in the format shown at the download step.",
+      "questions": [
+        "Which file types are supported?"
+      ],
+      "pages": [
+        "image-color-picker",
+        "make-image-transparent",
+        "meme-generator",
+        "transparent-png-maker"
+      ]
+    },
+    {
+      "count": 4,
+      "answer": "One image is processed per run, up to 30 MB — and you can run it as many times as you like. No signup, no counters, and no watermark on results.",
+      "questions": [
+        "What are the size and batch limits?"
+      ],
+      "pages": [
+        "gif-to-webp",
+        "image-to-ico",
+        "png-to-bmp",
+        "round-corners-image"
+      ]
+    },
+    {
+      "count": 4,
+      "answer": "The common formats are covered — JPG, PNG or WEBP, each up to 30 MB. One photo is processed per run.",
+      "questions": [
+        "Can it open JPG, PNG and WebP files?"
+      ],
+      "pages": [
+        "add-text-to-image",
+        "crop-image-to-circle",
+        "enlarge-image",
+        "straighten-image"
+      ]
+    },
+    {
+      "count": 3,
+      "answer": "WEBP inputs are supported, up to 30 MB per file. For exotic formats, convert them first with one of the converter tools, then come back.",
+      "questions": [
+        "What kind of image files work with this tool?"
+      ],
+      "pages": [
+        "compress-webp-image",
+        "resize-webp-image",
+        "webp-to-png"
+      ]
+    },
+    {
+      "count": 3,
+      "answer": "Common formats are covered: PNG, each up to 30 MB. Paste from the clipboard, drag and drop, or use the select button.",
+      "questions": [
+        "Which input formats does PNG to BMP accept?",
+        "Which input formats does PNG to JPG accept?",
+        "Which input formats does Resize PNG accept?"
+      ],
+      "pages": [
+        "png-to-bmp",
+        "png-to-jpg",
+        "resize-png-image"
+      ]
+    },
+    {
+      "count": 2,
+      "answer": "PNG files up to 30 MB each are accepted. Drop in one file or a whole batch (paste and drag also work), check the preview, and export in the format shown at the download step.",
+      "questions": [
+        "Which file types are supported?"
+      ],
+      "pages": [
+        "optimize-png-for-web",
+        "png-to-webp"
+      ]
+    },
+    {
+      "count": 2,
+      "answer": "You can adjust WebP quality. Results are previewed after processing, so tweak values and re-run until the output looks right.",
+      "questions": [
+        "Can I fine-tune the result before downloading?"
+      ],
+      "pages": [
+        "gif-to-webp",
+        "png-to-webp"
+      ]
+    },
+    {
+      "count": 2,
+      "answer": "PNG or WEBP inputs are supported, up to 30 MB per file. For exotic formats, convert them first with one of the converter tools, then come back.",
+      "questions": [
+        "What kind of image files work with this tool?"
+      ],
+      "pages": [
+        "add-white-background",
+        "png-drop-shadow"
+      ]
+    },
+    {
+      "count": 2,
+      "answer": "You can adjust Vertical anchor, Output format. Results are previewed after processing, so tweak values and re-run until the output looks right.",
+      "questions": [
+        "Can I fine-tune the result before downloading?"
+      ],
+      "pages": [
+        "crop-image-16-9",
+        "crop-image-3-2"
+      ]
+    },
+    {
+      "count": 2,
+      "answer": "JPG files up to 30 MB each are accepted. Drop in one file or a whole batch (paste and drag also work), check the preview, and export in the format shown at the download step.",
+      "questions": [
+        "Which file types are supported?"
+      ],
+      "pages": [
+        "compress-jpeg-image",
+        "resize-jpg-image"
+      ]
+    },
+    {
+      "count": 2,
+      "answer": "You can adjust Output format. Results are previewed after processing, so tweak values and re-run until the output looks right.",
+      "questions": [
+        "Can I fine-tune the result before downloading?"
+      ],
+      "pages": [
+        "add-white-background",
+        "compress-image-to-500kb"
+      ]
+    },
+    {
+      "count": 2,
+      "answer": "The controls cover Output format. Nothing is baked in until you press the action button, and every run gives you a fresh preview to check.",
+      "questions": [
+        "Can I fine-tune the result before downloading?"
+      ],
+      "pages": [
+        "compress-image-to-200kb",
+        "near-lossless-image-compressor"
+      ]
+    },
+    {
+      "count": 2,
+      "answer": "JPG inputs are supported, up to 30 MB per file. For exotic formats, convert them first with one of the converter tools, then come back.",
+      "questions": [
+        "What kind of image files work with this tool?"
+      ],
+      "pages": [
+        "jpg-to-webp",
+        "optimize-jpg-for-web"
+      ]
+    }
+  ]
+}
