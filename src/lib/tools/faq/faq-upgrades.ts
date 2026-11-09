@@ -140,7 +140,7 @@ export const FAQ_UPGRADES: Record<string, {
     add: [
       {
         q: "What's the difference between Remove Metadata and Remove GPS Data?",
-        a: "Remove Metadata strips every EXIF, GPS and vendor tag — the output is pure pixels. Remove GPS Data removes only the location tags and keeps the rest of the metadata (camera, settings, timestamps). Choose based on how much you want to keep.",
+        a: "Less than the names suggest: both tools run the same cleanup — the photo is re-encoded in your browser, and a re-encoded image contains pixels only, so EXIF, GPS, camera and timestamp tags are all removed in both cases. Neither output keeps \"the rest of the metadata.\" The real difference is the workflow: Remove GPS Data checks for location tags first and reports what it finds, while Remove Metadata reports every tag it strips. Pick whichever framing suits you — the cleaned file comes out the same.",
       },
       {
         q: "Will removing metadata change how my photo looks?",
