@@ -146,25 +146,17 @@ export default function RootLayout({
             </>
           )}
           {/*
-            Google AdSense site-verification loader — the official snippet
-            Google requires in the document head. Rendered as a plain async
-            <script> because React 19 hoists async scripts into <head> and
-            emits them in the server-rendered HTML — next/script strategies
-            (afterInteractive/beforeInteractive) inject the tag client-side
-            after hydration, so the raw HTML a verification crawler fetches
-            would not contain it. Rendered only in production indexing mode —
-            preview/staging never loads ad scripts. NOTE: keep the dormant
+            AdSense: no account-level ad loader is embedded. The authorized
+            seller for this domain is declared in /ads.txt (migrated to the
+            new AdSense account). When ad serving should start, paste the
+            official "Get code" snippet from the new AdSense account — the
+            async adsbygoogle.js loader with client=ca-pub-... — HERE, gated
+            by {!IS_PREVIEW} like the GA4 scripts above, so the raw HTML a
+            verification crawler fetches contains it. NOTE: keep the dormant
             AdSlot system (ad-slot.tsx + NEXT_PUBLIC_ADSENSE_* env) disabled
-            while this loader exists, otherwise the AdSense library would
+            while that loader exists, otherwise the AdSense library would
             load twice.
           */}
-          {!IS_PREVIEW && (
-            <script
-              async
-              src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1791950384087416"
-              crossOrigin="anonymous"
-            />
-          )}
           {/*
             Monetag banner-stack zone loaders — the owner-selected, non-
             popunder replacement for the removed MultiTag (zone 306556):
