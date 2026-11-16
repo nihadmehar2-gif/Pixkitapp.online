@@ -70,10 +70,15 @@ export const metadata: Metadata = {
   },
   // Preview/staging environments must never be indexable (see src/lib/seo.ts).
   robots: ROBOTS_DIRECTIVES,
-  // Monetag publisher site-verification — emitted into <head> on every page
-  // as <meta name="monetag" content="..."> (verification tags are public).
+  // Publisher site-verification tags — emitted into <head> on every page
+  // as <meta name="..." content="..."> (verification tags are public):
+  // - monetag: Monetag site ownership
+  // - google-adsense-account: AdSense site ownership (new account,
+  //   ca-pub-4279894620173730) — pairs with the ads.txt authorization line
+  //   and the AdSense loader below.
   other: {
     monetag: "fc91e716faf8b5d724195354b78bd1cc",
+    "google-adsense-account": "ca-pub-4279894620173730",
   },
 };
 
@@ -146,17 +151,24 @@ export default function RootLayout({
             </>
           )}
           {/*
-            AdSense: no account-level ad loader is embedded. The authorized
-            seller for this domain is declared in /ads.txt (migrated to the
-            new AdSense account). When ad serving should start, paste the
-            official "Get code" snippet from the new AdSense account — the
-            async adsbygoogle.js loader with client=ca-pub-... — HERE, gated
-            by {!IS_PREVIEW} like the GA4 scripts above, so the raw HTML a
-            verification crawler fetches contains it. NOTE: keep the dormant
-            AdSlot system (ad-slot.tsx + NEXT_PUBLIC_ADSENSE_* env) disabled
-            while that loader exists, otherwise the AdSense library would
+            Google AdSense account loader — the official "Get code" snippet
+            from the new AdSense account (ca-pub-4279894620173730). Rendered
+            as a plain async <script> because React 19 hoists async scripts
+            into <head> and emits them in the server-rendered HTML — the raw
+            HTML a verification crawler fetches contains it. Rendered only in
+            production indexing mode — preview/staging never loads ad scripts.
+            NOTE: this is the only AdSense loader on the site; keep the
+            dormant AdSlot system (ad-slot.tsx + NEXT_PUBLIC_ADSENSE_* env)
+            disabled while it exists, otherwise the AdSense library would
             load twice.
           */}
+          {!IS_PREVIEW && (
+            <script
+              async
+              src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4279894620173730"
+              crossOrigin="anonymous"
+            />
+          )}
           {/*
             Monetag banner-stack zone loaders — the owner-selected, non-
             popunder replacement for the removed MultiTag (zone 306556):
