@@ -66,11 +66,22 @@ export default async function ToolPage({ params }: Props) {
   if (!tool) notFound();
 
   const category = categoryById(tool.category);
-  // Related tools: same category first, then top up with cross-category picks
-  // scored by keyword/name affinity (e.g. crop 16:9 ↔ YouTube thumbnail resizer,
-  // white-background removal ↔ transparency tools). Keeps ≥4 links even in small
-  // categories and creates relevant cross-links between categories.
-  const sameCat = toolsByCategory(tool.category).filter((t) => t.slug !== tool.slug);
+  // Related tools: a deterministic cyclic window of same-category neighbours
+  // (+-1, +-2 in registry order, self excluded) first, then top up with
+  // cross-category picks scored by keyword/name affinity (e.g. crop 16:9 ↔
+  // YouTube thumbnail resizer, white-background removal ↔ transparency tools).
+  // The cyclic window replaces the previous fixed "first four" slice so EVERY
+  // tool in a category also receives inbound sibling links — tail tools no
+  // longer sit at the incoming-link floor — while adjacent registry entries
+  // stay semantically clustered (KB-target compressors, aspect-ratio crops,
+  // social resizers), keeping every link contextually relevant.
+  const catTools = toolsByCategory(tool.category);
+  const catIdx = catTools.findIndex((t) => t.slug === tool.slug);
+  const siblingWindow: typeof catTools = [];
+  for (const off of [-2, -1, 1, 2]) {
+    const t = catTools[(catIdx + off + catTools.length) % catTools.length];
+    if (t && t.slug !== tool.slug && !siblingWindow.some((w) => w.slug === t.slug)) siblingWindow.push(t);
+  }
   const words = new Set(
     [...tool.keywords, ...tool.name.toLowerCase().split(/\s+/)]
       .flatMap((k) => k.toLowerCase().split(/\s+/))
@@ -85,9 +96,9 @@ export default async function ToolPage({ params }: Props) {
     })
     .filter((s) => s.score > 0)
     .sort((a, b) => b.score - a.score)
-    .slice(0, Math.max(0, 6 - Math.min(4, sameCat.length)))
+    .slice(0, Math.max(0, 6 - siblingWindow.length))
     .map((s) => s.t);
-  const related = [...sameCat.slice(0, 4), ...crossCat].slice(0, 6);
+  const related = [...siblingWindow, ...crossCat].slice(0, 6);
 
   const jsonLd = {
     "@context": "https://schema.org",
