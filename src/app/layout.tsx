@@ -11,6 +11,7 @@ import { PageFade } from "@/components/site/page-fade";
 import { SITE_URL } from "@/lib/tools";
 import { OG_IMAGES, ROBOTS_DIRECTIVES, IS_PREVIEW } from "@/lib/seo";
 import { GA_MEASUREMENT_ID, GA_SPA_TRACKER_SNIPPET } from "@/lib/analytics";
+import { CONSENT_DEFAULT_SNIPPET } from "@/lib/consent";
 
 // Body font — warm, modern geometric sans with friendly curves.
 const jakarta = Plus_Jakarta_Sans({
@@ -70,14 +71,12 @@ export const metadata: Metadata = {
   },
   // Preview/staging environments must never be indexable (see src/lib/seo.ts).
   robots: ROBOTS_DIRECTIVES,
-  // Publisher site-verification tags — emitted into <head> on every page
+  // Publisher site-verification tag — emitted into <head> on every page
   // as <meta name="..." content="..."> (verification tags are public):
-  // - monetag: Monetag site ownership
-  // - google-adsense-account: AdSense site ownership (new account,
+  // - google-adsense-account: AdSense site ownership (account
   //   ca-pub-4279894620173730) — pairs with the ads.txt authorization line
   //   and the AdSense loader below.
   other: {
-    monetag: "fc91e716faf8b5d724195354b78bd1cc",
     "google-adsense-account": "ca-pub-4279894620173730",
   },
 };
@@ -100,6 +99,27 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
       <body className={`${jakarta.variable} ${bricolage.variable} font-sans antialiased bg-background text-foreground`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+          {/*
+            Google Consent Mode v2 regional defaults — MUST execute before
+            any Google tag (the AdSense loader and GA4 below). Rendered as a
+            plain inline <script> as the FIRST element of <body>, so the
+            browser executes it synchronously during HTML parsing. Ordering
+            guarantee (verified against the built HTML):
+              1. this consent snippet (inline, parses first in <body>)
+              2. the AdSense loader below — plain <script defer>, which the
+                 HTML spec executes only after the whole document is parsed,
+                 i.e. strictly after every inline script
+              3. GA4 gtag.js — next/script afterInteractive, injected after
+                 hydration (the initial HTML only contains a preload link).
+            Sets consent to "denied" for EEA/UK/CH visitors (personalized ad
+            cookies off, GA4 cookieless) and "granted" elsewhere; a
+            Google-certified CMP (AdSense → Privacy & messaging, enabled in
+            the AdSense account) updates the state through the standard
+            gtag('consent','update') mechanism. See src/lib/consent.ts.
+          */}
+          {!IS_PREVIEW && (
+            <script dangerouslySetInnerHTML={{ __html: CONSENT_DEFAULT_SNIPPET }} />
+          )}
           <a
             href="#main-content"
             className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-primary-foreground focus:shadow-lg"
@@ -150,50 +170,26 @@ export default function RootLayout({
               <script dangerouslySetInnerHTML={{ __html: GA_SPA_TRACKER_SNIPPET }} />
             </>
           )}
-          {/*
+          {/**
             Google AdSense account loader — the official "Get code" snippet
-            from the new AdSense account (ca-pub-4279894620173730). Rendered
-            as a plain async <script> because React 19 hoists async scripts
-            into <head> and emits them in the server-rendered HTML — the raw
-            HTML a verification crawler fetches contains it. Rendered only in
-            production indexing mode — preview/staging never loads ad scripts.
-            NOTE: this is the only AdSense loader on the site; keep the
-            dormant AdSlot system (ad-slot.tsx + NEXT_PUBLIC_ADSENSE_* env)
-            disabled while it exists, otherwise the AdSense library would
-            load twice.
+            from the AdSense account (ca-pub-4279894620173730), rendered as
+            a plain <script defer> so it stays in the server-rendered HTML —
+            the raw HTML a verification crawler fetches contains it — while
+            the defer attribute guarantees it EXECUTES only after the whole
+            document is parsed, i.e. strictly after the Consent Mode default
+            snippet above. (An async loader would race a cache-hot fetch
+            ahead of the consent defaults; defer makes the ordering exact.)
+            Rendered only in production indexing mode — preview/staging never
+            loads ad scripts. NOTE: this is the only AdSense loader on the
+            site; keep the dormant AdSlot system (ad-slot.tsx +
+            NEXT_PUBLIC_ADSENSE_* env) disabled while it exists, otherwise
+            the AdSense library would load twice.
           */}
           {!IS_PREVIEW && (
             <script
-              async
+              defer
               src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4279894620173730"
               crossOrigin="anonymous"
-            />
-          )}
-          {/*
-            Monetag banner-stack zone loaders — the owner-selected, non-
-            popunder replacement for the removed MultiTag (zone 306556):
-              - zone 12203276 via nap5k.com/tag.min.js (In-Page Push banner
-                slot; the served format follows the zone's dashboard config)
-              - zone 12203278 via n6wxm.com/vignette.min.js (Vignette Banner:
-                native-style centre overlay with Close/CTA buttons, shown on
-                page visit — no new tabs, no popunder/OnClick mechanics)
-            Both snippets are the official self-appending inline loaders;
-            they render inline like the GA4 init script above and are gated
-            to production indexing mode — preview/staging never loads ad
-            scripts.
-          */}
-          {!IS_PREVIEW && (
-            <script
-              dangerouslySetInnerHTML={{
-                __html: "(function(s){s.dataset.zone='12203276',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))",
-              }}
-            />
-          )}
-          {!IS_PREVIEW && (
-            <script
-              dangerouslySetInnerHTML={{
-                __html: "(function(s){s.dataset.zone='12203278',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))",
-              }}
             />
           )}
           {/*
