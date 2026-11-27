@@ -8,14 +8,18 @@
  * - When configured via env (see src/lib/ads.ts): renders a responsive
  *   <ins class="adsbygoogle"> unit inside a container with a fixed min-height
  *   reserved up front, so the unit filling in later causes no layout shift
- *   (CLS stays at zero). Loads the AdSense script once.
+ *   (CLS stays at zero).
  *
- * Ads never overlap controls: this component is a block-level element placed
- * in normal flow between content sections.
+ * LOADER OWNERSHIP: this component deliberately does NOT load its own
+ * copy of the AdSense library. src/app/layout.tsx already loads
+ * adsbygoogle.js once for the whole site (plain <script defer>), so
+ * adding a per-component loader here would inject a SECOND adsbygoogle.js
+ * whenever NEXT_PUBLIC_ADSENSE_* env vars are set — a double-load. The
+ * <ins> units below work with the global loader: adsbygoogle.push({})
+ * queues the unit and the library fills it whenever it arrives.
  */
 
 import { useEffect, useRef } from "react";
-import Script from "next/script";
 import { ADS_CONFIG, AD_SLOT_IDS, type AdSlotId } from "@/lib/ads";
 import { cn } from "@/lib/utils";
 
@@ -80,13 +84,8 @@ export function AdSlot({ id, className }: { id: AdSlotId; className?: string }) 
           data-full-width-responsive="true"
         />
       </div>
-      {/* Load the AdSense library once, after interactive, only when configured. */}
-      <Script
-        id="adsbygoogle-init"
-        strategy="afterInteractive"
-        crossOrigin="anonymous"
-        src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${client}`}
-      />
+      {/* No <Script> here on purpose: the global loader in layout.tsx is the
+          single source of adsbygoogle.js (see the loader-ownership note). */}
     </div>
   );
 }

@@ -56,7 +56,7 @@ export const POSTS_B: BlogPost[] = [
       { type: "h2", text: "Format choices for the web specifically" },
       {
         type: "p",
-        text: "The format guide on this blog covers JPG, PNG and WebP in depth; for web publishing the short version is that WebP is the default, JPEG is the compatibility copy, and PNG is for graphics where compression artifacts would be visible — logos, screenshots, diagrams. Photos saved as PNG by design tools are the most common accidental weight bomb on the sites we see: converting one to WebP or JPEG before upload routinely removes 80–90% of its weight with no visual change.",
+        text: "The format guide on this blog covers JPG, PNG and WebP in depth; for web publishing the short version is that WebP is the default, JPEG is the compatibility copy, and PNG is for graphics where compression artifacts would be visible — logos, screenshots, diagrams. Photos saved as PNG by design tools are a classic accidental weight bomb: converting one to WebP or JPEG before upload often removes 80–90% of its weight with no visible change.",
       },
       { type: "h2", text: "What not to do" },
       {

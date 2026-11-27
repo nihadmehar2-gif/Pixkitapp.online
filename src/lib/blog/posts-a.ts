@@ -31,7 +31,7 @@ export const POSTS_A: BlogPost[] = [
       { type: "h2", text: "Step 1 — Read the form's exact requirement" },
       {
         type: "p",
-        text: "Before touching any tool, note down exactly what the form demands. There are usually three separate numbers hiding in the fine print: a maximum file size ('photo must be under 100KB'), sometimes a minimum file size ('between 20KB and 100KB' — some systems reject tiny files as corrupt), and often required pixel dimensions ('200×230 pixels' for signatures is a classic Indian exam-portal spec, '600×600 pixels' for US passport uploads). Write them down. Half of all failed uploads come from fixing the wrong number — compressing a photo that was actually rejected for its dimensions.",
+        text: "Before touching any tool, note down exactly what the form demands. There are usually three separate numbers hiding in the fine print: a maximum file size ('photo must be under 100KB'), sometimes a minimum file size ('between 20KB and 100KB' — some systems reject tiny files as corrupt), and often required pixel dimensions ('200×230 pixels' for signatures is a classic Indian exam-portal spec, '600×600 pixels' for US passport uploads). Write them down. It is remarkably easy to fix the wrong number and still fail — compressing a photo that was actually rejected for its dimensions.",
       },
       {
         type: "callout",
@@ -211,15 +211,30 @@ export const POSTS_A: BlogPost[] = [
         type: "p",
         text: "Schengen-area visa applications (most of Europe) use the ICAO-standard 35×45 mm photograph. The face must occupy about 70–80% of the frame height — roughly 32–36 mm from chin to crown — on a light, plain background. The photo must be recent, in focus, printed on photo-quality paper if submitted physically, and show the full face without sunglasses, head coverings (with documented religious exceptions) or shadows across the face. Because 35×45 mm does not correspond to a round pixel count, the practical approach is to crop to the proportion and let the tool size the file at print resolution.",
       },
+      {
+        type: "tools",
+        intro: "Crop a photo to the Schengen spec:",
+        slugs: ["schengen-visa-photo"],
+      },
       { type: "h2", text: "China visa photo" },
       {
         type: "p",
         text: "The Chinese visa photo specification is 33×48 mm, a slightly taller frame than the Schengen standard, again on a plain white background with the face occupying the majority of the frame. Online application systems commonly request the photo as a JPG between 40KB and 120KB — a rare case where a visa photo has an explicit byte ceiling, which pairs the passport tools with the compressors described in our upload-limits guide.",
       },
+      {
+        type: "tools",
+        intro: "Crop a photo to the China visa spec:",
+        slugs: ["china-visa-photo"],
+      },
       { type: "h2", text: "One-inch ID photo (Chinese 1寸 standard)" },
       {
         type: "p",
         text: "The 1-inch ID photo is a common requirement for Chinese applications, student records and personnel files. At 300 DPI it measures 295×413 pixels (25×35 mm). The same framing rules apply — plain background, face filling most of the frame, even lighting — and because the spec is a fixed pixel size, the tool can output the file at exactly 295×413 without any resampling ambiguity.",
+      },
+      {
+        type: "tools",
+        intro: "Produce a 1-inch ID file at the exact pixel size:",
+        slugs: ["id-photo-1-inch"],
       },
       { type: "h2", text: "The rules that actually cause rejections" },
       {

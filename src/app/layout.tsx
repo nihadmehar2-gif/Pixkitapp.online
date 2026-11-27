@@ -180,10 +180,11 @@ export default function RootLayout({
             snippet above. (An async loader would race a cache-hot fetch
             ahead of the consent defaults; defer makes the ordering exact.)
             Rendered only in production indexing mode — preview/staging never
-            loads ad scripts. NOTE: this is the only AdSense loader on the
-            site; keep the dormant AdSlot system (ad-slot.tsx +
-            NEXT_PUBLIC_ADSENSE_* env) disabled while it exists, otherwise
-            the AdSense library would load twice.
+            loads ad scripts. NOTE: this is the ONLY AdSense loader on the
+            site. The dormant AdSlot system (ad-slot.tsx + NEXT_PUBLIC_ADSENSE_*
+            env) intentionally loads no library of its own — it only renders
+            <ins> units that this loader fills — so enabling those env vars
+            can never cause a second adsbygoogle.js load.
           */}
           {!IS_PREVIEW && (
             <script

@@ -22,12 +22,31 @@
  *   - EEA + UK + Switzerland (ISO 3166-1 alpha-2 region list): all four
  *     consent types default to DENIED. Until a CMP (or the user) updates
  *     the state, ad_storage stays denied, so ad cookies are not set and
- *     AdSense serves non-personalized ads; GA4 runs without analytics
- *     cookies.
- *   - All other regions: consent types default to GRANTED (no consent
- *     banner is legally required there; no CMP message is shown).
+ *     Google's documented behavior for denied ad_storage applies (no new
+ *     ad cookies; GA4 runs without analytics cookies). NOTE: the CMP that
+ *     updates this state (Google's certified CMP via AdSense → Privacy &
+ *     messaging) is still PENDING dashboard configuration — until it is
+ *     enabled, no consent message is shown and these defaults simply hold.
+ *   - All other regions: consent types default to GRANTED (no certified
+ *     CMP requirement applies outside the EEA, UK and Switzerland; no CMP
+ *     message is shown there).
  *   - wait_for_update: 500 ms — Google's documented integration window so
  *     an asynchronously-loading CMP can update consent before tags fire.
+ *   - url_passthrough + ads_data_redaction: Google's documented optional
+ *     hardening for the denied state (gtag('set', ...) calls below).
+ *     ads_data_redaction redacts ad click identifiers from network
+ *     requests when ad_storage is denied; url_passthrough preserves
+ *     click identifiers via first-party URLs so measurement can survive
+ *     without cookies. Both are no-ops while ads are not serving.
+ *
+ * SCOPE OF CLAIMS (accuracy rules):
+ *   This snippet is CODE ONLY. It is not a CMP, not a banner, not GDPR
+ *   compliance, and not consent persistence — Consent Mode stores nothing;
+ *   the CMP (once configured) must re-supply the stored choice on every
+ *   page load via gtag('consent','update'). Verified behavior: the snippet
+ *   executes before every Google tag (AdSense loader, GA4) on the built
+ *   site. Not yet verified (dashboard-pending): CMP message display,
+ *   consent updates, persistence, withdrawal flows.
  *
  * ORDERING GUARANTEE: rendered as a plain inline <script> as the FIRST
  * element of <body> in src/app/layout.tsx, so the browser executes it
@@ -69,4 +88,7 @@ gtag('consent', 'default', {
   'ad_personalization': 'granted',
   'analytics_storage': 'granted'
 });
+/* Google-documented optional hardening for the denied state. */
+gtag('set', 'url_passthrough', true);
+gtag('set', 'ads_data_redaction', true);
 `;

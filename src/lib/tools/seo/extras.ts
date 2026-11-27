@@ -98,7 +98,7 @@ export const SEO_EXTRAS: Record<string, ToolSeoExtras> = {
       headers: ["Situation", "Pick", "Why"],
       rows: [
         ["Form field says 'max 200KB'", "This tool", "Exact match to the cap — the search stops just under it"],
-        ["Form says 'under 1MB' but you want speed", "200KB", "Quarter the size, no visible loss on typical photos"],
+        ["Form says 'under 1MB' but you want speed", "200KB", "About a fifth of the size, no visible loss on typical photos"],
         ["Listing site with 5MB limit", "Near-lossless compressor", "Keeps maximum quality when no hard cap binds you"],
         ["Photo must also print well", "200KB with ≥2000px dimensions", "Enough bytes for screen use; printing needs the original"],
       ],
@@ -143,7 +143,7 @@ export const SEO_EXTRAS: Record<string, ToolSeoExtras> = {
       },
       {
         problem: "Sending 500KB photos through a 100KB-capped portal",
-        fix: "The targets exist separately for a reason: when a form names a smaller cap, use the matching tool (or Compress to Exact KB) instead of hoping the reviewer tolerates an oversized upload.",
+        fix: "The targets exist separately for a reason: when a form names a smaller cap, use the matching tool (or Compress to Custom KB) instead of hoping the reviewer tolerates an oversized upload.",
       },
       {
         problem: "Re-saving the 500KB output over and over",
@@ -158,7 +158,7 @@ export const SEO_EXTRAS: Record<string, ToolSeoExtras> = {
 
   "compress-image-to-specific-size": {
     intro:
-      "Upload forms love arbitrary numbers: 75KB for a signature, 120KB for a badge photo, 300KB for a product shot, 1MB for a portfolio piece. Retrying a fixed preset against those caps is trial-and-error; this tool turns the target itself into the input. Type the exact kilobyte figure, and the quality search narrows in on the largest quality value that still fits — the same measured loop the other compressors use, but aimed at whatever number the form demands. Combined with the two KB presets it covers the whole range: use the presets for the common ceilings and this tool for everything else.",
+      "Upload forms love arbitrary numbers: 75KB for a signature, 120KB for a badge photo, 300KB for a product shot, 1MB for a portfolio piece. Retrying a fixed preset against those caps is trial-and-error; this tool turns the target itself into the input. Type the exact kilobyte figure, and the quality search narrows in on the largest quality value that still fits — the same measured loop the other compressors use, but aimed at whatever number the form demands. Combined with the four KB presets it covers the whole range: use the presets for the common ceilings and this tool for everything else.",
     table: {
       caption: "Picking a target that will actually pass validation",
       headers: ["Form language", "Safe target to enter", "Note"],
@@ -166,13 +166,13 @@ export const SEO_EXTRAS: Record<string, ToolSeoExtras> = {
         ["'Maximum 100KB'", "100", "The search guarantees at-or-under; the preset page works identically"],
         ["'Around 150KB' / 'up to 150KB'", "140–150", "Staying slightly under avoids rounding surprises on the portal"],
         ["'Between 50KB and 100KB'", "75–95", "Some systems reject files that are too small, too — read both bounds"],
-        ["'1MB or less'", "1000", "Enter KB, not MB — 1MB equals 1000KB in this tool's units"],
+        ["'1MB or less'", "976", "This tool's KB unit is 1024 bytes; 976 keeps the result under a strict 1,000,000-byte megabyte cap"],
       ],
     },
     mistakes: [
       {
         problem: "Entering megabytes into a kilobyte field",
-        fix: "The number field reads kilobytes, so a '1MB' requirement means 1000. Entering 1 produces a 1KB file — instantly caught because the result card shows the achieved size.",
+        fix: "The number field reads kilobytes, and its kilobyte unit is 1024 bytes — so entering 1000 can land just above a strict one-million-byte cap. For '1MB or less' requirements, enter 976 or a rounder lower number; the result card shows the exact achieved size before you download.",
       },
       {
         problem: "Chasing an extreme target like 10KB",
@@ -383,7 +383,7 @@ export const SEO_EXTRAS: Record<string, ToolSeoExtras> = {
       },
       {
         problem: "Mixing up dimension resize with byte-size compression",
-        fix: "Changing width changes pixels; a KB target needs the compressors (for example Compress Image to 100KB). If a form checks file size, use those tools; if it checks dimensions, use this one.",
+        fix: "Changing width changes pixels; a KB target needs the compressors (for example Compress to 100KB or Less). If a form checks file size, use those tools; if it checks dimensions, use this one.",
       },
       {
         problem: "Serving upscaled WebP from a small source",
@@ -514,7 +514,7 @@ export const SEO_EXTRAS: Record<string, ToolSeoExtras> = {
       },
       {
         problem: "Expecting transparency to appear in the PNG",
-        fix: "The source BMP is opaque, so the PNG is opaque too — conversion cannot invent an alpha channel. To cut a background out afterwards, use Remove White Background or Make Image Transparent.",
+        fix: "The source BMP is opaque, so the PNG is opaque too — conversion cannot invent an alpha channel. To cut a background out afterwards, use Remove White Background or Make Transparent.",
       },
       {
         problem: "Renaming the extension instead of converting",
