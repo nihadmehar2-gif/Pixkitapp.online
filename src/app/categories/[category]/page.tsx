@@ -36,6 +36,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title,
       description,
       path: `/categories/${cat.slug}`,
+      // Page-specific sharing image + alt text (recovery R4).
+      image: { url: `/og/categories/${cat.slug}.png`, alt: `${cat.name} tools — PixKitApp` },
     }),
   };
 }

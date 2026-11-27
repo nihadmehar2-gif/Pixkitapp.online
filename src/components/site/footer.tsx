@@ -43,6 +43,7 @@ export function SiteFooter() {
             <ul className="mt-3 space-y-1 text-sm text-muted-foreground">
               <li><Link href="/about" className="inline-flex min-h-[36px] items-center hover:text-foreground">About Us</Link></li>
               <li><Link href="/contact" className="inline-flex min-h-[36px] items-center hover:text-foreground">Contact</Link></li>
+              <li><Link href="/blog" className="inline-flex min-h-[36px] items-center hover:text-foreground">Blog</Link></li>
               <li><Link href="/privacy" className="inline-flex min-h-[36px] items-center hover:text-foreground">Privacy Policy</Link></li>
               <li><Link href="/terms" className="inline-flex min-h-[36px] items-center hover:text-foreground">Terms of Service</Link></li>
               <li><Link href="/tools" className="inline-flex min-h-[36px] items-center hover:text-foreground">All {TOOLS.length} Tools</Link></li>

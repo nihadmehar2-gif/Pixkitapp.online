@@ -1,0 +1,150 @@
+{
+ "sitemap_count": 156,
+ "non200": {},
+ "thin": {},
+ "home_checks": {
+  "monetag": false,
+  "keywords_tag": false,
+  "adsense_new": true,
+  "adsense_old": false,
+  "ga4": true,
+  "consent_present": true,
+  "consent_before_adsense": true,
+  "og_image": "https://www.pixkitapp.online/og-default.png",
+  "og_alt": "PixKitApp — 127 free online image tools that run privately in your browser",
+  "canonical": "https://www.pixkitapp.online",
+  "noindex": false,
+  "noindex_strict": null
+ },
+ "tool_checks": {
+  "monetag": false,
+  "keywords_tag": false,
+  "adsense_new": true,
+  "adsense_old": false,
+  "ga4": true,
+  "consent_present": true,
+  "consent_before_adsense": true,
+  "og_image": "https://www.pixkitapp.online/og/tools/compress-image-to-100kb.png",
+  "og_alt": "Compress Image to 100KB or Less",
+  "canonical": "https://www.pixkitapp.online/compress-image-to-100kb",
+  "noindex": false,
+  "noindex_strict": null
+ },
+ "category_checks": {
+  "monetag": false,
+  "keywords_tag": false,
+  "adsense_new": true,
+  "adsense_old": false,
+  "ga4": true,
+  "consent_present": true,
+  "consent_before_adsense": true,
+  "og_image": "https://www.pixkitapp.online/og/categories/compress.png",
+  "og_alt": "Compression tools — PixKitApp",
+  "canonical": "https://www.pixkitapp.online/categories/compress",
+  "noindex": false,
+  "noindex_strict": null
+ },
+ "blogpost_checks": {
+  "monetag": false,
+  "keywords_tag": false,
+  "adsense_new": true,
+  "adsense_old": false,
+  "ga4": true,
+  "consent_present": true,
+  "consent_before_adsense": true,
+  "og_image": "https://www.pixkitapp.online/og/blog/reduce-photo-size-for-online-forms.png",
+  "og_alt": "How to Reduce a Photo&#x27;s Size for Online Forms (Without Ruining It)",
+  "canonical": "https://www.pixkitapp.online/blog/reduce-photo-size-for-online-forms",
+  "noindex": false,
+  "noindex_strict": null
+ },
+ "blog_index_words": 541,
+ "blog_links_to_posts": 2,
+ "extras": {
+  "compress-image-to-50kb": {
+   "table": true,
+   "mistakes": true,
+   "intro_len": 627
+  },
+  "compress-image-to-100kb": {
+   "table": true,
+   "mistakes": true,
+   "intro_len": 608
+  },
+  "compress-image-to-200kb": {
+   "table": true,
+   "mistakes": true,
+   "intro_len": 607
+  },
+  "compress-image-to-500kb": {
+   "table": true,
+   "mistakes": true,
+   "intro_len": 630
+  },
+  "compress-image-to-specific-size": {
+   "table": true,
+   "mistakes": true,
+   "intro_len": 594
+  },
+  "rotate-image-90": {
+   "table": true,
+   "mistakes": true,
+   "intro_len": 626
+  },
+  "rotate-image-180": {
+   "table": true,
+   "mistakes": true,
+   "intro_len": 590
+  },
+  "rotate-image-270": {
+   "table": true,
+   "mistakes": true,
+   "intro_len": 608
+  },
+  "resize-png-image": {
+   "table": true,
+   "mistakes": true,
+   "intro_len": 598
+  },
+  "resize-jpg-image": {
+   "table": true,
+   "mistakes": true,
+   "intro_len": 574
+  },
+  "resize-webp-image": {
+   "table": true,
+   "mistakes": true,
+   "intro_len": 620
+  },
+  "jpg-to-bmp": {
+   "table": true,
+   "mistakes": true,
+   "intro_len": 644
+  },
+  "png-to-bmp": {
+   "table": true,
+   "mistakes": true,
+   "intro_len": 584
+  },
+  "bmp-to-jpg": {
+   "table": true,
+   "mistakes": true,
+   "intro_len": 557
+  },
+  "bmp-to-png": {
+   "table": true,
+   "mistakes": true,
+   "intro_len": 537
+  }
+ },
+ "privacy": {
+  "stale_planned": false,
+  "adsense_disclosed": true,
+  "consent_described": true,
+  "contact": true
+ },
+ "broken_internal_links": {},
+ "FAILURES": []
+}
+
+=== RESULT: PASS ===
