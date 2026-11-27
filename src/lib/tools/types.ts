@@ -108,6 +108,32 @@ export interface ToolGuide {
   cases: string;
 }
 
+/** A small honest comparison table rendered on a tool page (unique per page). */
+export interface ToolTable {
+  /** Optional caption shown above the table. */
+  caption?: string;
+  headers: string[];
+  rows: string[][];
+}
+
+/** One "common mistake → how to fix it" pair, grounded in the tool's real behaviour. */
+export interface ToolMistake {
+  problem: string;
+  fix: string;
+}
+
+/** Optional depth block for pages that need more than the shared guide template.
+ *  Every string here must be page-specific — no template sentences reused
+ *  between tools (recovery F-07 / content-differentiation requirement). */
+export interface ToolSeoExtras {
+  /** Unique opening paragraph(s) rendered under "About the <tool>". */
+  intro?: string;
+  /** Small comparison table unique to this page (e.g. target size vs expected quality). */
+  table?: ToolTable;
+  /** Common mistakes and their fixes. */
+  mistakes?: ToolMistake[];
+}
+
 export interface ToolSeo {
   /** Unique SEO title WITHOUT the " | PixKitApp" suffix (the layout template appends it). */
   metaTitle: string;
@@ -116,6 +142,8 @@ export interface ToolSeo {
   /** The single primary keyword this page targets. */
   primaryKeyword: string;
   guide: ToolGuide;
+  /** Optional page-specific depth block (intro / comparison table / mistakes). */
+  extras?: ToolSeoExtras;
 }
 
 export function seo(
@@ -125,9 +153,10 @@ export function seo(
   how: string,
   steps: string,
   formats: string,
-  cases: string
+  cases: string,
+  extras?: ToolSeoExtras
 ): ToolSeo {
-  return { metaTitle, metaDescription, primaryKeyword, guide: { how, steps, formats, cases } };
+  return { metaTitle, metaDescription, primaryKeyword, guide: { how, steps, formats, cases }, extras };
 }
 
 export function optSlider(key: string, label: string, def: number, min: number, max: number, step = 1, suffix = "", help?: string): ToolOption {

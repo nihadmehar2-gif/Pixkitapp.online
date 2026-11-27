@@ -1,22 +1,25 @@
 import type { MetadataRoute } from "next";
 import { TOOLS, SITE_URL } from "@/lib/tools";
 import { CATEGORIES } from "@/lib/tools/categories";
+import { POSTS } from "@/lib/blog/posts";
 import { IS_PREVIEW } from "@/lib/seo";
 
 /**
- * Production sitemap: exactly the 147 intended indexable URLs —
+ * Production sitemap: the intended indexable URLs —
  * 1 homepage + 5 static pages (/tools /about /contact /privacy /terms)
- * + 14 category pages + 127 tool pages — all absolute https://www.pixkitapp.online
- * URLs, no query variants, no fragments, no duplicates.
+ * + 14 category pages + 127 tool pages + /blog and the 8 published guides
+ * = 156 URLs — all absolute https://www.pixkitapp.online URLs, no query
+ * variants, no fragments, no duplicates.
  *
  * Preview/staging must not publish the production sitemap (robots.txt
  * already omits the reference; the route itself stays empty there).
  *
- * No <lastmod>: we have no accurate, maintainable per-URL change tracking
- * (a build timestamp would mark every URL as changed on every deploy, which
- * search engines learn to ignore — or worse, distrust). Omitted entirely so
- * crawlers rely on our own fetch/recrawl signals instead. changeFrequency and
- * priority are kept as coarse, stable hints.
+ * lastmod policy (honesty rule): we do NOT stamp build timestamps — a
+ * date that changes on every deploy teaches crawlers to distrust it.
+ * lastmod appears ONLY where we know a true date: the blog guides carry
+ * their publication date. Tool/category/static pages omit lastmod so
+ * crawlers rely on our fetch/recrawl signals instead. changeFrequency
+ * and priority are kept as coarse, stable hints.
  */
 export default function sitemap(): MetadataRoute.Sitemap {
   if (IS_PREVIEW) return [];
@@ -38,5 +41,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: "weekly",
     priority: t.popular ? 0.9 : 0.7,
   }));
-  return [...staticPages, ...categoryPages, ...toolPages];
+  const blogPages: MetadataRoute.Sitemap = [
+    { url: `${SITE_URL}/blog`, changeFrequency: "weekly", priority: 0.8 },
+    ...POSTS.map((p) => ({
+      url: `${SITE_URL}/blog/${p.slug}`,
+      lastModified: new Date(p.date),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
+  ];
+  return [...staticPages, ...categoryPages, ...toolPages, ...blogPages];
 }

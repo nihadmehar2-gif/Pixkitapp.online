@@ -124,6 +124,7 @@ export const CATEGORIES: ToolCategory[] = [
     intro: [
       "Every photo can carry hidden text: camera model, exposure settings, capture time and often GPS coordinates. The Metadata Viewer decodes EXIF, GPS records and PNG chunks on your device, so you can see exactly what a file reveals before you post it.",
       "When something shouldn't travel with the picture, Remove Metadata re-encodes a clean copy, and Remove GPS Data targets location records specifically while leaving the rest of the file untouched. A useful habit: screenshots and re-saved images are often already clean, while camera originals are the ones worth checking — especially anything shot near home or work.",
+      "A practical routine before sharing a photo publicly: first inspect it in the Metadata Viewer and read what's actually attached — you'll often find the camera, lens and a precise timestamp even when GPS is absent. If anything feels too revealing, strip it with Remove Metadata, then run the result through the viewer again to confirm it reports nothing. Keep the original file untouched in case you need the EXIF data later: the tools read your file and write a new one, so the cleanup never costs you the source.",
     ],
   },
   {
@@ -154,6 +155,7 @@ export const CATEGORIES: ToolCategory[] = [
     intro: [
       "Five tools cover the practical ways to mark a photo as yours: a text stamp with control over font, size, opacity and position; a logo overlay that respects transparent PNGs; a tiled pattern repeating across the whole frame; a date stamp for record-keeping; and a bulk version that applies identical settings to ten photos at once, downloaded as a single ZIP.",
       "The balance to strike is visible but not destructive — around 50–60% opacity in a corner usually protects a photo without ruining it. For proofs and previews where protection matters more than looks, the tiled watermark is deliberately the hardest to crop out.",
+      "Choosing between them is easier once you know how each watermark fails: a single corner stamp can be cropped away, an overlay across the centre survives cropping but dominates the picture, and a tiled pattern is the strongest guard because removing it means rebuilding the whole image. For client proofs, photographers typically pair a light tiled pass with a stronger logo stamp; for business photos that go out in batches, the Bulk Watermark keeps size, opacity and placement identical across the whole set, which is what makes a portfolio look consistent.",
     ],
   },
   {
@@ -169,6 +171,7 @@ export const CATEGORIES: ToolCategory[] = [
     intro: [
       "Sometimes a picture needs words on it, and these five tools each do one job well. Add Text to Image handles free-form typography — colour, weight, size and an optional background pill for readability. Caption Bar wraps longer sentences in a styled bar above or below the photo, the meme generator pairs bold top-and-bottom text the classic way, Quote Card sets a quotation with attribution for social sharing, and Title Banner builds blog thumbnails with a headline on a colour bar.",
       "Everything renders on your device, so drafts of unpublished work stay private until you choose to share them.",
+      "Readable text on a photo comes down to contrast and hierarchy: light text needs a dark or blurred area behind it, and the background pill on Add Text to Image guarantees that contrast even on busy photos. Keep one message per image — a caption longer than two lines belongs in the Caption Bar rather than floating over the picture — and let size carry the emphasis: a headline roughly three times the height of any secondary line reads clearly even at thumbnail scale. Because every tool re-renders the text as real pixels, check the preview at the size you'll actually publish, not just zoomed in.",
     ],
   },
   {

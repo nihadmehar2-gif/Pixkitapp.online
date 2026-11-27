@@ -8,7 +8,6 @@ import type { Metadata } from "next";
 import { ChevronRight, ShieldCheck, Zap, Lock, Wifi, Info } from "lucide-react";
 import { ToolCard, categoryStyle } from "@/components/site/cards";
 import { AdSlot } from "@/components/site/ad-slot";
-import { OG_IMAGES } from "@/lib/seo";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -27,20 +26,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // Unique, hand-authored SEO title (layout template appends " | PixKitApp") and description.
   const title = tool.seo?.metaTitle ?? `${tool.name} — Free Online`;
   const description = tool.seo?.metaDescription ?? tool.description;
-  // Merge primary keyword + tool keywords, deduplicated case-insensitively so the
-  // meta keywords tag never contains repeats (e.g. "compress image to 50kb").
-  const kwSource = tool.seo ? [tool.seo.primaryKeyword, ...tool.keywords] : tool.keywords;
-  const seenKw = new Set<string>();
-  const keywords = kwSource.filter((k) => {
-    const key = k.toLowerCase().trim();
-    if (!key || seenKw.has(key)) return false;
-    seenKw.add(key);
-    return true;
-  });
+  // NOTE: no meta keywords tag — search engines ignore it and it duplicated
+  // title/description signals (recovery R4: removed site-wide).
+  const ogImage = { url: `/og/tools/${tool.slug}.png`, width: 1200, height: 630, alt: tool.h1 };
   return {
     title,
     description,
-    keywords,
     alternates: { canonical: `${SITE_URL}/${tool.slug}` },
     openGraph: {
       title: `${title} | PixKitApp`,
@@ -49,13 +40,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       siteName: "PixKitApp",
       type: "website",
       locale: "en_US",
-      images: OG_IMAGES,
+      images: [ogImage],
     },
     twitter: {
       card: "summary_large_image",
       title: `${title} | PixKitApp`,
       description,
-      images: OG_IMAGES,
+      images: [ogImage],
     },
   };
 }
@@ -205,7 +196,35 @@ export default async function ToolPage({ params }: Props) {
       {tool.seo ? (
         <section className="mt-10 max-w-3xl">
           <h2 className="text-lg font-semibold">About the {tool.name}</h2>
+          {tool.seo.extras?.intro && (
+            <p className="mt-2 leading-relaxed text-muted-foreground">{tool.seo.extras.intro}</p>
+          )}
           {tool.about && <p className="mt-2 leading-relaxed text-muted-foreground">{tool.about}</p>}
+          {tool.seo.extras?.table && (
+            <figure className="mt-5 overflow-x-auto">
+              {tool.seo.extras.table.caption && (
+                <figcaption className="mb-2 text-sm font-medium">{tool.seo.extras.table.caption}</figcaption>
+              )}
+              <table className="w-full border-collapse text-sm">
+                <thead>
+                  <tr>
+                    {tool.seo.extras.table.headers.map((h) => (
+                      <th key={h} className="border-b px-3 py-2 text-left font-semibold">{h}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {tool.seo.extras.table.rows.map((row, i) => (
+                    <tr key={i} className="odd:bg-card">
+                      {row.map((cell, j) => (
+                        <td key={j} className="border-b px-3 py-2 align-top text-muted-foreground">{cell}</td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </figure>
+          )}
           <div className="mt-5 space-y-5">
             <div>
               <h3 className="font-medium">How it works</h3>
@@ -219,6 +238,18 @@ export default async function ToolPage({ params }: Props) {
               <h3 className="font-medium">Supported formats &amp; limitations</h3>
               <p className="mt-1 leading-relaxed text-muted-foreground">{tool.seo.guide.formats}</p>
             </div>
+            {tool.seo.extras?.mistakes && tool.seo.extras.mistakes.length > 0 && (
+              <div>
+                <h3 className="font-medium">Common mistakes and fixes</h3>
+                <ul className="mt-2 space-y-2">
+                  {tool.seo.extras.mistakes.map((m) => (
+                    <li key={m.problem} className="text-sm leading-relaxed text-muted-foreground">
+                      <span className="font-medium text-foreground">{m.problem}</span> — {m.fix}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
             <div>
               <h3 className="font-medium">Common use cases</h3>
               <p className="mt-1 leading-relaxed text-muted-foreground">{tool.seo.guide.cases}</p>

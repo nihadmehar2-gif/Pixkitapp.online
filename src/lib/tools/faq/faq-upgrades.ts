@@ -320,6 +320,20 @@ export const FAQ_UPGRADES: Record<string, {
    * Tools that already had entries above (png-to-jpg, webp-to-png,
    * image-color-picker, image-to-base64) carry their privacyAnswer there. */
   "compress-image-to-500kb": {
+    add: [
+      {
+        q: "Is 500KB the right target for email attachments?",
+        a: "Yes — 500KB sits comfortably under the per-file limits most mail providers and corporate filters enforce, and it is small enough that a few photos can share one message without hitting the total attachment cap. Files that already weigh less than 500KB pass through with minimal re-encoding, so nothing is degraded unnecessarily.",
+      },
+      {
+        q: "Will a 500KB photo look noticeably compressed on the web?",
+        a: "Almost never. At this roomy target the quality search usually lands on a high encoding quality, and most 12–24 megapixel photos come out with no difference you can spot — the megabytes shrink while the pixels stay. This is also why 500KB works well for blog heroes, real-estate listings and marketplace photos where a smaller target would start to show.",
+      },
+      {
+        q: "What should I do if the result looks soft even though it fits?",
+        a: "That happens with very large originals squeezed into a fixed byte budget. Resize the photo to around 2000px on the long edge first (the Resize tools do this in one step), then compress — 500KB spreads across fewer pixels far more comfortably, and the output is sharper than the same budget stretched over 6000px. Trying the WebP output is another quick win.",
+      },
+    ],
     privacyAnswer:
       "Compression happens entirely inside this browser tab: the photo is decoded into memory, re-encoded at progressively lower quality settings until the file fits inside 500 KB, and the finished file is handed to your browser as a local download. No server is involved at any step — you can even disconnect from the internet once the page has loaded and the tool keeps working.",
   },
@@ -446,5 +460,27 @@ export const FAQ_UPGRADES: Record<string, {
   "brightness-adjuster": {
     privacyAnswer:
       "Brightness is applied locally through the browser's GPU-accelerated filter pipeline: each image is redrawn with the brightness value you chose on a canvas in this tab, re-encoded, and downloaded directly. The original file on your disk is never modified, nothing is transmitted while the filter runs, and the brightened or darkened copy exists only in browser memory until you save it.",
+  },
+  /* ---------- Recovery F-07: size-specific FAQ differentiation for the
+     two KB-target compressor pages so their Q&A is no longer the generic
+     template set. Grounded in the actual compressToSize behaviour (quality
+     search loop, JPEG/WebP/PNG output options, 10-file batches, dimension
+     downscaling) and in the guide text of each tool. The 500KB entry above
+     now carries its own `add` items alongside the existing privacyAnswer. ---------- */
+  "compress-image-to-100kb": {
+    add: [
+      {
+        q: "Why do so many portals ask for a photo under 100KB?",
+        a: "Government, exam and job-application portals cap photo uploads to keep their databases small and their forms fast. 100KB is one of the most common ceilings for signature photos and document scans — large enough for a legible portrait at moderate dimensions, small enough that thousands of submissions add up to little storage.",
+      },
+      {
+        q: "How do I keep a photo looking sharp at 100KB?",
+        a: "Let the compressor do the size math, but give it reasonable pixels: around 1000–1600px on the long edge is the sweet spot at this target, so faces and small text stay crisp. If the preview looks soft, try the WebP output — it usually keeps more visible detail than JPEG at the same file size — or slightly reduce the dimensions and run it again rather than accepting a mushier first result.",
+      },
+      {
+        q: "Should I pick JPEG or WebP for a 100KB upload?",
+        a: "Choose JPEG when the portal only accepts .jpg files, or when the picture is a photograph and compatibility matters. Choose WebP when the receiving site accepts it: at a strict 100KB ceiling, WebP typically fits the same image with visibly better sharpness, because its compression is more efficient per byte.",
+      },
+    ],
   },
 };

@@ -63,8 +63,13 @@ export function socialMeta(opts: {
   description: string;
   /** Path beginning with "/" — canonical + og:url are built from SITE_URL. */
   path: string;
+  /** Page-specific OG image (defaults to the site-wide default). */
+  image?: { url: string; alt: string; width?: number; height?: number };
 }): Pick<Metadata, "openGraph" | "twitter"> {
   const url = `${SITE_URL}${opts.path}`;
+  const img = opts.image
+    ? [{ url: opts.image.url, width: opts.image.width ?? 1200, height: opts.image.height ?? 630, alt: opts.image.alt }]
+    : OG_IMAGES;
   return {
     openGraph: {
       title: opts.title,
@@ -73,13 +78,13 @@ export function socialMeta(opts: {
       siteName: "PixKitApp",
       type: "website",
       locale: "en_US",
-      images: OG_IMAGES,
+      images: img,
     },
     twitter: {
       card: "summary_large_image",
       title: opts.title,
       description: opts.description,
-      images: OG_IMAGES,
+      images: img,
     },
   };
 }

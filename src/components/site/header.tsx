@@ -17,6 +17,7 @@ const NAV = [
   { href: "/categories/compress", label: "Compress" },
   { href: "/categories/convert", label: "Convert" },
   { href: "/categories/passport-photos", label: "Passport Photos" },
+  { href: "/blog", label: "Blog" },
   { href: "/about", label: "About" },
 ];
 
